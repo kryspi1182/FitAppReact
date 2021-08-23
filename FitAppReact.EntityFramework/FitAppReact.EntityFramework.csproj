@@ -18,4 +18,9 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
+    <ProjectReference Include="..\FitAppReact.Interfaces.Infrastructure\FitAppReact.Interfaces.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

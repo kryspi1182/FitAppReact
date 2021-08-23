@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using FitAppReact.EntityFramework.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace FitAppReact.EntityFramework
 {
@@ -8,7 +9,7 @@ namespace FitAppReact.EntityFramework
     {
         public AppDbContext() : base() { }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
+        
         public DbSet<Meal> Meals { get; set; }
         public DbSet<MealProduct> MealProducts { get; set; }
         public DbSet<MealCategory> MealCategories { get; set; }
@@ -20,7 +21,7 @@ namespace FitAppReact.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
