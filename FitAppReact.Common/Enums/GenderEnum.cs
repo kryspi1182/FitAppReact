@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Common.Enums
 {
-    public enum MealCategoryEnum
+    public enum GenderEnum
     {
-        BreakfastDinner = 1,
-        Lunch = 2,
-        Snack = 3
+        Male = 1,
+        Female = 2
     }
 }

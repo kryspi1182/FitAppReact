@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Common.ModelsDTO
 {
-    public class MedicalCondictionHazardDTO
+    public class MedicalConditionHazardDTO
     {
         public int Id { get; set; }
         public int MedicalConditionId { get; set; }
