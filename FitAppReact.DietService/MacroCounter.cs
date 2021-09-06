@@ -3,25 +3,24 @@ using FitAppReact.Common.Enums;
 using FitAppReact.Common.Classes;
 using FitAppReact.EntityFramework;
 using FitAppReact.EntityFramework.Models;
+using FitAppReact.Interfaces.Infrastructure.DietService;
 
 namespace FitAppReact.DietService
 {
-    public class MacroCounter
+    public class MacroCounter: IMacroCounter
     {
-        public static Macros GetDailyMacros(
-            float _weight,
-            float _height,
-            float _activity,
-            int _age,
-            GenderEnum gender
-            )
+        public Macros GetDailyMacros(UserParams userParams)
         {
-            return CountDailyMacros(_weight, _height, _activity, _age, gender);
+            return CountDailyMacros(
+                userParams.weight, 
+                userParams.height, userParams.activity,
+                userParams.age, 
+                userParams.gender);
         }
 
         #region Private
 
-        private static Macros CountDailyMacros(
+        private Macros CountDailyMacros(
             double _weight,
             double _height,
             double _activity, //enum value from ActivityEnum class (details commented in ActivityEnum)

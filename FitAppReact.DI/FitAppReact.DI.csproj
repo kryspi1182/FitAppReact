@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
+    <ProjectReference Include="..\FitAppReact.DietService\FitAppReact.DietService.csproj" />
     <ProjectReference Include="..\FitAppReact.EntityFramework\FitAppReact.EntityFramework.csproj" />
     <ProjectReference Include="..\FitAppReact.Facades\FitAppReact.Facades.csproj" />
     <ProjectReference Include="..\FitAppReact.Interfaces.Facades\FitAppReact.Interfaces.Facades.csproj" />

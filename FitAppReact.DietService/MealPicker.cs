@@ -8,10 +8,13 @@ using FitAppReact.Common.Enums;
 using FitAppReact.EntityFramework;
 using FitAppReact.EntityFramework.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using FitAppReact.Common.ModelsDTO;
+using FitAppReact.Interfaces.Infrastructure;
 
 namespace FitAppReact.DietService
 {
-    public class MealPicker
+    public class MealPicker: IMealPicker
     {
         private readonly AppDbContext appDbContext;
         private readonly IMapper mapper;
@@ -20,9 +23,18 @@ namespace FitAppReact.DietService
             appDbContext = _appDbContext;
             mapper = _mapper;
         }
-        public void GetMeal(Macros requirements, MealCategoryEnum mealCategory)
+        public IEnumerable<MealDTO> GetDietMealsForCategory(Macros requirements, MealCategoryEnum mealCategory)
         {
-            Meal result = appDbContext.Meals.Where(meal => CheckMeal(meal, requirements)).FirstOrDefault();
+            var result = appDbContext.Meals
+                .AsNoTracking()
+                .Include(x => x.MealProducts)
+                .ThenInclude(x => x.Product)
+                .Where(meal => meal.MealCategoryId == ((int)mealCategory))
+                .ToList();
+
+            var finalResult = result.FindAll(meal => CheckMeal(meal, requirements)).ToArray();
+
+            return mapper.Map<MealDTO[]>(finalResult);
         }
 
         #region Private
@@ -40,13 +52,14 @@ namespace FitAppReact.DietService
                 mealMacros.Sugar += (int)mealProduct.Product.Sugar;
                 mealMacros.Salt += (int)mealProduct.Product.Salt;
             }
-            if((mealMacros.Calories > requirements.Calories * 1.1 || mealMacros.Calories < requirements.Calories * 0.9) ||
-                (mealMacros.Carbohydrates > requirements.Carbohydrates * 1.1 || mealMacros.Carbohydrates < requirements.Carbohydrates * 0.9) ||
-                (mealMacros.Fat > requirements.Fat * 1.1 || mealMacros.Fat < requirements.Fat * 0.9) ||
-                (mealMacros.Fibre > requirements.Fibre * 1.1 || mealMacros.Fibre < requirements.Fibre * 0.9) ||
-                (mealMacros.Protein > requirements.Protein * 1.1 || mealMacros.Protein < requirements.Protein * 0.9) ||
-                (mealMacros.Sugar > requirements.Sugar * 1.1) ||
-                (mealMacros.Salt > requirements.Salt * 1.1))
+            //TODO: change margin of error when more complete data exists in the database
+            if((mealMacros.Calories > requirements.Calories * 1.2 || mealMacros.Calories < requirements.Calories * 0.8) /*||
+                (mealMacros.Carbohydrates > requirements.Carbohydrates * 1.5 || mealMacros.Carbohydrates < requirements.Carbohydrates * 0.5) ||
+                (mealMacros.Fat > requirements.Fat * 1.5 || mealMacros.Fat < requirements.Fat * 0.5) ||
+                (mealMacros.Fibre > requirements.Fibre * 1.5 || mealMacros.Fibre < requirements.Fibre * 0.5) ||
+                (mealMacros.Protein > requirements.Protein * 1.5 || mealMacros.Protein < requirements.Protein * 0.5) ||
+                (mealMacros.Sugar > requirements.Sugar * 1.5) ||
+                (mealMacros.Salt > requirements.Salt * 1.5)*/)
             {
                 return false;
             }
