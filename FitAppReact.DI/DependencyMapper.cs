@@ -10,6 +10,8 @@ using FitAppReact.Interfaces.Facades;
 using FitAppReact.Interfaces.Infrastructure;
 using FitAppReact.DietService;
 using FitAppReact.Interfaces.Infrastructure.DietService;
+using FitAppReact.EntityFramework.Models;
+using Microsoft.AspNetCore.Authentication;
 
 namespace FitAppReact.DI
 {
@@ -20,6 +22,15 @@ namespace FitAppReact.DI
             #region Context
             serviceCollection.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Local")));
+
+            serviceCollection.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            serviceCollection.AddIdentityServer()
+                .AddApiAuthorization<AppUser, AppDbContext>();
+
+            serviceCollection.AddAuthentication()
+                .AddIdentityServerJwt();
 
             #endregion
 

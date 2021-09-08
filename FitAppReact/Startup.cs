@@ -58,7 +58,10 @@ namespace FitAppReact
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-
+            /*TODO: fix dependency injection errors
+            app.UseAuthentication();
+            app.UseIdentityServer();
+            app.UseAuthorization();*/
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
