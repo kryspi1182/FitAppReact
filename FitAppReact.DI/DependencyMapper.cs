@@ -23,6 +23,8 @@ namespace FitAppReact.DI
             serviceCollection.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Local")));
 
+            serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
+
             serviceCollection.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
 

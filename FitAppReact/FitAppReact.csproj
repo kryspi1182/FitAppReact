@@ -16,6 +16,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 
@@ -29,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
     <ProjectReference Include="..\FitAppReact.DI\FitAppReact.DI.csproj" />
+    <ProjectReference Include="..\FitAppReact.EntityFramework\FitAppReact.EntityFramework.csproj" />
     <ProjectReference Include="..\FitAppReact.Facades\FitAppReact.Facades.csproj" />
   </ItemGroup>
 
