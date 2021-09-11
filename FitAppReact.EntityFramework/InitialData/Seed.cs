@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FitAppReact.EntityFramework.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace FitAppReact.EntityFramework.InitialData
 {
@@ -27,6 +29,8 @@ namespace FitAppReact.EntityFramework.InitialData
             MedicalConditionHazards();
             ProductHazards();
             MealProducts();
+
+            Roles();
         }
         #region Private
         private void Products()
@@ -1031,6 +1035,12 @@ namespace FitAppReact.EntityFramework.InitialData
 
 
                 );
+        }
+        private void Roles()
+        {
+            string[] roles = new string[] { "User", "Administrator" };
+            IdentityRole[] identityRoles = roles.Select(role => new IdentityRole(role)).ToArray();
+            modelBuilder.Entity<IdentityRole>().HasData(identityRoles);
         }
         #endregion
     }
