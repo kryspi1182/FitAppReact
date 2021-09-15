@@ -10,5 +10,11 @@ namespace FitAppReact.EntityFramework.Models
 {
     public class AppUser : IdentityUser
     {
+        public decimal Weight { get; set; }
+        public decimal Height { get; set; }
+        public int Age { get; set; }
+        public int Gender { get; set; }
+        public decimal Activity { get; set; }
+
     }
 }

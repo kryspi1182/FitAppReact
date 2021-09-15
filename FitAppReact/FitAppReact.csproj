@@ -32,8 +32,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\NewFetchData.tsx" />
+    <None Remove="ClientApp\src\models\User.ts" />
     <None Remove="ClientApp\src\store\dataSlice.ts" />
     <None Remove="ClientApp\src\store\newConfigureStore.ts" />
+    <None Remove="ClientApp\src\store\userSlice.ts" />
   </ItemGroup>
 
   <ItemGroup>
