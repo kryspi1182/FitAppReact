@@ -2,8 +2,8 @@
 import notificationService from './ToastNotify';
 
 export const api = axios.create({
-    baseURL: 'https://localhost:25415/api/',
-    withCredentials: true
+    baseURL: 'http://localhost:25415/api/',
+    withCredentials: true,
 });
 
 api.interceptors.response.use(async response => {

@@ -11,7 +11,7 @@ namespace FitAppReact.Controllers
     public class UserController : Controller
     {
         [HttpGet]
-        [Route("user/{id}")]
+        [Route("getUser/{id}")]
         public IActionResult GetUser(string id)
         {
             return Ok(null);

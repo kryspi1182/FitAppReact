@@ -5,7 +5,7 @@ import { EntityId } from '@reduxjs/toolkit';
 export const userApi = {
     async getUser(id: EntityId) {
         try {
-            return await connection.api.get<User>(`user/${id}`)
+            return await connection.api.get<User>(`user/getUser/${id}`)
                 .then(response => response.data);
         }
         catch (e) {
