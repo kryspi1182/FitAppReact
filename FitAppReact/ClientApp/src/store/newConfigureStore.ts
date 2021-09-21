@@ -3,6 +3,7 @@ import reduxThunk from 'redux-thunk';
 import { connectRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import dataReducer from './dataSlice';
+import userReducer from './userSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -18,6 +19,7 @@ const store = configureStore({
             ),
     reducer: {
         data: dataReducer,
+        user: userReducer,
         //@ts-ignore
         router: connectRouter(history)
     },
