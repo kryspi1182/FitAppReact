@@ -19,6 +19,7 @@
     <ProjectReference Include="..\FitAppReact.Facades\FitAppReact.Facades.csproj" />
     <ProjectReference Include="..\FitAppReact.Interfaces.Facades\FitAppReact.Interfaces.Facades.csproj" />
     <ProjectReference Include="..\FitAppReact.Interfaces.Infrastructure\FitAppReact.Interfaces.Infrastructure.csproj" />
+    <ProjectReference Include="..\FitAppReact.UserService\FitAppReact.UserService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -34,7 +34,8 @@
     <None Remove="ClientApp\src\components\api-communication\ApiConnection.ts" />
     <None Remove="ClientApp\src\components\api-communication\ToastNotify.ts" />
     <None Remove="ClientApp\src\components\api-communication\UserApi.ts" />
-    <None Remove="ClientApp\src\components\NewFetchData.tsx" />
+    <None Remove="ClientApp\src\components\UserProfile.tsx" />
+    <None Remove="ClientApp\src\components\UserProfileEdit.tsx" />
     <None Remove="ClientApp\src\models\ProfileStorage.ts" />
     <None Remove="ClientApp\src\models\User.ts" />
     <None Remove="ClientApp\src\models\UserStorage.ts" />

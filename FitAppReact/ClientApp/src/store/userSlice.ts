@@ -6,14 +6,14 @@ import authService from '../components/api-authorization/AuthorizeService';
 import { userApi } from '../components/api-communication/UserApi';
 
 const initialState: User = {
-    Id: "0",
-    UserName: "test",
-    Email: "test@mail.com",
-    Height: 1,
-    Weight: 1,
-    Activity: 1,
-    Age: 20,
-    Gender: 1
+    id: "0",
+    userName: "test",
+    email: "test@mail.com",
+    height: 1,
+    weight: 1,
+    activity: 1,
+    age: 20,
+    gender: 1
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async (id: string) => {
@@ -46,9 +46,12 @@ const userSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(fetchUser.fulfilled, (state, action: PayloadAction<User>) => {
             if (action.payload) {
-                state.Id = action.payload.Id;
+                console.log(action.payload);
+                state.id = action.payload.id;
+                state.email = action.payload.email;
+                state.userName = action.payload.userName;
             }
-        })
+        });
     }
 });
 

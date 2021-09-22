@@ -12,6 +12,8 @@ using FitAppReact.DietService;
 using FitAppReact.Interfaces.Infrastructure.DietService;
 using FitAppReact.EntityFramework.Models;
 using Microsoft.AspNetCore.Authentication;
+using FitAppReact.Interfaces.Infrastructure.UserService;
+using FitAppReact.UserService;
 
 namespace FitAppReact.DI
 {
@@ -38,12 +40,14 @@ namespace FitAppReact.DI
 
             #region Facades
             serviceCollection.AddScoped<IDietFcd, DietFcd>();
+            serviceCollection.AddScoped<IUserFcd, UserFcd>();
 
             #endregion
 
             #region Services
             serviceCollection.AddScoped<IMealPicker, MealPicker>();
             serviceCollection.AddScoped<IMacroCounter, MacroCounter>();
+            serviceCollection.AddScoped<IAppUserSrv, AppUserSrv>();
 
             #endregion
 

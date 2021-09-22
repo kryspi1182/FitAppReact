@@ -1,12 +1,12 @@
 ﻿import { EntityId } from "@reduxjs/toolkit";
 
 export interface User {
-    Id: EntityId,
-    UserName: string,
-    Email: string,
-    Activity: number,
-    Age: number,
-    Gender: number,
-    Height: number,
-    Weight: number
+    id: string,
+    userName: string,
+    email: string,
+    activity: number,
+    age: number,
+    gender: number,
+    height: number,
+    weight: number
 };
