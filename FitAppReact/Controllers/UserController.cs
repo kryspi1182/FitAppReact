@@ -1,4 +1,5 @@
-﻿using FitAppReact.Interfaces.Facades;
+﻿using FitAppReact.Common.Classes;
+using FitAppReact.Interfaces.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,20 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
             
+        }
+        [HttpPut]
+        [Route("updateUser/{id}")]
+        public IActionResult UpdateUser(string id, [FromBody] UserParams userParams)
+        {
+            try
+            {
+                userFcd.UpdateUser(id, userParams);
+                return Ok(userParams);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
     }
 }

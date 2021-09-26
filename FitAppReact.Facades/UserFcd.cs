@@ -1,4 +1,5 @@
-﻿using FitAppReact.Common.ModelsDTO;
+﻿using FitAppReact.Common.Classes;
+using FitAppReact.Common.ModelsDTO;
 using FitAppReact.Interfaces.Facades;
 using FitAppReact.Interfaces.Infrastructure.UserService;
 using System;
@@ -21,6 +22,10 @@ namespace FitAppReact.Facades
         public AppUserDTO GetUserById(string id)
         {
             return appUserSrv.GetUserById(id);
+        }
+        public void UpdateUser(string id, UserParams userParams)
+        {
+            appUserSrv.UpdateUser(id, userParams);
         }
     }
 }

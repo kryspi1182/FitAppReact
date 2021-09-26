@@ -4,6 +4,7 @@ import { User } from '../models/User';
 import { PayloadAction } from '@reduxjs/toolkit/src';
 import authService from '../components/api-authorization/AuthorizeService';
 import { userApi } from '../components/api-communication/UserApi';
+import { UserParams } from '../models/UserParams';
 
 const initialState: User = {
     id: "0",
@@ -17,22 +18,18 @@ const initialState: User = {
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async (id: string) => {
-    //try {
-    //    const currentUser = authService.getUser() as Promise<any>;
-    //    await currentUser.then(function (result) {
-    //        console.log(result);
-    //    }, function (err) {
-    //        console.log(err);
-    //    });
-    //    console.log("implement fetch user: " + id);
-    //    return id;
-    //}
-    //catch (e) {
-    //    console.log("error fetch user");
-    //    return null;
-    //}
     try {
         return await userApi.getUser(id);
+    }
+    catch (e) {
+        return e.json();
+    }
+});
+
+export const updateUser = createAsyncThunk('user/updateUser', async (params: UserParams, thunkAPI) => {
+    try {
+        const state = thunkAPI.getState() as RootState;
+        return await userApi.updateUser(state.user.id, params);
     }
     catch (e) {
         return e.json();
@@ -50,6 +47,19 @@ const userSlice = createSlice({
                 state.id = action.payload.id;
                 state.email = action.payload.email;
                 state.userName = action.payload.userName;
+                state.activity = action.payload.activity;
+                state.age = action.payload.age;
+                state.gender = action.payload.gender;
+                state.height = action.payload.height;
+                state.weight = action.payload.weight;
+            }
+        }).addCase(updateUser.fulfilled, (state, action: PayloadAction<UserParams>) => {
+            if (action.payload) {
+                state.activity = action.payload.activity;
+                state.age = action.payload.age;
+                state.gender = action.payload.gender;
+                state.height = action.payload.height;
+                state.weight = action.payload.weight;
             }
         });
     }
