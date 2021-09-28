@@ -1,7 +1,6 @@
 ﻿import * as connection from './ApiConnection';
 import { User } from '../../models/User';
 import { EntityId } from '@reduxjs/toolkit';
-import { updateUser } from '../../store/userSlice';
 import { UserParams } from '../../models/UserParams';
 
 export const userApi = {
@@ -16,7 +15,8 @@ export const userApi = {
     },
     async updateUser(id: EntityId, userParams: UserParams) {
         try {
-            return await connection.api.put<EntityId, UserParams>(`user/updateUser/${id}`, userParams);
+            return await connection.api.put<UserParams>(`user/updateUser/${id}`, userParams)
+                .then(response => response.data);
         }
         catch (e) {
             console.log("error w userApi " + e);

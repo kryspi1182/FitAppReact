@@ -55,6 +55,7 @@ const userSlice = createSlice({
             }
         }).addCase(updateUser.fulfilled, (state, action: PayloadAction<UserParams>) => {
             if (action.payload) {
+                console.log(action.payload);
                 state.activity = action.payload.activity;
                 state.age = action.payload.age;
                 state.gender = action.payload.gender;

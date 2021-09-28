@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import {selectUser, updateUser} from '../../store/userSlice';
+import {selectUserMacros, fetchUserMacros} from '../../store/userMacrosSlice';
 import { UserParams } from '../../models/UserParams';
 
 const useStyles = makeStyles({
@@ -20,6 +21,12 @@ const UserData: React.FC = () => {
     const user = useSelector(selectUser);
     const classes = useStyles();
     const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        if(user.weight !== 1) //TODO: first login logic to ensure data has been filled
+            dispatch(fetchUserMacros(null));
+    }, [user]);
+
     const formik = useFormik({
         initialValues: {
             activity: user.activity,

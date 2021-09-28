@@ -1,5 +1,5 @@
 import { EntityId } from "@reduxjs/toolkit";
-import { Product } from "./Product";
+import { MealProduct } from "./MealProduct";
 
 export interface Meal {
     id: EntityId,
@@ -7,5 +7,5 @@ export interface Meal {
     description: string,
     recipe: string,
     mealCategoryId: number,
-    mealProducts: Array<Product>
+    mealProducts: Array<MealProduct>
 };
