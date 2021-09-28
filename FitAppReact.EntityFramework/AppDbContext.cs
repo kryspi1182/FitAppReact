@@ -3,13 +3,18 @@ using System;
 using FitAppReact.EntityFramework.Models;
 using Microsoft.Extensions.Configuration;
 using FitAppReact.EntityFramework.InitialData;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using IdentityServer4.EntityFramework.Options;
+using Microsoft.Extensions.Options;
 
 namespace FitAppReact.EntityFramework
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: ApiAuthorizationDbContext<AppUser>
     {
-        public AppDbContext() : base() { }
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        //public AppDbContext(IOptions<OperationalStoreOptions> operationalStoreOptions) : base(operationalStoreOptions) { }
+        public AppDbContext(
+            DbContextOptions<AppDbContext> options,
+            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions) { }
         
         public DbSet<Meal> Meals { get; set; }
         public DbSet<MealProduct> MealProducts { get; set; }

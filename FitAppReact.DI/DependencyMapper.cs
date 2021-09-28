@@ -10,6 +10,10 @@ using FitAppReact.Interfaces.Facades;
 using FitAppReact.Interfaces.Infrastructure;
 using FitAppReact.DietService;
 using FitAppReact.Interfaces.Infrastructure.DietService;
+using FitAppReact.EntityFramework.Models;
+using Microsoft.AspNetCore.Authentication;
+using FitAppReact.Interfaces.Infrastructure.UserService;
+using FitAppReact.UserService;
 
 namespace FitAppReact.DI
 {
@@ -21,16 +25,30 @@ namespace FitAppReact.DI
             serviceCollection.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Local")));
 
+            serviceCollection.AddDatabaseDeveloperPageExceptionFilter();
+
+            serviceCollection.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AppDbContext>();
+
+            serviceCollection.AddIdentityServer()
+                .AddApiAuthorization<AppUser, AppDbContext>();
+
+            serviceCollection.AddAuthentication()
+                .AddIdentityServerJwt();
+
             #endregion
 
             #region Facades
             serviceCollection.AddScoped<IDietFcd, DietFcd>();
+            serviceCollection.AddScoped<IUserFcd, UserFcd>();
 
             #endregion
 
             #region Services
             serviceCollection.AddScoped<IMealPicker, MealPicker>();
             serviceCollection.AddScoped<IMacroCounter, MacroCounter>();
+            serviceCollection.AddScoped<IAppUserSrv, AppUserSrv>();
+            serviceCollection.AddScoped<IProductManager, ProductManager>();
 
             #endregion
 

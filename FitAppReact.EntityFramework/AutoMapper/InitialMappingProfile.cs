@@ -36,6 +36,9 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<ProductHazard, ProductHazardDTO>();
             CreateMap<ProductHazardDTO, ProductHazard>();
+
+            CreateMap<AppUser, AppUserDTO>();
+            CreateMap<AppUserDTO, AppUser>();
         }
     }
 }

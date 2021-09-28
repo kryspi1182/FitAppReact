@@ -38,11 +38,11 @@ namespace FitAppReact.DietService
 
             if (gender == GenderEnum.Male)
             {
-                calories = (int)Math.Ceiling(((9.99 * _weight) + (6.25 * _height) - (4.92 * _age) + 5) * _activity);
+                calories = (int)Math.Ceiling(((9.99 * _weight) + (6.25 * _height * 100) - (4.92 * _age) + 5) * _activity);
             }
             else
             {
-                calories = (int)Math.Ceiling(((9.99 * _weight) + (6.25 * _height) - (4.92 * _age) - 161) * _activity);
+                calories = (int)Math.Ceiling(((9.99 * _weight) + (6.25 * _height * 100) - (4.92 * _age) - 161) * _activity);
             }
 
             carbohydrates = (int)Math.Ceiling(calories * 0.4 / 4);

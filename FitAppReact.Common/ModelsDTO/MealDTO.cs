@@ -13,5 +13,6 @@ namespace FitAppReact.Common.ModelsDTO
         public string Description { get; set; }
         public string Recipe { get; set; }
         public int MealCategoryId { get; set; }
+        public ICollection<MealProductDTO> MealProducts { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from './';
+import authService from '../components/api-authorization/AuthorizeService';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
