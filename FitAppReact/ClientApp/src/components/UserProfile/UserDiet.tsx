@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { EntityId } from '@reduxjs/toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from 'reactstrap';
@@ -7,29 +8,40 @@ import { Container } from 'reactstrap';
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { fetchProducts } from '../../store/productsSlice';
+import { DietMeals } from '../../models/DietMeals';
+import WeekDietBox from '../common/WeekDietBox';
+import DietResult from './DietResult';
+
+const getRandomInt = (max: number) => {
+    return Math.floor(Math.random() * max);
+};
 
 const UserDiet: React.FC = () => {
     const dispatch = useDispatch();
     const [chosenOption, setChosenOption] = React.useState("none");
-    const [showDiet, setShowDiet] = React.useState(false);
+    const [startDietProcess, setStartDietProcess] = React.useState(false);
+    const [generateDiet, setGenerateDiet] = React.useState(false);
+
     const macros = useSelector(selectUserMacros);
-    const generateDiet = () => {
-        //setShowDiet(false);
-        setShowDiet(true);
-    };
     const meals = useSelector(selectAllUserMeals);
     React.useEffect(() => {
         dispatch(fetchProducts());
     }, []);
     React.useEffect(() => {
-        if (macros.calories > 0) {
+        if (macros.calories > 0 && startDietProcess) {
             dispatch(fetchBreakfast(macros));
             dispatch(fetchLunch(macros));
             dispatch(fetchDinner(macros));
             dispatch(fetchSnack(macros));
+            //setTimeout(() => setGenerateDiet(true), 500);
         }
-    }, [showDiet]);
-
+    }, [startDietProcess]);
+    React.useEffect(() => {
+        if(meals.some((meal) => meal.mealCategoryId === 1) 
+        && meals.some((meal) => meal.mealCategoryId === 2)
+        && meals.some((meal) => meal.mealCategoryId === 3))
+            setGenerateDiet(true);
+    }, [meals]);
     return(<>
     <Container>
     <h2>User diet component</h2>
@@ -39,12 +51,13 @@ const UserDiet: React.FC = () => {
         </>)}
         {(chosenOption === "data" && <>
             <button onClick={() => {setChosenOption("none")}}>Back</button>
-            <button onClick={() => {generateDiet()}}>Generate diet</button>
+            <button onClick={() => {setStartDietProcess(true)}}>Generate diet</button>
         </>)}
         {(chosenOption === "form" && <>
             <button onClick={() => {setChosenOption("none")}}>Back</button>
             <h3>Form will be here</h3>
         </>)}
+        {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet}/>)}
 
     </Container>
         
