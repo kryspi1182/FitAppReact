@@ -8,7 +8,10 @@ import { Container } from 'reactstrap';
 import DayDietBox from './DayDietBox';
 import { Meal } from '../../models/Meal';
 import { selectAllUserMeals } from '../../store/userMealsSlice';
+import { selectAllProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
+import { Product } from '../../models/Product';
+import MealWithProducts from '../../models/MealWithProducts';
 
 
 const useStyles = makeStyles({
@@ -23,23 +26,26 @@ type Props = {
     dinners: EntityId[],
 };
 
+
+
 const WeekDietBox: React.FC<Props> = (props) => {
     const meals = useSelector(selectAllUserMeals);
-    const breakfasts = props.breakfasts.map((meal) => {
-        return meals.filter((m) => m.id === meal)[0]
-    });
-    const secondBreakfasts = props.secondBreakfasts.map((meal) => {
-        return meals.filter((m) => m.id === meal)[0]
-    });
-    const lunches = props.lunches.map((meal) => {
-        return meals.filter((m) => m.id === meal)[0]
-    });
-    const snacks = props.snacks.map((meal) => {
-        return meals.filter((m) => m.id === meal)[0]
-    });
-    const dinners = props.dinners.map((meal) => {
-        return meals.filter((m) => m.id === meal)[0]
-    });
+    const allProducts = useSelector(selectAllProducts);
+    const mapMealToMealWithProducts = (m: Meal) => {
+        const prod = allProducts.filter((product) => m.mealProducts.some((mealProduct) => mealProduct.productId === product.id));
+        return {meal: m, products: prod} as MealWithProducts;
+    };
+    const mapIdsToMealsWithProducts = (mealIds: EntityId[]) => {
+        return mealIds.map((meal) => {
+            return mapMealToMealWithProducts(meals.filter((m) => m.id === meal)[0]);
+        });
+    };
+
+    const breakfasts = mapIdsToMealsWithProducts(props.breakfasts);
+    const secondBreakfasts = mapIdsToMealsWithProducts(props.secondBreakfasts);
+    const lunches = mapIdsToMealsWithProducts(props.lunches);
+    const snacks = mapIdsToMealsWithProducts(props.snacks);
+    const dinners = mapIdsToMealsWithProducts(props.dinners);
     return(<Container>
             <DayDietBox meals={[breakfasts[0], secondBreakfasts[0], lunches[0], snacks[0], dinners[0]]} day="Monday" />
             <DayDietBox meals={[breakfasts[1], secondBreakfasts[1], lunches[1], snacks[1], dinners[1]]} day="Tuesday" />

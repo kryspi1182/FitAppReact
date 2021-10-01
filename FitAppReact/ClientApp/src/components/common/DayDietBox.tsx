@@ -6,18 +6,20 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import { Chip } from '@material-ui/core';
 
 import { Meal } from '../../models/Meal';
+import MealWithProducts from '../../models/MealWithProducts';
+import MealWithProductItem from './MealWithProductsItem';
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
-        maxWidth: 360
     }
 });
 
 type Props = {
-    meals: Meal[],
+    meals: MealWithProducts[],
     day: string
 }
 
@@ -26,30 +28,15 @@ const DayDietBox: React.FC<Props> = (props) => {
     return(<Container>
         <h2>{props.day}</h2>
         {(props.meals.length === 5 && <List className={classes.root}>
-            <ListItem>
-                <ListItemText primary="Breakfast" secondary={props.meals[0].name} />
-                <h4>Products here</h4>
-            </ListItem>
+            <MealWithProductItem label="Breakfast" meal={props.meals[0]}/>
             <Divider variant="inset" component="li" />
-            <ListItem>
-                <ListItemText primary="Second breakfast" secondary={props.meals[1].name} />
-                <h4>Products here</h4>
-            </ListItem>
+            <MealWithProductItem label="Second breakfast" meal={props.meals[1]}/>
             <Divider variant="inset" component="li" />
-            <ListItem>
-                <ListItemText primary="Lunch" secondary={props.meals[2].name} />
-                <h4>Products here</h4>
-            </ListItem>
+            <MealWithProductItem label="Lunch" meal={props.meals[2]}/>
             <Divider variant="inset" component="li" />
-            <ListItem>
-                <ListItemText primary="Snack" secondary={props.meals[3].name} />
-                <h4>Products here</h4>
-            </ListItem>
+            <MealWithProductItem label="Snack" meal={props.meals[3]}/>
             <Divider variant="inset" component="li" />
-            <ListItem>
-                <ListItemText primary="Dinner" secondary={props.meals[4].name} />
-                <h4>Products here</h4>
-            </ListItem>
+            <MealWithProductItem label="Dinner" meal={props.meals[4]}/>
             <Divider variant="inset" component="li" />
         </List>)}
         {(props.meals.length !== 5 && <h3>Error: wrong data format</h3>)}
