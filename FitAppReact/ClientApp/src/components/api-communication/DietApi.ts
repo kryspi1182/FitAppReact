@@ -5,23 +5,6 @@ import { Meal } from '../../models/Meal';
 import { Product } from '../../models/Product';
 
 export const dietApi = {
-    /*async getUser(id: EntityId) {
-        try {
-            return await connection.api.get<User>(`user/getUser/${id}`)
-                .then(response => response.data);
-        }
-        catch (e) {
-            console.log("error w userApi " + e);
-        }
-    },
-    async updateUser(id: EntityId, userParams: UserParams) {
-        try {
-            return await connection.api.put<EntityId, UserParams>(`user/updateUser/${id}`, userParams);
-        }
-        catch (e) {
-            console.log("error w userApi " + e);
-        }
-    }*/
     async getMacros(userParams: UserParams) {
         try {
             return await connection.api.post<Macros>(`diet/macros/count`, userParams)
@@ -69,7 +52,7 @@ export const dietApi = {
     },
     async getProducts() {
         try {
-            return await connection.api.get<Array<Product>>(`diet/products`)
+            return await connection.api.get<Array<Product>>(`diet/products/get`)
                 .then(response => response.data);
         }
         catch (e) {

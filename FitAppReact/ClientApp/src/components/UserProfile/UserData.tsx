@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Col, Row } from 'reactstrap';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Select, MenuItem, FormControl, FormHelperText } from '@material-ui/core';
+import { TextField, Select, MenuItem, FormControl, FormHelperText, InputLabel } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,8 +14,15 @@ import { UserParams } from '../../models/UserParams';
 
 const useStyles = makeStyles({
     formControl: {
+        //margin: '10px',
+        display: 'block'
+        //minWidth: 120
+    },
+    container: {
+        padding: '10px'
+    },
+    column: {
         margin: '10px',
-        minWidth: 120
     }
 });
 
@@ -58,82 +67,107 @@ const UserData: React.FC = () => {
             dispatch(updateUser(values));
         }
     });
-    return(<>
-        <h2>User data component</h2>
+    return(<Container className={classes.container}>
         <form onSubmit={formik.handleSubmit} id="user-data-form">
-            <FormControl className={classes.formControl}>
-                <TextField
-                    id="user-data-age"
-                    label="Age"
-                    type="number"
-                    InputProps={{inputProps: {min: 10, max: 130}}}
-                    onChange={(event) => {
-                        if(!isNaN(parseInt(event.target.value)))
-                            formik.setFieldValue('age', parseInt(event.target.value));
-                    }}
-                    value={formik.values.age}
-                />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <Select
-                    id="user-data-gender"
-                    label="Gender"
-                    onChange={(event) => {
-                        formik.setFieldValue('gender', event.target.value as number);
-                    }}
-                    value={formik.values.gender}
-                >
-                    <MenuItem value={1}>Male</MenuItem>
-                    <MenuItem value={2}>Female</MenuItem>
-                </Select>
-                <FormHelperText>Gender</FormHelperText>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <Select
-                    id="user-data-activity"
-                    label="Activity"
-                    onChange={(event) => {
-                        formik.setFieldValue('activity', event.target.value as number);
-                    }}
-                    value={formik.values.activity}
-                >
-                    <MenuItem value={1.2}>None</MenuItem>
-                    <MenuItem value={1.35}>Light</MenuItem>
-                    <MenuItem value={1.55}>Moderate</MenuItem>
-                    <MenuItem value={1.75}>High</MenuItem>
-                </Select>
-                <FormHelperText>Activity</FormHelperText>
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField
-                    id="user-data-weight"
-                    label="Weight (kg)"
-                    type="number"
-                    InputProps={{inputProps: {min: 30, max: 500}}}
-                    onChange={(event) => {
-                        if(!isNaN(parseInt(event.target.value)))
-                            formik.setFieldValue('weight', parseInt(event.target.value));
-                    }}
-                    value={formik.values.weight}
-                />
-            </FormControl>
-            <FormControl className={classes.formControl}>
-                <TextField
-                    id="user-data-height"
-                    label="Height (m)"
-                    type="number"
-                    InputProps={{inputProps: {min: 1, max: 2.5, step: 0.01}}}
-                    onChange={(event) => {
-                        if(!isNaN(parseFloat(event.target.value)))
-                            formik.setFieldValue('height', parseFloat(event.target.value));
-                    }}
-                    value={formik.values.height}
-                />
-            </FormControl> 
-            <button type="submit">Submit</button>
+            <Row>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl}>
+                        <TextField
+                            id="user-data-age"
+                            label="Age"
+                            type="number"
+                            InputProps={{inputProps: {min: 10, max: 130}}}
+                            onChange={(event) => {
+                                if(!isNaN(parseInt(event.target.value)))
+                                    formik.setFieldValue('age', parseInt(event.target.value));
+                            }}
+                            value={formik.values.age}
+                            variant="outlined"
+                        />
+                    </FormControl>
+                </Col>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl} variant="outlined">
+                        <InputLabel>Gender</InputLabel>
+                        <Select
+                            id="user-data-gender"
+                            label="Gender"
+                            onChange={(event) => {
+                                formik.setFieldValue('gender', event.target.value as number);
+                            }}
+                            value={formik.values.gender}
+                        >
+                            <MenuItem value={1}>Male</MenuItem>
+                            <MenuItem value={2}>Female</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl} variant="outlined">
+                        <InputLabel>Activity</InputLabel>
+                        <Select
+                            id="user-data-activity"
+                            label="Activity"
+                            onChange={(event) => {
+                                formik.setFieldValue('activity', event.target.value as number);
+                            }}
+                            value={formik.values.activity}
+                        >
+                            <MenuItem value={1.2}>None</MenuItem>
+                            <MenuItem value={1.35}>Light</MenuItem>
+                            <MenuItem value={1.55}>Moderate</MenuItem>
+                            <MenuItem value={1.75}>High</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl}>
+                        <TextField
+                            id="user-data-weight"
+                            label="Weight (kg)"
+                            type="number"
+                            InputProps={{inputProps: {min: 30, max: 500}}}
+                            onChange={(event) => {
+                                if(!isNaN(parseInt(event.target.value)))
+                                    formik.setFieldValue('weight', parseInt(event.target.value));
+                            }}
+                            value={formik.values.weight}
+                            variant="outlined"
+                        />
+                    </FormControl>
+                </Col>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl}>
+                        <TextField
+                            id="user-data-height"
+                            label="Height (m)"
+                            type="number"
+                            InputProps={{inputProps: {min: 1, max: 2.5, step: 0.01}}}
+                            onChange={(event) => {
+                                if(!isNaN(parseFloat(event.target.value)))
+                                    formik.setFieldValue('height', parseFloat(event.target.value));
+                            }}
+                            value={formik.values.height}
+                            variant="outlined"
+                        />
+                    </FormControl> 
+                </Col>
+            </Row>
+            <Row>
+                <Col className={classes.column}>
+                    <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    >
+                        Submit
+                    </Button>
+                </Col>
+            </Row> 
         </form>
-        
-    </>)
+    </Container>)
 };
 
 export default UserData;

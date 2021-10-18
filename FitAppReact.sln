@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitAppReact.DietService", "
 		{0B60295D-9879-42DE-9784-E54BACBC9CCD} = {0B60295D-9879-42DE-9784-E54BACBC9CCD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitAppReact.UserService", "FitAppReact.UserService\FitAppReact.UserService.csproj", "{B1E47C9B-7333-4F8A-808D-9D4CE534014E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitAppReact.UserService", "FitAppReact.UserService\FitAppReact.UserService.csproj", "{B1E47C9B-7333-4F8A-808D-9D4CE534014E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

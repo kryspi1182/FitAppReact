@@ -2,7 +2,7 @@
 import notificationService from './ToastNotify';
 
 export const api = axios.create({
-    baseURL: 'http://localhost:25415/api/',
+    baseURL: 'http://192.168.0.15:25415/api/',
     withCredentials: true,
 });
 

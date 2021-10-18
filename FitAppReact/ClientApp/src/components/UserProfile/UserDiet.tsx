@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EntityId } from '@reduxjs/toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Container } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import { Container, Col, Row } from 'reactstrap';
 
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
@@ -16,14 +17,50 @@ const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
 };
 
+const useStyles = makeStyles({
+    button: {
+        margin: '10px'
+    },
+});
+
 const UserDiet: React.FC = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const [chosenOption, setChosenOption] = React.useState("none");
     const [startDietProcess, setStartDietProcess] = React.useState(false);
     const [generateDiet, setGenerateDiet] = React.useState(false);
+    const [step, setStep] = React.useState(1);
+    const [title, setTitle] = React.useState("Generate diet based on your:");
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
+
+    React.useEffect(() => {
+        switch(step) {
+            case 1:
+                setTitle("Generate diet based on your:");
+                break;
+            case 2:
+                setTitle("Almost there:");
+                break;
+            case 3:
+                setTitle("Weekly diet:");
+                break;
+        }
+    }, [step]);
+    React.useEffect(() => {
+        switch(chosenOption) {
+            case "data":
+                setStep(2);
+                break;
+            case "form":
+                setStep(2);
+                break;
+            case "none":
+                setStep(1);
+                break;
+        }
+    }, [chosenOption]);
     React.useEffect(() => {
         dispatch(fetchProducts());
     }, []);
@@ -33,6 +70,7 @@ const UserDiet: React.FC = () => {
             dispatch(fetchLunch(macros));
             dispatch(fetchDinner(macros));
             dispatch(fetchSnack(macros));
+            setStep(3);
             //setTimeout(() => setGenerateDiet(true), 500);
         }
     }, [startDietProcess]);
@@ -44,21 +82,51 @@ const UserDiet: React.FC = () => {
     }, [meals]);
     return(<>
     <Container>
-    <h2>User diet component</h2>
+        <Row>
+            <Col><h4>{title}</h4></Col>
+        </Row>
+        <Row>
         {(chosenOption === "none" && <>
-            <button onClick={() => {setChosenOption("data")}}>Generate diet based on your data (recommended for beginners)</button>
-            <button onClick={() => {setChosenOption("form")}}>Generate diet based on macros of your choice</button>
+            <Button 
+                onClick={() => {setChosenOption("data")}}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+            >Your data (recommended for beginners)</Button>
+            <Button 
+                onClick={() => {setChosenOption("form")}}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+            >Macros of your choice</Button>
         </>)}
         {(chosenOption === "data" && <>
-            <button onClick={() => {setChosenOption("none")}}>Back</button>
-            <button onClick={() => {setStartDietProcess(true)}}>Generate diet</button>
+            <Button 
+                onClick={() => {setChosenOption("none")}}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+            >Back</Button>
+            <Button 
+                onClick={() => {setStartDietProcess(true)}}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+            >Generate diet</Button>
         </>)}
         {(chosenOption === "form" && <>
-            <button onClick={() => {setChosenOption("none")}}>Back</button>
+            <Button 
+                onClick={() => {setChosenOption("none")}}
+                variant="contained"
+                color="primary"
+                className={classes.button}
+            >Back</Button>
             <h3>Form will be here</h3>
         </>)}
-        {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet}/>)}
-
+        </Row>
+        <Row>
+            {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet}/>)}
+        </Row>
     </Container>
         
     </>)

@@ -132,7 +132,7 @@ namespace FitAppReact.Controllers
         }
         
         [HttpGet]
-        [Route("products")]
+        [Route("products/get")]
         public IActionResult GetProducts()
         {
             try
