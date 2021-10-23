@@ -11,6 +11,8 @@ import * as Yup from 'yup';
 import {selectUser, updateUser} from '../../store/userSlice';
 import {selectUserMacros, fetchUserMacros} from '../../store/userMacrosSlice';
 import { UserParams } from '../../models/UserParams';
+import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
+import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
 
 const useStyles = makeStyles({
     formControl: {
@@ -30,6 +32,7 @@ const UserData: React.FC = () => {
     const user = useSelector(selectUser);
     const classes = useStyles();
     const dispatch = useDispatch();
+    const testItems = [{id: 'id1', name: 'what1'}, {id: 'id2', name: 'what2'}] as AutocompleteItem[];
 
     React.useEffect(() => {
         if(user.weight !== 1) //TODO: first login logic to ensure data has been filled
@@ -167,6 +170,9 @@ const UserData: React.FC = () => {
                 </Col>
             </Row> 
         </form>
+        <Row>
+            <AutocompleteInput items={testItems} id="test-input" title="Test input"/>
+        </Row>
     </Container>)
 };
 

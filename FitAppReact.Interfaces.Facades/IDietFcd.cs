@@ -12,6 +12,7 @@ namespace FitAppReact.Interfaces.Facades
     public interface IDietFcd
     {
         public Macros GetDailyMacros(UserParams userParams);
+        public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams);
         public IEnumerable<MealDTO> GetDietMealsForBreakfast(Macros requirements);
         public IEnumerable<MealDTO> GetDietMealsForLunch(Macros requirements);
         public IEnumerable<MealDTO> GetDietMealsForDinner(Macros requirements);

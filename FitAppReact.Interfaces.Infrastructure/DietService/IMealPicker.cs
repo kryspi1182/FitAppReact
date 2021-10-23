@@ -12,5 +12,6 @@ namespace FitAppReact.Interfaces.Infrastructure
     public interface IMealPicker
     {
         public IEnumerable<MealDTO> GetDietMealsForCategory(Macros requirements, MealCategoryEnum mealCategory);
+        public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams);
     }
 }

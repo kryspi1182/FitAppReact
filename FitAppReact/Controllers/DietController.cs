@@ -36,6 +36,20 @@ namespace FitAppReact.Controllers
         }
 
         [HttpPost]
+        [Route("meals/match")]
+        public IActionResult GetMatchingMeals([FromBody] UserDietParams userDietParams)
+        {
+            try
+            {
+                return Ok(dietFcd.GetMatchingMeals(userDietParams));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
         [Route("meals/breakfast")]
         public IActionResult GetDietMealsForBreakfast([FromBody] Macros macros)
         {

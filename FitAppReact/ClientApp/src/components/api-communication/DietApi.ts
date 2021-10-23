@@ -3,11 +3,21 @@ import { Macros } from '../../models/Macros';
 import { UserParams } from '../../models/UserParams';
 import { Meal } from '../../models/Meal';
 import { Product } from '../../models/Product';
+import { UserDietParams } from '../../models/UserDietParams';
 
 export const dietApi = {
     async getMacros(userParams: UserParams) {
         try {
             return await connection.api.post<Macros>(`diet/macros/count`, userParams)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w dietApi " + e);
+        }
+    },
+    async getMatchingMeals(params: UserDietParams) {
+        try {
+            return await connection.api.post<Array<Meal>>(`diet/meals/match`, params)
                 .then(response => response.data);
         }
         catch (e) {
