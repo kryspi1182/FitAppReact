@@ -2,6 +2,7 @@
 import { User } from '../../models/User';
 import { EntityId } from '@reduxjs/toolkit';
 import { UserParams } from '../../models/UserParams';
+import { MedicalCondition } from '../../models/MedicalCondition';
 
 export const userApi = {
     async getUser(id: EntityId) {
@@ -16,6 +17,15 @@ export const userApi = {
     async updateUser(id: EntityId, userParams: UserParams) {
         try {
             return await connection.api.put<UserParams>(`user/updateUser/${id}`, userParams)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w userApi " + e);
+        }
+    },
+    async getMedicalConditions() {
+        try {
+            return await connection.api.get<Array<MedicalCondition>>(`user/medicalConditions`)
                 .then(response => response.data);
         }
         catch (e) {

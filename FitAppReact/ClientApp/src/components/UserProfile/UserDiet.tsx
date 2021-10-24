@@ -61,9 +61,9 @@ const UserDiet: React.FC = () => {
                 break;
         }
     }, [chosenOption]);
-    React.useEffect(() => {
-        dispatch(fetchProducts());
-    }, []);
+    /*React.useEffect(() => {
+        
+    }, []);*/
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
             dispatch(fetchBreakfast(macros));

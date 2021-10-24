@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Interfaces.Infrastructure.DietService
 {
-    public interface IProductManager
+    public interface IProductSrv
     {
         public IEnumerable<ProductDTO> GetProducts();
     }

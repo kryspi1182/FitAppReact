@@ -13,10 +13,12 @@ namespace FitAppReact.Facades
     public class UserFcd : IUserFcd
     {
         private readonly IAppUserSrv appUserSrv;
+        private readonly IMedicalConditionSrv medicalConditionSrv;
 
-        public UserFcd(IAppUserSrv _appUserSrv)
+        public UserFcd(IAppUserSrv _appUserSrv, IMedicalConditionSrv _medicalConditionSrv)
         {
             appUserSrv = _appUserSrv;
+            medicalConditionSrv = _medicalConditionSrv;
         }
 
         public AppUserDTO GetUserById(string id)
@@ -26,6 +28,10 @@ namespace FitAppReact.Facades
         public void UpdateUser(string id, UserParams userParams)
         {
             appUserSrv.UpdateUser(id, userParams);
+        }
+        public IEnumerable<MedicalConditionDTO> GetMedicalConditions()
+        {
+            return medicalConditionSrv.GetMedicalConditions();
         }
     }
 }

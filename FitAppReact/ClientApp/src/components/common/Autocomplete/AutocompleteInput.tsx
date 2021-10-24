@@ -15,7 +15,9 @@ import AutocompleteChip from './AutocompleteChip';
 type Props = {
     items: AutocompleteItem[],
     id: string,
-    title: string
+    title: string,
+    setSelected: Function,
+    selectedValues: AutocompleteItem[]
 };
 
 const useStyles = makeStyles({
@@ -79,18 +81,18 @@ const useStyles = makeStyles({
 
 const AutocompleteInput: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const [selectedValues, setSelectedValues] = React.useState([] as AutocompleteItem[]);
+    const [selectedValues, setSelectedValues] = React.useState(props.selectedValues);
     React.useEffect(() => {
       console.log(selectedValues);
     }, [selectedValues]);
     return (
         <Autocomplete
-        open
         multiple
         id={props.id}
         value={selectedValues}
         onChange={(event, value) => {
-            setSelectedValues(value);
+          setSelectedValues(value);
+          props.setSelected(value);
         }}
         options={props.items}
         getOptionLabel={(option) => option.name}

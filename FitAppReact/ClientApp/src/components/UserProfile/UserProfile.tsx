@@ -4,6 +4,8 @@ import { fetchUser, selectUser } from '../../store/userSlice';
 import { UserStorage } from '../../models/UserStorage';
 import { ProfileStorage } from '../../models/ProfileStorage';
 import UserProfileEdit from './UserProfileEdit';
+import { fetchProducts } from '../../store/productsSlice';
+import { fetchMedicalConditions } from '../../store/medicalConditionsSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
@@ -13,6 +15,8 @@ const UserProfile: React.FC = () => {
     const userObj = JSON.parse(userString) as UserStorage;
     console.log(userObj.profile);
     React.useEffect(() => {
+        dispatch(fetchProducts());
+        dispatch(fetchMedicalConditions());
         if (userObj && userObj.profile.sub)
             dispatch(fetchUser(userObj.profile.sub));
     }, [dispatch]);

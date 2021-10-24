@@ -48,5 +48,18 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+        [HttpGet]
+        [Route("medicalConditions")]
+        public IActionResult GetMedicalConditions()
+        {
+            try
+            {
+                return Ok(userFcd.GetMedicalConditions());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

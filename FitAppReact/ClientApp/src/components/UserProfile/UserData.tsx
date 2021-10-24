@@ -10,9 +10,13 @@ import * as Yup from 'yup';
 
 import {selectUser, updateUser} from '../../store/userSlice';
 import {selectUserMacros, fetchUserMacros} from '../../store/userMacrosSlice';
+import { selectAllMedicalConditions, fetchMedicalConditions } from '../../store/medicalConditionsSlice';
 import { UserParams } from '../../models/UserParams';
 import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
 import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
+import { selectAllProducts } from '../../store/productsSlice';
+import { UserMedicalCondition } from '../../models/UserMedicalCondition';
+import { UserUnwantedProduct } from '../../models/UserUnwantedProduct';
 
 const useStyles = makeStyles({
     formControl: {
@@ -32,12 +36,52 @@ const UserData: React.FC = () => {
     const user = useSelector(selectUser);
     const classes = useStyles();
     const dispatch = useDispatch();
-    const testItems = [{id: 'id1', name: 'what1'}, {id: 'id2', name: 'what2'}] as AutocompleteItem[];
+    const medicalConditions = useSelector(selectAllMedicalConditions);
+    const products = useSelector(selectAllProducts);
+
+    const mappedMedicalConditions = medicalConditions.map(x => {
+        return {id: x.id, name: x.name} as AutocompleteItem;
+    });
+    const mappedProducts = products.map(x => {
+        return {id: x.id, name: x.name} as AutocompleteItem;
+    });
+    const [selectedMedicalConditions, setSelectedMedicalConditions] = React.useState(user.medicalConditions);
+    const [selectedUnwantedProducts, setSelectedUnwantedProducts] = React.useState(user.unwantedProducts);
+    const [selectedMappedMedicalConditions, setSelectedMappedMedicalConditions] = React.useState(user.medicalConditions ? mappedMedicalConditions.filter(mapped => user.medicalConditions.some(med => med.medicalConditionId === mapped.id)): [] as AutocompleteItem[]);
+    const [selectedMappedUnwantedProducts, setSelectedMappedUnwantedProducts] = React.useState(user.unwantedProducts ? mappedProducts.filter(mapped => user.unwantedProducts.some(prod => prod.productId === mapped.id)): [] as AutocompleteItem[]);
+    const mapItemsToMedicalConditions = (items: AutocompleteItem[]) => {
+        setSelectedMappedMedicalConditions(items);
+        const medCons = medicalConditions.filter(medCon => items.some(item => item.id === medCon.id));
+        const userMedCons = medCons.map(medCon => {
+            return { userId: user.id, medicalConditionId: medCon.id } as UserMedicalCondition;
+        });
+        setSelectedMedicalConditions(userMedCons);
+    };
+    const mapItemsToUnwantedProducts = (items: AutocompleteItem[]) => {
+        setSelectedMappedUnwantedProducts(items);
+        const unProds = products.filter(prod => items.some(item => item.id === prod.id));
+        const userUnProds = unProds.map(prod => {
+            return { userId: user.id, productId: prod.id } as UserUnwantedProduct;
+        });
+        setSelectedUnwantedProducts(userUnProds);
+    };
 
     React.useEffect(() => {
-        if(user.weight !== 1) //TODO: first login logic to ensure data has been filled
+        if(user.weight !== 1) {
             dispatch(fetchUserMacros(null));
+            
+        } //TODO: first login logic to ensure data has been filled
+            
     }, [user]);
+
+    React.useEffect(() => {
+        console.log(selectedMedicalConditions);
+        formik.setFieldValue('medicalConditions', selectedMedicalConditions);
+    }, [selectedMedicalConditions]);
+
+    React.useEffect(() => {
+        formik.setFieldValue('unwantedProducts', selectedUnwantedProducts);
+    }, [selectedUnwantedProducts]);
 
     const formik = useFormik({
         initialValues: {
@@ -45,7 +89,9 @@ const UserData: React.FC = () => {
             weight: user.weight,
             height: user.height,
             age: user.age,
-            gender: user.gender
+            gender: user.gender,
+            unwantedProducts: selectedUnwantedProducts,
+            medicalConditions: selectedMedicalConditions
         } as UserParams,
         validationSchema: Yup.object({
             age: Yup.number()
@@ -160,6 +206,32 @@ const UserData: React.FC = () => {
             </Row>
             <Row>
                 <Col className={classes.column}>
+                    <FormControl className={classes.formControl}>
+                        <AutocompleteInput 
+                            items={mappedMedicalConditions} 
+                            id="medical-conditions" 
+                            title="Medical conditions"
+                            setSelected={mapItemsToMedicalConditions}
+                            selectedValues={selectedMappedMedicalConditions}
+                        />
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl}>
+                        <AutocompleteInput 
+                            items={mappedProducts} 
+                            id="unwanted-products" 
+                            title="Unwanted products"
+                            setSelected={mapItemsToUnwantedProducts}
+                            selectedValues={selectedMappedUnwantedProducts}
+                        />
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row>
+                <Col className={classes.column}>
                     <Button
                     type="submit"
                     variant="contained"
@@ -170,9 +242,7 @@ const UserData: React.FC = () => {
                 </Col>
             </Row> 
         </form>
-        <Row>
-            <AutocompleteInput items={testItems} id="test-input" title="Test input"/>
-        </Row>
+        
     </Container>)
 };
 

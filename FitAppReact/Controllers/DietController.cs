@@ -158,5 +158,7 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        
     }
 }
