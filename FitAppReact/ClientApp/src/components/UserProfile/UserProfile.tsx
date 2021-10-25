@@ -13,7 +13,6 @@ const UserProfile: React.FC = () => {
     const localStorage = window.localStorage;
     const userString = localStorage.getItem("FitAppReactuser:http://192.168.0.15:25415:FitAppReact");
     const userObj = JSON.parse(userString) as UserStorage;
-    console.log(userObj.profile);
     React.useEffect(() => {
         dispatch(fetchProducts());
         dispatch(fetchMedicalConditions());

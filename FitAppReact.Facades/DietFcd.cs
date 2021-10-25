@@ -32,9 +32,9 @@ namespace FitAppReact.Facades
         public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams)
         {
             if ((userDietParams.conditionIds.Count() == 0) && (userDietParams.unwantedProductIds.Count() == 0))
-                return mealPicker.GetMatchingMeals(userDietParams);
-            else
                 return mealPicker.GetDietMealsForCategory(userDietParams.macros, userDietParams.mealCategory);
+            else 
+                return mealPicker.GetMatchingMeals(userDietParams);
         }
 
         public IEnumerable<MealDTO> GetDietMealsForBreakfast(Macros requirements)

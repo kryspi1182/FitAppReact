@@ -82,9 +82,7 @@ const useStyles = makeStyles({
 const AutocompleteInput: React.FC<Props> = (props) => {
     const classes = useStyles();
     const [selectedValues, setSelectedValues] = React.useState(props.selectedValues);
-    React.useEffect(() => {
-      console.log(selectedValues);
-    }, [selectedValues]);
+
     return (
         <Autocomplete
         multiple

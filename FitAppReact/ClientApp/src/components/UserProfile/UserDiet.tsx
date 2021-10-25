@@ -6,12 +6,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Container, Col, Row } from 'reactstrap';
 
-import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
+import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals, fetchMatchingMeals } from '../../store/userMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
 import WeekDietBox from '../common/WeekDietBox';
 import DietResult from './DietResult';
+import { selectUser } from '../../store/userSlice';
+import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
+import { UserDietParams } from '../../models/UserDietParams';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -28,12 +31,14 @@ const UserDiet: React.FC = () => {
     const dispatch = useDispatch();
     const [chosenOption, setChosenOption] = React.useState("none");
     const [startDietProcess, setStartDietProcess] = React.useState(false);
+    const [startCustomDietProcess, setStartCustomDietProcess] = React.useState(false);
     const [generateDiet, setGenerateDiet] = React.useState(false);
     const [step, setStep] = React.useState(1);
     const [title, setTitle] = React.useState("Generate diet based on your:");
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
+    const user = useSelector(selectUser);
 
     React.useEffect(() => {
         switch(step) {
@@ -66,12 +71,28 @@ const UserDiet: React.FC = () => {
     }, []);*/
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
-            dispatch(fetchBreakfast(macros));
-            dispatch(fetchLunch(macros));
-            dispatch(fetchDinner(macros));
-            dispatch(fetchSnack(macros));
+            const breakfastParams = {
+                macros: macros,
+                unwantedProductIds: user.unwantedProducts.map(x => x.productId),
+                conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
+                mealCategory: MealCategoryEnum.BreakfastDinner
+            } as UserDietParams;
+            const lunchParams = {
+                macros: macros,
+                unwantedProductIds: user.unwantedProducts.map(x => x.productId),
+                conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
+                mealCategory: MealCategoryEnum.Lunch
+            } as UserDietParams;
+            const snackParams = {
+                macros: macros,
+                unwantedProductIds: user.unwantedProducts.map(x => x.productId),
+                conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
+                mealCategory: MealCategoryEnum.Snack
+            } as UserDietParams;
+            dispatch(fetchMatchingMeals(breakfastParams));
+            dispatch(fetchMatchingMeals(lunchParams));
+            dispatch(fetchMatchingMeals(snackParams));
             setStep(3);
-            //setTimeout(() => setGenerateDiet(true), 500);
         }
     }, [startDietProcess]);
     React.useEffect(() => {

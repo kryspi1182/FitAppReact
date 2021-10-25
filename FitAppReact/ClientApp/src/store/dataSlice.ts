@@ -19,7 +19,6 @@ export const fetchData = createAsyncThunk('data/fetchData', async () => {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
-        console.log(data);
         return data;
     }
     catch (e) {

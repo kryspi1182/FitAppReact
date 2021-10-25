@@ -20,9 +20,7 @@ import { UserUnwantedProduct } from '../../models/UserUnwantedProduct';
 
 const useStyles = makeStyles({
     formControl: {
-        //margin: '10px',
         display: 'block'
-        //minWidth: 120
     },
     container: {
         padding: '10px'
@@ -75,7 +73,6 @@ const UserData: React.FC = () => {
     }, [user]);
 
     React.useEffect(() => {
-        console.log(selectedMedicalConditions);
         formik.setFieldValue('medicalConditions', selectedMedicalConditions);
     }, [selectedMedicalConditions]);
 
