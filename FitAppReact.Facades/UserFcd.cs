@@ -33,5 +33,9 @@ namespace FitAppReact.Facades
         {
             return medicalConditionSrv.GetMedicalConditions();
         }
+        public void AddUserDiet(UserDietObjectParams userDietObjectParams)
+        {
+            appUserSrv.AddUserDiet(userDietObjectParams);
+        }
     }
 }
