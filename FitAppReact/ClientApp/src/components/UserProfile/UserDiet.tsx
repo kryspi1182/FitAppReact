@@ -8,13 +8,16 @@ import { Container, Col, Row } from 'reactstrap';
 
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals, fetchMatchingMeals } from '../../store/userMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
+import { selectAllCustomMeals } from '../../store/customMealsSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
 import WeekDietBox from '../common/WeekDietBox';
 import DietResult from './DietResult';
 import { selectUser } from '../../store/userSlice';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
+import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { UserDietParams } from '../../models/UserDietParams';
+import CustomDiet from './CustomDiet';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -33,11 +36,13 @@ const UserDiet: React.FC = () => {
     const [startDietProcess, setStartDietProcess] = React.useState(false);
     const [startCustomDietProcess, setStartCustomDietProcess] = React.useState(false);
     const [generateDiet, setGenerateDiet] = React.useState(false);
+    const [generateCustomDiet, setGenerateCustomDiet] = React.useState(false);
     const [step, setStep] = React.useState(1);
     const [title, setTitle] = React.useState("Generate diet based on your:");
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
+    const customMeals = useSelector(selectAllCustomMeals);
     const user = useSelector(selectUser);
 
     React.useEffect(() => {
@@ -66,9 +71,7 @@ const UserDiet: React.FC = () => {
                 break;
         }
     }, [chosenOption]);
-    /*React.useEffect(() => {
-        
-    }, []);*/
+
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
             const breakfastParams = {
@@ -99,8 +102,23 @@ const UserDiet: React.FC = () => {
         if(meals.some((meal) => meal.mealCategoryId === 1) 
         && meals.some((meal) => meal.mealCategoryId === 2)
         && meals.some((meal) => meal.mealCategoryId === 3))
+        {
             setGenerateDiet(true);
+            setGenerateCustomDiet(false);
+        }
+            
     }, [meals]);
+    React.useEffect(() => {
+        if(customMeals.some((meal) => meal.mealCategoryId === 1) 
+        && customMeals.some((meal) => meal.mealCategoryId === 2)
+        && customMeals.some((meal) => meal.mealCategoryId === 3)
+        && startCustomDietProcess)
+        {
+            setGenerateCustomDiet(true);
+            setGenerateDiet(false);
+        }
+            
+    }, [customMeals]);
     return(<>
     <Container>
         <Row>
@@ -143,10 +161,12 @@ const UserDiet: React.FC = () => {
                 className={classes.button}
             >Back</Button>
             <h3>Form will be here</h3>
+            <CustomDiet setStartProcess={setStartCustomDietProcess}/>
         </>)}
         </Row>
         <Row>
-            {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet}/>)}
+            {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
+            {(generateCustomDiet && <DietResult generateDiet={generateCustomDiet} setGenerateDiet={setGenerateCustomDiet} dietType={DietTypeEnum.Custom}/>)}
         </Row>
     </Container>
         

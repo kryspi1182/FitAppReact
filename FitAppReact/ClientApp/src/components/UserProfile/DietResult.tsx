@@ -6,10 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container } from 'reactstrap';
 
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
+import { selectAllCustomMeals } from '../../store/customMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
 import WeekDietBox from '../common/WeekDietBox';
+import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
+import { Meal } from '../../models/Meal';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -17,7 +20,8 @@ const getRandomInt = (max: number) => {
 
 type Props = {
     generateDiet: boolean,
-    setGenerateDiet: Function
+    setGenerateDiet: Function,
+    dietType: DietTypeEnum
 };
 
 const DietResult: React.FC<Props> = (props) => {
@@ -34,7 +38,16 @@ const DietResult: React.FC<Props> = (props) => {
     const [dietDinner, setDietDinner] = React.useState(Array<EntityId>());
 
     const meals = useSelector(selectAllUserMeals);
-
+    const customMeals = useSelector(selectAllCustomMeals);
+    var resultMeals = [] as Meal[];
+    switch(props.dietType) {
+        case DietTypeEnum.Data:
+            resultMeals = meals;
+        break;
+        case DietTypeEnum.Custom:
+            resultMeals = customMeals;
+        break;
+    };
     const pickDietMeals = () => {
         const breakfastDinnerIds = breakfastDinners.length;
         const lunchIds = lunches.length;
@@ -58,10 +71,10 @@ const DietResult: React.FC<Props> = (props) => {
     }, [breakfastDinners, lunches, snacks]);
 
     React.useEffect(() => {
-        if(props.generateDiet && meals.length > 0) {
-            setBreakfastDinners(meals.filter((meal) => meal.mealCategoryId === 1).map((meal) => meal.id));
-            setLunches(meals.filter((meal) => meal.mealCategoryId === 2).map((meal) => meal.id));
-            setSnacks(meals.filter((meal) => meal.mealCategoryId === 3).map((meal) => meal.id));
+        if(props.generateDiet && resultMeals.length > 0) {
+            setBreakfastDinners(resultMeals.filter((meal) => meal.mealCategoryId === 1).map((meal) => meal.id));
+            setLunches(resultMeals.filter((meal) => meal.mealCategoryId === 2).map((meal) => meal.id));
+            setSnacks(resultMeals.filter((meal) => meal.mealCategoryId === 3).map((meal) => meal.id));
         }
             
     }, [props.generateDiet]);

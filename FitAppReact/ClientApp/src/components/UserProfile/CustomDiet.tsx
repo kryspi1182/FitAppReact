@@ -12,9 +12,14 @@ import { userInfo } from 'os';
 
 import { selectAllMedicalConditions } from '../../store/medicalConditionsSlice';
 import { selectAllProducts } from '../../store/productsSlice';
+import { fetchMatchingCustomMeals } from '../../store/customMealsSlice';
 import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
 import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
 import { Macros } from '../../models/Macros';
+import { dietApi } from '../api-communication/DietApi';
+import { UserDietParams } from '../../models/UserDietParams';
+import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
+import { fetchMatchingMeals } from '../../store/userMealsSlice';
 
 const useStyles = makeStyles({
     formControl: {
@@ -28,7 +33,12 @@ const useStyles = makeStyles({
     }
 });
 
-const CustomDiet: React.FC = () => {
+type Props = {
+    setStartProcess: Function
+};
+
+const CustomDiet: React.FC<Props> = (props) => {
+    const dispatch = useDispatch();
     const classes = useStyles();
     const medicalConditions = useSelector(selectAllMedicalConditions);
     const products = useSelector(selectAllProducts);
@@ -101,6 +111,7 @@ const CustomDiet: React.FC = () => {
                 .required(),
         }),
         onSubmit: (values) => {
+            //console.log(values);
             const macros = {
                 calories: formik.values.calories,
                 fat: formik.values.fat,
@@ -110,7 +121,18 @@ const CustomDiet: React.FC = () => {
                 protein: formik.values.protein,
                 salt: formik.values.salt
             } as Macros;
-            //TODO: either modify parent component state passed as props, or dispatch here and set a parent component flag to display diet
+            var dietParams = {
+                macros: macros,
+                unwantedProductIds: selectedUnwantedProducts,
+                conditionIds: selectedMedicalConditions,
+                mealCategory: MealCategoryEnum.BreakfastDinner
+            } as UserDietParams;
+            dispatch(fetchMatchingCustomMeals(dietParams));
+            dietParams.mealCategory = MealCategoryEnum.Lunch;
+            dispatch(fetchMatchingCustomMeals(dietParams));
+            dietParams.mealCategory = MealCategoryEnum.Snack;
+            dispatch(fetchMatchingCustomMeals(dietParams));
+            props.setStartProcess(true);
         }
     });
     return(<Container className={classes.container}>
@@ -166,22 +188,6 @@ const CustomDiet: React.FC = () => {
                 </Col>
             </Row>
                 <Row>
-                    <Col className={classes.column}>
-                        <FormControl className={classes.formControl}>
-                            <TextField
-                                id="custom-diet-fat"
-                                label="Fat"
-                                type="number"
-                                InputProps={{inputProps: {min: 10, max: 1000}}}
-                                onChange={(event) => {
-                                    if(!isNaN(parseInt(event.target.value)))
-                                        formik.setFieldValue('fat', parseInt(event.target.value));
-                                }}
-                                value={formik.values.fat}
-                                variant="outlined"
-                            />
-                        </FormControl>
-                    </Col>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -287,3 +293,5 @@ const CustomDiet: React.FC = () => {
         </form>
     </Container>);
 }
+
+export default CustomDiet;

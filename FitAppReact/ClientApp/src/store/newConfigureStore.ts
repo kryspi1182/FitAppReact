@@ -6,6 +6,7 @@ import dataReducer from './dataSlice';
 import userReducer from './userSlice';
 import userMacrosReducer from './userMacrosSlice';
 import userMealsReducer from './userMealsSlice';
+import customMealsReducer from './customMealsSlice';
 import productsReducer from './productsSlice';
 import medicalConditionsReducer from './medicalConditionsSlice';
 
@@ -28,6 +29,7 @@ const store = configureStore({
         userMeals: userMealsReducer,
         products: productsReducer,
         medicalConditions: medicalConditionsReducer,
+        customMeals: customMealsReducer,
         //@ts-ignore
         router: connectRouter(history)
     },
