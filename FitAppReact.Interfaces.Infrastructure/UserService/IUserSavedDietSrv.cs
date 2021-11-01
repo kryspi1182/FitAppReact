@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Interfaces.Infrastructure.UserService
 {
-    public interface IAppUserSrv
+    public interface IUserSavedDietSrv
     {
-        public AppUserDTO GetUserById(string id);
-        public void UpdateUser(string id, UserParams userParams);
-        
+        public Task<UserSavedDietDTO> AddUserSavedDiet(UserSavedDietParams userDietObjectParams);
+        public IEnumerable<UserSavedDietDTO> GetUserSavedDiets(string id);
     }
 }

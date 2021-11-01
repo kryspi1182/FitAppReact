@@ -12,6 +12,7 @@ import UserData from './UserData';
 import UserTraining from './UserTraining';
 import UserDiet from './UserDiet';
 import { fetchUser, selectUser } from '../../store/userSlice';
+import UserSavedDiets from './UserSavedDiets';
 
 const useStyles = makeStyles({
     container: {
@@ -36,6 +37,9 @@ const UserProfileEdit: React.FC = () => {
             case "diet":
                 setTitle("Your diet");
                 break;
+            case "savedDiets":
+                setTitle("Your saved diets");
+                break;
             case "training":
                 setTitle("Your training");
                 break;
@@ -52,6 +56,12 @@ const UserProfileEdit: React.FC = () => {
         label: "Diet",
         clickHandler: setChosenMenu,
         clickValue: "diet"
+    } as menuOption);
+    options.push({
+        icon: FastfoodIcon,
+        label: "Saved diets",
+        clickHandler: setChosenMenu,
+        clickValue: "savedDiets"
     } as menuOption);
     options.push({
         icon: FitnessCenterIcon,
@@ -72,6 +82,7 @@ const UserProfileEdit: React.FC = () => {
                 <Col xs="auto">
                     {(chosenMenu === "data") && <UserData />}
                     {(chosenMenu === "diet") && <UserDiet />}
+                    {(chosenMenu === "savedDiets") && <UserSavedDiets />}
                     {(chosenMenu === "training") && <UserTraining />}
                 </Col>
             </Row>

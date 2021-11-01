@@ -59,6 +59,7 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<IAppUserSrv, AppUserSrv>();
             serviceCollection.AddScoped<IProductSrv, ProductSrv>();
             serviceCollection.AddScoped<IMedicalConditionSrv, MedicalConditionSrv>();
+            serviceCollection.AddScoped<IUserSavedDietSrv, UserSavedDietSrv>();
             #endregion
 
             #region Mapper

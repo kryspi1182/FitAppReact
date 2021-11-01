@@ -62,13 +62,26 @@ namespace FitAppReact.Controllers
             }
         }
         [HttpPost]
-        [Route("userDiet/add")]
-        public IActionResult AddUserDiet([FromBody] UserDietObjectParams userDietObjectParams)
+        [Route("userSavedDiet/add")]
+        public IActionResult AddUserSavedDiet([FromBody] UserSavedDietParams userSavedDietParams)
         {
             try
             {
-                userFcd.AddUserDiet(userDietObjectParams));
-                return Ok(userDietObjectParams);
+                var result = userFcd.AddUserSavedDiet(userSavedDietParams);
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+        [HttpGet]
+        [Route("userSavedDiet/{id}")]
+        public IActionResult GetUserSavedDiets(string id)
+        {
+            try
+            {
+                return Ok(userFcd.GetUserSavedDiets(id));
             }
             catch(Exception e)
             {

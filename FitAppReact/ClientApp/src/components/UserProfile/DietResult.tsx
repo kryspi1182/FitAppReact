@@ -3,16 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EntityId } from '@reduxjs/toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Container } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import { Container, Row } from 'reactstrap';
 
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
 import { selectAllCustomMeals } from '../../store/customMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
+import { addUserSavedDiet } from '../../store/userSavedDietsSlice';
+import { selectUser } from '../../store/userSlice';
 import WeekDietBox from '../common/WeekDietBox';
 import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { Meal } from '../../models/Meal';
+import { UserSavedDietParams } from '../../models/UserSavedDietParams';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -36,9 +40,11 @@ const DietResult: React.FC<Props> = (props) => {
     const [dietLunch, setDietLunch] = React.useState(Array<EntityId>());
     const [dietSnack, setDietSnack] = React.useState(Array<EntityId>());
     const [dietDinner, setDietDinner] = React.useState(Array<EntityId>());
+    const [dietSaved, setDietSaved] = React.useState(false);
 
     const meals = useSelector(selectAllUserMeals);
     const customMeals = useSelector(selectAllCustomMeals);
+    const user = useSelector(selectUser);
     var resultMeals = [] as Meal[];
     switch(props.dietType) {
         case DietTypeEnum.Data:
@@ -60,6 +66,20 @@ const DietResult: React.FC<Props> = (props) => {
             setDietDinner(old => [...old, breakfastDinners[getRandomInt(breakfastDinnerIds)]]);          
         }
         setDietReady(true);
+    };
+
+    const saveDiet = () => {
+        const dietMeals = [...dietBreakfast, ...dietSecondBreakfast, ...dietLunch, ...dietSnack, ...dietDinner];
+        var dietName = prompt("Name your diet:", "Diet");
+        if(dietName) {
+            const savedDietParams = {
+                userId: user.id,
+                name: dietName,
+                mealIds: dietMeals
+            } as UserSavedDietParams;
+            dispatch(addUserSavedDiet(savedDietParams));
+            setDietSaved(true);
+        }
     };
 
     React.useEffect(() => {
@@ -86,12 +106,21 @@ const DietResult: React.FC<Props> = (props) => {
         && dietLunch.length === 7
         && dietSnack.length === 7
         && dietDinner.length === 7) && 
-        <WeekDietBox 
-            breakfasts={dietBreakfast}
-            secondBreakfasts={dietSecondBreakfast}
-            lunches={dietLunch}
-            snacks={dietSnack}
-            dinners={dietDinner}/>)}
+        <Container>
+            <Row>
+                <WeekDietBox 
+                    breakfasts={dietBreakfast}
+                    secondBreakfasts={dietSecondBreakfast}
+                    lunches={dietLunch}
+                    snacks={dietSnack}
+                    dinners={dietDinner}/>
+            </Row>
+            <Row>
+                {(!dietSaved && <Button onClick={saveDiet}>
+                    Save diet
+                </Button>)}
+            </Row>
+        </Container>)}
     </Container>)
 };
 

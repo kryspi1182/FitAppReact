@@ -29,6 +29,7 @@ type Props = {
 
 
 const WeekDietBox: React.FC<Props> = (props) => {
+    //TODO: create all meals slice and use that
     const meals = useSelector(selectAllUserMeals);
     const allProducts = useSelector(selectAllProducts);
     const mapMealToMealWithProducts = (m: Meal) => {

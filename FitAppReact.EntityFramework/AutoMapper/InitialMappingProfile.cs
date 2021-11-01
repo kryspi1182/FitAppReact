@@ -45,6 +45,12 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<UserUnwantedProduct, UserUnwantedProductDTO>();
             CreateMap<UserUnwantedProductDTO, UserUnwantedProduct>();
+
+            CreateMap<UserSavedDietMeal, UserSavedDietMealDTO>();
+            CreateMap<UserSavedDietMealDTO, UserSavedDietMeal>();
+
+            CreateMap<UserSavedDiet, UserSavedDietDTO>();
+            CreateMap<UserSavedDietDTO, UserSavedDiet>();
         }
     }
 }

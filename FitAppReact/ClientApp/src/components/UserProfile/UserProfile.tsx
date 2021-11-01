@@ -6,6 +6,7 @@ import { ProfileStorage } from '../../models/ProfileStorage';
 import UserProfileEdit from './UserProfileEdit';
 import { fetchProducts } from '../../store/productsSlice';
 import { fetchMedicalConditions } from '../../store/medicalConditionsSlice';
+import { fetchUserSavedDiets } from '../../store/userSavedDietsSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
@@ -16,8 +17,11 @@ const UserProfile: React.FC = () => {
     React.useEffect(() => {
         dispatch(fetchProducts());
         dispatch(fetchMedicalConditions());
-        if (userObj && userObj.profile.sub)
+        if (userObj && userObj.profile.sub) {
             dispatch(fetchUser(userObj.profile.sub));
+            dispatch(fetchUserSavedDiets(userObj.profile.sub));
+        }
+            
     }, [dispatch]);
     const user = useSelector(selectUser);
     return (

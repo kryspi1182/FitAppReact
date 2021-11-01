@@ -1,8 +1,7 @@
 import { EntityId } from "@reduxjs/toolkit";
 
-export interface UserDiet {
-    id: EntityId,
+export interface UserSavedDietParams {
     userId: EntityId,
     name: string,
-    
-}
+    mealIds: Array<EntityId>
+};

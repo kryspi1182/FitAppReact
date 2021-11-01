@@ -73,24 +73,6 @@ namespace FitAppReact.UserService
             appDbContext.Users.Update(user);
             appDbContext.SaveChanges();
         }
-        public void AddUserDiet(UserDietObjectParams userDietObjectParams)
-        {
-            var meals = appDbContext.Meals
-                .AsNoTracking()
-                .Where(x => userDietObjectParams.mealIds.Contains(x.Id))
-                .ToArray();
-
-            UserDiet userDiet = new UserDiet();
-            userDiet.Name = userDietObjectParams.name;
-            userDiet.UserId = userDietObjectParams.userId;
-            appDbContext.UserDiets.Add(userDiet);
-            appDbContext.SaveChangesAsync();
-
-            foreach(Meal meal in meals)
-            {
-                appDbContext.UserDietMeals.Add(new UserDietMeal { MealId = meal.Id, UserDietId = userDiet.Id });
-            }
-            appDbContext.SaveChangesAsync();
-        }
+        
     }
 }

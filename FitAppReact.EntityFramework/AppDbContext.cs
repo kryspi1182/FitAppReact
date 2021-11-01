@@ -26,8 +26,8 @@ namespace FitAppReact.EntityFramework
         public DbSet<MedicalConditionHazard> MedicalConditionHazards { get; set; }
         public DbSet<UserUnwantedProduct> UserUnwantedProducts { get; set; }
         public DbSet<UserMedicalCondition> UserMedicalConditions { get; set; }
-        public DbSet<UserDiet> UserDiets { get; set; }
-        public DbSet<UserDietMeal> UserDietMeals { get; set; }
+        public DbSet<UserSavedDiet> UserSavedDiets { get; set; }
+        public DbSet<UserSavedDietMeal> UserSavedDietMeals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

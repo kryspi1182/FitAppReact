@@ -13,6 +13,7 @@ namespace FitAppReact.Interfaces.Facades
         public AppUserDTO GetUserById(string id);
         public void UpdateUser(string id, UserParams userParams);
         public IEnumerable<MedicalConditionDTO> GetMedicalConditions();
-        public void AddUserDiet(UserDietObjectParams userDietObjectParams);
+        public UserSavedDietDTO AddUserSavedDiet(UserSavedDietParams userDietObjectParams);
+        public IEnumerable<UserSavedDietDTO> GetUserSavedDiets(string id);
     }
 }

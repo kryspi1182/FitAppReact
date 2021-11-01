@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Common.Classes
 {
-    public class UserDietObjectParams
+    public class UserSavedDietParams
     {
         public string userId { get; set; }
         public string name { get; set; }
