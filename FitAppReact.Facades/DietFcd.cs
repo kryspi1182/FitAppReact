@@ -57,5 +57,9 @@ namespace FitAppReact.Facades
         {
             return productSrv.GetProducts();
         }
+        public IEnumerable<MealDTO> GetMeals()
+        {
+            return mealPicker.GetMeals();
+        }
     }
 }

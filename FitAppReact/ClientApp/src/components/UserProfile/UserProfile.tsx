@@ -7,6 +7,7 @@ import UserProfileEdit from './UserProfileEdit';
 import { fetchProducts } from '../../store/productsSlice';
 import { fetchMedicalConditions } from '../../store/medicalConditionsSlice';
 import { fetchUserSavedDiets } from '../../store/userSavedDietsSlice';
+import { fetchMeals } from '../../store/mealsSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const UserProfile: React.FC = () => {
     React.useEffect(() => {
         dispatch(fetchProducts());
         dispatch(fetchMedicalConditions());
+        dispatch(fetchMeals());
         if (userObj && userObj.profile.sub) {
             dispatch(fetchUser(userObj.profile.sub));
             dispatch(fetchUserSavedDiets(userObj.profile.sub));

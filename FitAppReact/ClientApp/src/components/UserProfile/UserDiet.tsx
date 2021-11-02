@@ -160,7 +160,6 @@ const UserDiet: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Back</Button>
-            <h3>Form will be here</h3>
             <CustomDiet setStartProcess={setStartCustomDietProcess}/>
         </>)}
         </Row>

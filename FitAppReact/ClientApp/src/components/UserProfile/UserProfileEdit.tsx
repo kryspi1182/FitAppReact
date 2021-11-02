@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SideMenu, {menuOption} from '../common/SideMenu';
@@ -58,7 +59,7 @@ const UserProfileEdit: React.FC = () => {
         clickValue: "diet"
     } as menuOption);
     options.push({
-        icon: FastfoodIcon,
+        icon: SaveIcon,
         label: "Saved diets",
         clickHandler: setChosenMenu,
         clickValue: "savedDiets"

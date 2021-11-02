@@ -4,6 +4,11 @@ import { EntityId } from '@reduxjs/toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Container, Row } from 'reactstrap';
 
 import { selectAllUserSavedDiets } from '../../store/userSavedDietsSlice';
@@ -38,13 +43,28 @@ const UserSavedDiets: React.FC = () => {
                     break;
                 };
             }
-            return <WeekDietBox
-                breakfasts={breakfasts}
-                secondBreakfasts={secondBreakfasts}
-                lunches={lunches}
-                snacks={snacks}
-                dinners={dinners}
-            />
+            return (
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography>{userDiet.name}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <WeekDietBox
+                            breakfasts={breakfasts}
+                            secondBreakfasts={secondBreakfasts}
+                            lunches={lunches}
+                            snacks={snacks}
+                            dinners={dinners}
+                        />
+                    </AccordionDetails>
+            </Accordion>
+            
+            
+            )
         })}
     </Container>);
 };

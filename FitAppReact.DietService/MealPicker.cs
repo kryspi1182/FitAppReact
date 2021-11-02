@@ -53,6 +53,18 @@ namespace FitAppReact.DietService
             return mapper.Map<MealDTO[]>(finalResult);
         }
 
+        public IEnumerable<MealDTO> GetMeals()
+        {
+            var result = appDbContext.Meals
+                .AsNoTracking()
+                .Include(x => x.MealProducts)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.ProductHazards)
+                .ToArray();
+
+            return mapper.Map<MealDTO[]>(result);
+        }
+
         #region Private
 
         private bool CheckMeal(Meal meal, Macros requirements, MealCategoryEnum mealCategory)

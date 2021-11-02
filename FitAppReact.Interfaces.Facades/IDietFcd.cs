@@ -18,5 +18,6 @@ namespace FitAppReact.Interfaces.Facades
         public IEnumerable<MealDTO> GetDietMealsForDinner(Macros requirements);
         public IEnumerable<MealDTO> GetDietMealsForSnack(Macros requirements);
         public IEnumerable<ProductDTO> GetProducts();
+        public IEnumerable<MealDTO> GetMeals();
     }
 }

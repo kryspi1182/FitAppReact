@@ -68,5 +68,14 @@ export const dietApi = {
         catch (e) {
             console.log("error w dietApi " + e);
         }
+    },
+    async getMeals() {
+        try {
+            return await connection.api.get<Array<Meal>>(`diet/meals/get`)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w dietApi " + e);
+        }
     }
 };

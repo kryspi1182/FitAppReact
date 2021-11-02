@@ -159,6 +159,19 @@ namespace FitAppReact.Controllers
             }
         }
 
-        
+        [HttpGet]
+        [Route("meals/get")]
+        public IActionResult GetMeals()
+        {
+            try
+            {
+                return Ok(dietFcd.GetMeals());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
     }
 }

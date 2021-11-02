@@ -170,6 +170,8 @@ const CustomDiet: React.FC<Props> = (props) => {
                         />
                     </FormControl>
                 </Col>
+            </Row>
+            <Row>
                 <Col className={classes.column}>
                     <FormControl className={classes.formControl}>
                         <TextField
@@ -186,8 +188,6 @@ const CustomDiet: React.FC<Props> = (props) => {
                         />
                     </FormControl>
                 </Col>
-            </Row>
-                <Row>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -204,6 +204,8 @@ const CustomDiet: React.FC<Props> = (props) => {
                             />
                         </FormControl>
                     </Col>
+            </Row>
+            <Row>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -236,6 +238,8 @@ const CustomDiet: React.FC<Props> = (props) => {
                             />
                         </FormControl>
                     </Col>
+            </Row>
+            <Row>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
