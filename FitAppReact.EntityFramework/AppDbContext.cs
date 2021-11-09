@@ -28,6 +28,16 @@ namespace FitAppReact.EntityFramework
         public DbSet<UserMedicalCondition> UserMedicalConditions { get; set; }
         public DbSet<UserSavedDiet> UserSavedDiets { get; set; }
         public DbSet<UserSavedDietMeal> UserSavedDietMeals { get; set; }
+        public DbSet<BodyTarget> BodyTargets { get; set; }
+        public DbSet<Difficulty> Difficulties { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseBodyTarget> ExerciseBodyTargets { get; set; }
+        public DbSet<ExerciseCategory> ExerciseCategories { get; set; }
+        public DbSet<Training> Trainings { get; set; }
+        public DbSet<TrainingCategory> TrainingCategories { get; set; }
+        public DbSet<TrainingConditionSeverity> TrainingConditionSeverities { get; set; }
+        public DbSet<TrainingExercise> TrainingExercises { get; set; }
+        public DbSet<UserTrainingCondition> UserTrainingConditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
