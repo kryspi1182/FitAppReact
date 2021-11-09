@@ -51,6 +51,36 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<UserSavedDiet, UserSavedDietDTO>();
             CreateMap<UserSavedDietDTO, UserSavedDiet>();
+
+            CreateMap<BodyTarget, BodyTargetDTO>();
+            CreateMap<BodyTargetDTO, BodyTarget>();
+
+            CreateMap<Difficulty, DifficultyDTO>();
+            CreateMap<DifficultyDTO, Difficulty>();
+
+            CreateMap<Exercise, ExerciseDTO>();
+            CreateMap<ExerciseDTO, Exercise>();
+
+            CreateMap<ExerciseBodyTarget, ExerciseBodyTargetDTO>();
+            CreateMap<ExerciseBodyTargetDTO, ExerciseBodyTarget>();
+
+            CreateMap<ExerciseCategory, ExerciseCategoryDTO>();
+            CreateMap<ExerciseCategoryDTO, ExerciseCategory>();
+
+            CreateMap<Training, TrainingDTO>();
+            CreateMap<TrainingDTO, Training>();
+
+            CreateMap<TrainingCategory, TrainingCategoryDTO>();
+            CreateMap<TrainingCategoryDTO, TrainingCategory>();
+
+            CreateMap<TrainingConditionSeverity, TrainingConditionSeverityDTO>();
+            CreateMap<TrainingConditionSeverityDTO, TrainingConditionSeverity>();
+
+            CreateMap<TrainingExercise, TrainingExerciseDTO>();
+            CreateMap<TrainingExerciseDTO, TrainingExercise>();
+
+            CreateMap<UserTrainingCondition, UserTrainingConditionDTO>();
+            CreateMap<UserTrainingConditionDTO, UserTrainingCondition>();
         }
     }
 }

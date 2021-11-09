@@ -30,6 +30,12 @@ namespace FitAppReact.EntityFramework.InitialData
             ProductHazards();
             MealProducts();
 
+            BodyTargets();
+            Difficulties();
+            ExerciseCategories();
+            TrainingCategories();
+            TrainingConditionSeverities();
+
             Roles();
         }
         #region Private
@@ -1041,6 +1047,58 @@ namespace FitAppReact.EntityFramework.InitialData
             string[] roles = new string[] { "User", "Administrator" };
             IdentityRole[] identityRoles = roles.Select(role => new IdentityRole(role)).ToArray();
             modelBuilder.Entity<IdentityRole>().HasData(identityRoles);
+        }
+        private void BodyTargets()
+        {
+            modelBuilder.Entity<BodyTarget>().HasData(
+                new BodyTarget { Id = 1, Target = "Cardio" },
+                new BodyTarget { Id = 2, Target = "Legs" },
+                new BodyTarget { Id = 3, Target = "Arms" },
+                new BodyTarget { Id = 4, Target = "Chest" },
+                new BodyTarget { Id = 5, Target = "Back" },
+                new BodyTarget { Id = 6, Target = "Stomach" }
+                );
+        }
+
+        private void Difficulties()
+        {
+            modelBuilder.Entity<Difficulty>().HasData(
+                new Difficulty { Id = 1, Name = "Beginner", Description = "You have next to no experience in sports/workouts. That's okay, you've begun your journey, every athlete has at some point." },
+                new Difficulty { Id = 2, Name = "Intermediate", Description = "You've exercised before, you know the basics, nothing fancy but we'll change that." },
+                new Difficulty { Id = 3, Name = "Advanced", Description = "You feel confident while working out, you are aware of your body, you know what are you doing and what you want to achieve and you want to keep moving forward." },
+                new Difficulty { Id = 4, Name = "Professional", Description = "You know why you're here, no need for introductions, let's get to work." }
+                );
+        }
+
+        private void ExerciseCategories()
+        {
+            modelBuilder.Entity<ExerciseCategory>().HasData(
+                new ExerciseCategory { Id = 1, Name = "Warmup", Description = "Exercises meant to prepare your body for the training. Mainly cardio exercises to force faster heart rate and heavier breathing." },
+                new ExerciseCategory { Id = 2, Name = "Main", Description = "The main course. Exercises which will help rebuild your body the way you want and put in effort." },
+                new ExerciseCategory { Id = 3, Name = "Stretch", Description = "Stretching is an important element of every training. Stretching before working out can provide better results, due to muscles being ready and unlocked. Also reduces risks of muscle, tendons and joint injuries." }
+                );
+        }
+
+        private void TrainingCategories()
+        {
+            modelBuilder.Entity<TrainingCategory>().HasData(
+                new TrainingCategory { Id = 1, Name = "Continuous", Description = "Maintain the heart rate at a desired level. Examples are: running, swimming, cycling etc."},
+                new TrainingCategory { Id = 2, Name = "Fartlek", Description = "Training which uses periods of high intensity, low intensity and rest. Example: full sprint for 10 seconds, walk for 1 minute, jog for 2 minutes, repeat."},
+                new TrainingCategory { Id = 3, Name = "Circuit", Description = "Training which involves completing short sets of different exercises one after the other. Example: burpess, press ups, sit ups, squats, rest, repeat."},
+                new TrainingCategory { Id = 4, Name = "Interval", Description = "Training with periods of rest mixed with high intensity exercises. Example: 50m sprint, 30 seconds rest, repeat 10 times."},
+                new TrainingCategory { Id = 5, Name = "Plyometric", Description = "Training which involves short bursts of very high intensity. Example: box jumps."},
+                new TrainingCategory { Id = 6, Name = "Flexibility", Description = "Training focused on improving range of motion. Example: calf raise."},
+                new TrainingCategory { Id = 7, Name = "Weight", Description = "Training focused on muscle movement with additional resistance in the form of a heavy weight. If exercises are not done correctly, there is a serious risk of injury."}
+                );
+        }
+
+        private void TrainingConditionSeverities()
+        {
+            modelBuilder.Entity<TrainingConditionSeverity>().HasData(
+                new TrainingConditionSeverity { Id = 1, Name = "Unnoticable", Description = "A condition you almost forgot about. Nothing to worry, yet better be safe than sorry. Exercises affecting the body part will be highlighted so you know what to observe more carefully." },
+                new TrainingConditionSeverity { Id = 2, Name = "Mild", Description = "Nothing serious, yet you are aware something is not 100% good. Exercises highlighted in yellow should be done with caution, listen to your body and in case anything is wrong, lower the intensity or even leave it alone. Focus on your health, without it there won't be any gains." },
+                new TrainingConditionSeverity { Id = 3, Name = "Severe", Description = "A serious condition that affects the ability to use said body part. Exercises affecting the chosen body part will not be listed for you. Health should always be a top priority. If you are looking for rehab exercises, we reccomend consulting a specialist." }
+                );
         }
         #endregion
     }
