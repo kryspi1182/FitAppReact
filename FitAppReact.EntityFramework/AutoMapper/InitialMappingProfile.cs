@@ -39,6 +39,18 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<AppUser, AppUserDTO>();
             CreateMap<AppUserDTO, AppUser>();
+
+            CreateMap<UserMedicalCondition, UserMedicalConditionDTO>();
+            CreateMap<UserMedicalConditionDTO, UserMedicalCondition>();
+
+            CreateMap<UserUnwantedProduct, UserUnwantedProductDTO>();
+            CreateMap<UserUnwantedProductDTO, UserUnwantedProduct>();
+
+            CreateMap<UserSavedDietMeal, UserSavedDietMealDTO>();
+            CreateMap<UserSavedDietMealDTO, UserSavedDietMeal>();
+
+            CreateMap<UserSavedDiet, UserSavedDietDTO>();
+            CreateMap<UserSavedDietDTO, UserSavedDiet>();
         }
     }
 }

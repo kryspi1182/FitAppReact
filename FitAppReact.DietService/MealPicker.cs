@@ -32,16 +32,57 @@ namespace FitAppReact.DietService
                 .Where(meal => meal.MealCategoryId == ((int)mealCategory))
                 .ToList();
 
-            var finalResult = result.FindAll(meal => CheckMeal(meal, requirements)).ToArray();
+            var finalResult = result.FindAll(meal => CheckMeal(meal, requirements, mealCategory)).ToArray();
+
+            return mapper.Map<MealDTO[]>(finalResult);
+        }
+        public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams)
+        {
+            var result = appDbContext.Meals
+                .AsNoTracking()
+                .Include(x => x.MealProducts)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.ProductHazards)
+                .Where(meal => meal.MealCategoryId == ((int)userDietParams.mealCategory)
+                    && !meal.MealProducts.Any(product => userDietParams.unwantedProductIds.Contains(product.ProductId))
+                    && !meal.MealProducts.Any(product => product.Product.ProductHazards.Any(hazard => userDietParams.conditionIds.Contains(hazard.HazardId))))
+                .ToList();
+
+            var finalResult = result.FindAll(meal => CheckMeal(meal, userDietParams.macros, userDietParams.mealCategory)).ToArray();
 
             return mapper.Map<MealDTO[]>(finalResult);
         }
 
+        public IEnumerable<MealDTO> GetMeals()
+        {
+            var result = appDbContext.Meals
+                .AsNoTracking()
+                .Include(x => x.MealProducts)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.ProductHazards)
+                .ToArray();
+
+            return mapper.Map<MealDTO[]>(result);
+        }
+
         #region Private
 
-        private bool CheckMeal(Meal meal, Macros requirements)
+        private bool CheckMeal(Meal meal, Macros requirements, MealCategoryEnum mealCategory)
         {
             Macros mealMacros = new Macros();
+            double fraction = 0;
+            switch(mealCategory)
+            {
+                case MealCategoryEnum.BreakfastDinner:
+                    fraction = 0.2;
+                    break;
+                case MealCategoryEnum.Lunch:
+                    fraction = 0.4;
+                    break;
+                case MealCategoryEnum.Snack:
+                    fraction = 0.1;
+                    break;
+            }
             foreach(MealProduct mealProduct in meal.MealProducts)
             {
                 mealMacros.Calories += (int)mealProduct.Product.Calories;
@@ -53,7 +94,7 @@ namespace FitAppReact.DietService
                 mealMacros.Salt += (int)mealProduct.Product.Salt;
             }
             //TODO: change margin of error when more complete data exists in the database
-            if((mealMacros.Calories > requirements.Calories * 1.2 || mealMacros.Calories < requirements.Calories * 0.8) /*||
+            if((mealMacros.Calories > requirements.Calories * fraction * 1.2 || mealMacros.Calories < requirements.Calories * fraction * 0.8) /*||
                 (mealMacros.Carbohydrates > requirements.Carbohydrates * 1.5 || mealMacros.Carbohydrates < requirements.Carbohydrates * 0.5) ||
                 (mealMacros.Fat > requirements.Fat * 1.5 || mealMacros.Fat < requirements.Fat * 0.5) ||
                 (mealMacros.Fibre > requirements.Fibre * 1.5 || mealMacros.Fibre < requirements.Fibre * 0.5) ||

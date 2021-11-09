@@ -6054,6 +6054,92 @@ namespace FitAppReact.EntityFramework.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserMedicalCondition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MedicalConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalConditionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserMedicalConditions");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedDiet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserSavedDiets");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedDietMeal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserSavedDietId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("UserSavedDietId");
+
+                    b.ToTable("UserSavedDietMeals");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserUnwantedProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserUnwantedProducts");
+                });
+
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
@@ -6186,14 +6272,14 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ccb965a5-29e4-4961-b023-e04e7eb23dfa",
-                            ConcurrencyStamp = "df85760a-4beb-4f11-93f2-8c042407e781",
+                            Id = "4f18a177-c58d-4c27-b6cf-caf49780f25f",
+                            ConcurrencyStamp = "576d156d-abeb-4b1f-8916-a5959835e9d0",
                             Name = "User"
                         },
                         new
                         {
-                            Id = "65178827-e419-48af-93a3-3838b1685e3e",
-                            ConcurrencyStamp = "150e841c-f769-4e42-8f0f-26b2807feb44",
+                            Id = "238586d7-a231-46ff-aaaa-1d73e85eae2f",
+                            ConcurrencyStamp = "5f6e6854-cee9-4981-95ac-fc42e7d14f86",
                             Name = "Administrator"
                         });
                 });
@@ -6374,6 +6460,68 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserMedicalCondition", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.MedicalCondition", "MedicalCondition")
+                        .WithMany("UserMedicalConditions")
+                        .HasForeignKey("MedicalConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
+                        .WithMany("MedicalConditions")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("MedicalCondition");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedDiet", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
+                        .WithMany("UserSavedDiets")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedDietMeal", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.Meal", "Meal")
+                        .WithMany()
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitAppReact.EntityFramework.Models.UserSavedDiet", "UserSavedDiet")
+                        .WithMany("Meals")
+                        .HasForeignKey("UserSavedDietId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Meal");
+
+                    b.Navigation("UserSavedDiet");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserUnwantedProduct", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.Product", "Product")
+                        .WithMany("UserUnwantedProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
+                        .WithMany("UnwantedProducts")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -6425,6 +6573,15 @@ namespace FitAppReact.EntityFramework.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.AppUser", b =>
+                {
+                    b.Navigation("MedicalConditions");
+
+                    b.Navigation("UnwantedProducts");
+
+                    b.Navigation("UserSavedDiets");
+                });
+
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.Hazard", b =>
                 {
                     b.Navigation("MedicalConditionHazards");
@@ -6443,6 +6600,8 @@ namespace FitAppReact.EntityFramework.Migrations
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.MedicalCondition", b =>
                 {
                     b.Navigation("MedicalConditionHazards");
+
+                    b.Navigation("UserMedicalConditions");
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.Product", b =>
@@ -6450,6 +6609,13 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.Navigation("MealProducts");
 
                     b.Navigation("ProductHazards");
+
+                    b.Navigation("UserUnwantedProducts");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedDiet", b =>
+                {
+                    b.Navigation("Meals");
                 });
 #pragma warning restore 612, 618
         }

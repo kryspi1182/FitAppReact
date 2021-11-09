@@ -12,5 +12,6 @@ namespace FitAppReact.Interfaces.Infrastructure.UserService
     {
         public AppUserDTO GetUserById(string id);
         public void UpdateUser(string id, UserParams userParams);
+        
     }
 }

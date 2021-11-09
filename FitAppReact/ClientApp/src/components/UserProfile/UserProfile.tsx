@@ -4,23 +4,31 @@ import { fetchUser, selectUser } from '../../store/userSlice';
 import { UserStorage } from '../../models/UserStorage';
 import { ProfileStorage } from '../../models/ProfileStorage';
 import UserProfileEdit from './UserProfileEdit';
+import { fetchProducts } from '../../store/productsSlice';
+import { fetchMedicalConditions } from '../../store/medicalConditionsSlice';
+import { fetchUserSavedDiets } from '../../store/userSavedDietsSlice';
+import { fetchMeals } from '../../store/mealsSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
     const storage = window.sessionStorage;
     const localStorage = window.localStorage;
-    const userString = localStorage.getItem("FitAppReactuser:http://localhost:25415:FitAppReact");
+    const userString = localStorage.getItem("FitAppReactuser:http://192.168.0.15:25415:FitAppReact");
     const userObj = JSON.parse(userString) as UserStorage;
-    console.log(userObj.profile);
     React.useEffect(() => {
-        if (userObj.profile.sub)
+        dispatch(fetchProducts());
+        dispatch(fetchMedicalConditions());
+        dispatch(fetchMeals());
+        if (userObj && userObj.profile.sub) {
             dispatch(fetchUser(userObj.profile.sub));
+            dispatch(fetchUserSavedDiets(userObj.profile.sub));
+        }
+            
     }, [dispatch]);
     const user = useSelector(selectUser);
     return (
         <>
             {(user && user.id !== "0") && <>
-                <h2>{user.userName}</h2>
                 <UserProfileEdit />
             </>}
         </>

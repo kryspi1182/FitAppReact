@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.DietService
 {
-    public class ProductManager : IProductManager
+    public class ProductSrv : IProductSrv
     {
         private readonly AppDbContext appDbContext;
         private readonly IMapper mapper;
 
-        public ProductManager(AppDbContext _appDbContext, IMapper _mapper)
+        public ProductSrv(AppDbContext _appDbContext, IMapper _mapper)
         {
             appDbContext = _appDbContext;
             mapper = _mapper;

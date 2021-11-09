@@ -34,6 +34,7 @@
     <None Remove="ClientApp\src\components\api-communication\ApiConnection.ts" />
     <None Remove="ClientApp\src\components\api-communication\ToastNotify.ts" />
     <None Remove="ClientApp\src\components\api-communication\UserApi.ts" />
+    <None Remove="ClientApp\src\components\common\Autocomplete\AutocompleteInput.tsx" />
     <None Remove="ClientApp\src\components\UserProfile.tsx" />
     <None Remove="ClientApp\src\components\UserProfileEdit.tsx" />
     <None Remove="ClientApp\src\models\ProfileStorage.ts" />

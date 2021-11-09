@@ -12,5 +12,6 @@ namespace FitAppReact.EntityFramework.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<MedicalConditionHazard> MedicalConditionHazards { get; set; }
+        public ICollection<UserMedicalCondition> UserMedicalConditions { get; set; }
     }
 }

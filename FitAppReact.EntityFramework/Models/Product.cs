@@ -19,5 +19,6 @@ namespace FitAppReact.EntityFramework.Models
         public decimal Salt { get; set; }
         public ICollection<ProductHazard> ProductHazards { get; set; }
         public ICollection<MealProduct> MealProducts { get; set; }
+        public ICollection<UserUnwantedProduct> UserUnwantedProducts { get; set; }
     }
 }

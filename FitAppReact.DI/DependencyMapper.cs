@@ -14,6 +14,7 @@ using FitAppReact.EntityFramework.Models;
 using Microsoft.AspNetCore.Authentication;
 using FitAppReact.Interfaces.Infrastructure.UserService;
 using FitAppReact.UserService;
+using System.Linq;
 
 namespace FitAppReact.DI
 {
@@ -31,7 +32,15 @@ namespace FitAppReact.DI
                 .AddEntityFrameworkStores<AppDbContext>();
 
             serviceCollection.AddIdentityServer()
-                .AddApiAuthorization<AppUser, AppDbContext>();
+                .AddApiAuthorization<AppUser, AppDbContext>(options => 
+                {
+                    options.Clients.AddNativeApp("FitAppReactNative", app => app.WithScopes("openid", "profile", "FitAppReactAPI", "offline_access"));
+                    var client = options.Clients.Single(c => c.ClientId == "FitAppReactNative");
+                    client.RequirePkce = true;
+                    client.AllowOfflineAccess = true;
+                    client.RedirectUris.Clear();
+                    client.RedirectUris.Add("https://auth.expo.io/@krystian1182/FitAppReactNative");
+                });
 
             serviceCollection.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -48,8 +57,9 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<IMealPicker, MealPicker>();
             serviceCollection.AddScoped<IMacroCounter, MacroCounter>();
             serviceCollection.AddScoped<IAppUserSrv, AppUserSrv>();
-            serviceCollection.AddScoped<IProductManager, ProductManager>();
-
+            serviceCollection.AddScoped<IProductSrv, ProductSrv>();
+            serviceCollection.AddScoped<IMedicalConditionSrv, MedicalConditionSrv>();
+            serviceCollection.AddScoped<IUserSavedDietSrv, UserSavedDietSrv>();
             #endregion
 
             #region Mapper

@@ -60,7 +60,7 @@ namespace FitAppReact
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

@@ -8,8 +8,8 @@ import { Container } from 'reactstrap';
 import MenuItemWithIcon from './MenuItemWithIcon';
 
 const useStyles = makeStyles({
-    sideMenu: {
-        width: 250
+    container: {
+        padding: '0px'
     }
 });
 
@@ -27,8 +27,8 @@ type Props = {
 const SideMenu: React.FC<Props> = (props) => {
     const classes = useStyles();
     return(<>
-        <Container>
-            <Paper className={classes.sideMenu}>
+        <Container className={classes.container}>
+            <Paper>
                 <MenuList>
                     {props.options.map((x) => {
                         return <MenuItemWithIcon icon={x.icon} label={x.label} clickHandler={x.clickHandler} clickValue={x.clickValue} key={x.label + x.clickValue}/>

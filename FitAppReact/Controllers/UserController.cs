@@ -48,5 +48,45 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+        [HttpGet]
+        [Route("medicalConditions")]
+        public IActionResult GetMedicalConditions()
+        {
+            try
+            {
+                return Ok(userFcd.GetMedicalConditions());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+        [HttpPost]
+        [Route("userSavedDiet/add")]
+        public IActionResult AddUserSavedDiet([FromBody] UserSavedDietParams userSavedDietParams)
+        {
+            try
+            {
+                var result = userFcd.AddUserSavedDiet(userSavedDietParams);
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+        [HttpGet]
+        [Route("userSavedDiet/{id}")]
+        public IActionResult GetUserSavedDiets(string id)
+        {
+            try
+            {
+                return Ok(userFcd.GetUserSavedDiets(id));
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

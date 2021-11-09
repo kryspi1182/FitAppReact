@@ -16,18 +16,25 @@ namespace FitAppReact.Facades
     {
         private readonly IMacroCounter macroCounter;
         private readonly IMealPicker mealPicker;
-        private readonly IProductManager productManager;
+        private readonly IProductSrv productSrv;
 
-        public DietFcd(IMacroCounter _macroCounter, IMealPicker _mealPicker, IProductManager _productManager)
+        public DietFcd(IMacroCounter _macroCounter, IMealPicker _mealPicker, IProductSrv _productSrv)
         {
             macroCounter = _macroCounter;
             mealPicker = _mealPicker;
-            productManager = _productManager;
+            productSrv = _productSrv;
         }
 
         public Macros GetDailyMacros(UserParams userParams)
         {
             return macroCounter.GetDailyMacros(userParams);
+        }
+        public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams)
+        {
+            if ((userDietParams.conditionIds.Count() == 0) && (userDietParams.unwantedProductIds.Count() == 0))
+                return mealPicker.GetDietMealsForCategory(userDietParams.macros, userDietParams.mealCategory);
+            else 
+                return mealPicker.GetMatchingMeals(userDietParams);
         }
 
         public IEnumerable<MealDTO> GetDietMealsForBreakfast(Macros requirements)
@@ -48,7 +55,11 @@ namespace FitAppReact.Facades
         }
         public IEnumerable<ProductDTO> GetProducts()
         {
-            return productManager.GetProducts();
+            return productSrv.GetProducts();
+        }
+        public IEnumerable<MealDTO> GetMeals()
+        {
+            return mealPicker.GetMeals();
         }
     }
 }
