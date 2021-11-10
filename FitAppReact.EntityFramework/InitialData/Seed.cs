@@ -35,6 +35,11 @@ namespace FitAppReact.EntityFramework.InitialData
             ExerciseCategories();
             TrainingCategories();
             TrainingConditionSeverities();
+            TrainingConditions();
+            Exercises();
+            ExerciseBodyTargets();
+            Trainings();
+            TrainingExercises();
 
             Roles();
         }
@@ -1098,6 +1103,79 @@ namespace FitAppReact.EntityFramework.InitialData
                 new TrainingConditionSeverity { Id = 1, Name = "Unnoticable", Description = "A condition you almost forgot about. Nothing to worry, yet better be safe than sorry. Exercises affecting the body part will be highlighted so you know what to observe more carefully." },
                 new TrainingConditionSeverity { Id = 2, Name = "Mild", Description = "Nothing serious, yet you are aware something is not 100% good. Exercises highlighted in yellow should be done with caution, listen to your body and in case anything is wrong, lower the intensity or even leave it alone. Focus on your health, without it there won't be any gains." },
                 new TrainingConditionSeverity { Id = 3, Name = "Severe", Description = "A serious condition that affects the ability to use said body part. Exercises affecting the chosen body part will not be listed for you. Health should always be a top priority. If you are looking for rehab exercises, we reccomend consulting a specialist." }
+                );
+        }
+
+        private void TrainingConditions()
+        {
+            modelBuilder.Entity<TrainingCondition>().HasData(
+                new TrainingCondition { Id = 1, BodyTargetId = 1, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 2, BodyTargetId = 1, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 3, BodyTargetId = 1, TrainingConditionSeverityId = 3},
+                new TrainingCondition { Id = 4, BodyTargetId = 2, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 5, BodyTargetId = 2, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 6, BodyTargetId = 2, TrainingConditionSeverityId = 3},
+                new TrainingCondition { Id = 7, BodyTargetId = 3, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 8, BodyTargetId = 3, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 9, BodyTargetId = 3, TrainingConditionSeverityId = 3},
+                new TrainingCondition { Id = 10, BodyTargetId = 4, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 11, BodyTargetId = 4, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 12, BodyTargetId = 4, TrainingConditionSeverityId = 3},
+                new TrainingCondition { Id = 13, BodyTargetId = 5, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 14, BodyTargetId = 5, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 15, BodyTargetId = 5, TrainingConditionSeverityId = 3},
+                new TrainingCondition { Id = 16, BodyTargetId = 6, TrainingConditionSeverityId = 1},
+                new TrainingCondition { Id = 17, BodyTargetId = 6, TrainingConditionSeverityId = 2},
+                new TrainingCondition { Id = 18, BodyTargetId = 6, TrainingConditionSeverityId = 3}
+                );
+        }
+
+        private void Exercises()
+        {
+            modelBuilder.Entity<Exercise>().HasData(
+                new Exercise {  Id = 1, DifficultyId = 1, ExerciseCategoryId = 1, Name = "Light jog"},
+                new Exercise {  Id = 2, DifficultyId = 1, ExerciseCategoryId = 2, Name = "Bicep curls"},
+                new Exercise {  Id = 3, DifficultyId = 1, ExerciseCategoryId = 3, Name = "Arm stretch"},
+                new Exercise {  Id = 4, DifficultyId = 1, ExerciseCategoryId = 1, Name = "Jumping rope"},
+                new Exercise {  Id = 5, DifficultyId = 2, ExerciseCategoryId = 2, Name = "Squats"},
+                new Exercise {  Id = 6, DifficultyId = 1, ExerciseCategoryId = 3, Name = "Bends"}
+                );
+        }
+
+        private void ExerciseBodyTargets()
+        {
+            modelBuilder.Entity<ExerciseBodyTarget>().HasData(
+                new ExerciseBodyTarget {  Id = 1, ExerciseId = 1, BodyTargetId = 1},
+                new ExerciseBodyTarget {  Id = 2, ExerciseId = 2, BodyTargetId = 3},
+                new ExerciseBodyTarget {  Id = 3, ExerciseId = 3, BodyTargetId = 3},
+                new ExerciseBodyTarget {  Id = 4, ExerciseId = 3, BodyTargetId = 5},
+                new ExerciseBodyTarget {  Id = 5, ExerciseId = 4, BodyTargetId = 1},
+                new ExerciseBodyTarget {  Id = 6, ExerciseId = 4, BodyTargetId = 2},
+                new ExerciseBodyTarget {  Id = 7, ExerciseId = 4, BodyTargetId = 3},
+                new ExerciseBodyTarget {  Id = 8, ExerciseId = 5, BodyTargetId = 2},
+                new ExerciseBodyTarget {  Id = 9, ExerciseId = 5, BodyTargetId = 5},
+                new ExerciseBodyTarget {  Id = 10, ExerciseId = 5, BodyTargetId = 6},
+                new ExerciseBodyTarget {  Id = 11, ExerciseId = 6, BodyTargetId = 2}
+                );
+        }
+
+        private void Trainings()
+        {
+            modelBuilder.Entity<Training>().HasData(
+                new Training {  Id = 1, DifficultyId = 1, TrainingCategoryId = 7, Name = "Bicepz gainz", Description = "Beginner friendly workout aiming to grow one of the most popular muscles - biceps."},
+                new Training {  Id = 2, DifficultyId = 1, TrainingCategoryId = 7, Name = "Quads for days", Description = "Get dem quads going bois"}
+                );
+        }
+
+        private void TrainingExercises()
+        {
+            modelBuilder.Entity<TrainingExercise>().HasData(
+                new TrainingExercise {  Id = 1, ExerciseId = 4, TrainingId = 1, Series = 10, RepsPerSeries = 1 },
+                new TrainingExercise {  Id = 2, ExerciseId = 2, TrainingId = 1, Series = 5, RepsPerSeries = 20 },
+                new TrainingExercise {  Id = 3, ExerciseId = 3, TrainingId = 1, Series = 10, RepsPerSeries = 10 },
+                new TrainingExercise {  Id = 4, ExerciseId = 1, TrainingId = 2, Series = 10, RepsPerSeries = 30 },
+                new TrainingExercise {  Id = 5, ExerciseId = 5, TrainingId = 2, Series = 10, RepsPerSeries = 10 },
+                new TrainingExercise {  Id = 6, ExerciseId = 6, TrainingId = 2, Series = 10, RepsPerSeries = 10 }
                 );
         }
         #endregion

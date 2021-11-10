@@ -4,14 +4,16 @@ using FitAppReact.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitAppReact.EntityFramework.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211110173650_UpdateTrainingConditions")]
+    partial class UpdateTrainingConditions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,50 +215,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("ExerciseCategoryId");
 
                     b.ToTable("Exercises");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DifficultyId = 1,
-                            ExerciseCategoryId = 1,
-                            Name = "Light jog"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DifficultyId = 1,
-                            ExerciseCategoryId = 2,
-                            Name = "Bicep curls"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DifficultyId = 1,
-                            ExerciseCategoryId = 3,
-                            Name = "Arm stretch"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DifficultyId = 1,
-                            ExerciseCategoryId = 1,
-                            Name = "Jumping rope"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DifficultyId = 2,
-                            ExerciseCategoryId = 2,
-                            Name = "Squats"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DifficultyId = 1,
-                            ExerciseCategoryId = 3,
-                            Name = "Bends"
-                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.ExerciseBodyTarget", b =>
@@ -279,74 +237,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("ExerciseBodyTargets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BodyTargetId = 1,
-                            ExerciseId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BodyTargetId = 3,
-                            ExerciseId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BodyTargetId = 3,
-                            ExerciseId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BodyTargetId = 5,
-                            ExerciseId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BodyTargetId = 1,
-                            ExerciseId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            BodyTargetId = 2,
-                            ExerciseId = 4
-                        },
-                        new
-                        {
-                            Id = 7,
-                            BodyTargetId = 3,
-                            ExerciseId = 4
-                        },
-                        new
-                        {
-                            Id = 8,
-                            BodyTargetId = 2,
-                            ExerciseId = 5
-                        },
-                        new
-                        {
-                            Id = 9,
-                            BodyTargetId = 5,
-                            ExerciseId = 5
-                        },
-                        new
-                        {
-                            Id = 10,
-                            BodyTargetId = 6,
-                            ExerciseId = 5
-                        },
-                        new
-                        {
-                            Id = 11,
-                            BodyTargetId = 2,
-                            ExerciseId = 6
-                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.ExerciseCategory", b =>
@@ -6368,24 +6258,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("TrainingCategoryId");
 
                     b.ToTable("Trainings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Beginner friendly workout aiming to grow one of the most popular muscles - biceps.",
-                            DifficultyId = 1,
-                            Name = "Bicepz gainz",
-                            TrainingCategoryId = 7
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Get dem quads going bois",
-                            DifficultyId = 1,
-                            Name = "Quads for days",
-                            TrainingCategoryId = 7
-                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.TrainingCategory", b =>
@@ -6646,56 +6518,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("TrainingId");
 
                     b.ToTable("TrainingExercises");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ExerciseId = 4,
-                            RepsPerSeries = 1,
-                            Series = 10,
-                            TrainingId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ExerciseId = 2,
-                            RepsPerSeries = 20,
-                            Series = 5,
-                            TrainingId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ExerciseId = 3,
-                            RepsPerSeries = 10,
-                            Series = 10,
-                            TrainingId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ExerciseId = 1,
-                            RepsPerSeries = 30,
-                            Series = 10,
-                            TrainingId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ExerciseId = 5,
-                            RepsPerSeries = 10,
-                            Series = 10,
-                            TrainingId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ExerciseId = 6,
-                            RepsPerSeries = 10,
-                            Series = 10,
-                            TrainingId = 2
-                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserMedicalCondition", b =>
@@ -6938,14 +6760,14 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0ba49c38-f88b-4593-bb80-4f07175c64d7",
-                            ConcurrencyStamp = "d96b4597-2603-439b-afce-d1a49e10c221",
+                            Id = "65b3f8f8-a2c7-4ee6-8968-afe7ffbf0a11",
+                            ConcurrencyStamp = "df012635-ab40-4e4b-b3ee-52994b0ad5be",
                             Name = "User"
                         },
                         new
                         {
-                            Id = "d85308da-f3c2-49e6-a5ac-b491a017cb77",
-                            ConcurrencyStamp = "16716513-1fb7-4c0f-ba5a-3da904350729",
+                            Id = "2ed68a3b-d23e-4827-b979-51b7ca4081fd",
+                            ConcurrencyStamp = "b2326a7b-8bc4-457c-811d-a65239f566cc",
                             Name = "Administrator"
                         });
                 });

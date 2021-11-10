@@ -11,6 +11,7 @@ import productsReducer from './productsSlice';
 import medicalConditionsReducer from './medicalConditionsSlice';
 import userSavedDietsReducer from './userSavedDietsSlice';
 import mealsReducer from './mealsSlice';
+import userTrainingsReducer from './userTrainingsSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -34,6 +35,7 @@ const store = configureStore({
         customMeals: customMealsReducer,
         userSavedDiets: userSavedDietsReducer,
         meals: mealsReducer,
+        userTrainings: userTrainingsReducer,
         //@ts-ignore
         router: connectRouter(history)
     },

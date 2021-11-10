@@ -81,6 +81,9 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<UserTrainingCondition, UserTrainingConditionDTO>();
             CreateMap<UserTrainingConditionDTO, UserTrainingCondition>();
+
+            CreateMap<TrainingCondition, TrainingConditionDTO>();
+            CreateMap<TrainingConditionDTO, TrainingCondition>();
         }
     }
 }
