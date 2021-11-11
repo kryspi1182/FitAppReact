@@ -63,6 +63,8 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<IMedicalConditionSrv, MedicalConditionSrv>();
             serviceCollection.AddScoped<IUserSavedDietSrv, UserSavedDietSrv>();
             serviceCollection.AddScoped<ITrainingSrv, TrainingSrv>();
+            serviceCollection.AddScoped<IExerciseSrv, ExerciseSrv>();
+            serviceCollection.AddScoped<IBodyTargetSrv, BodyTargetSrv>();
             #endregion
 
             #region Mapper

@@ -32,5 +32,33 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpGet]
+        [Route("exercises/get")]
+        public IActionResult GetExercises()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetExercises());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("bodyTargets/get")]
+        public IActionResult GetBodyTargets()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetBodyTargets());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

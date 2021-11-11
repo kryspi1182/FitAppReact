@@ -1,8 +1,10 @@
 import { EntityId } from "@reduxjs/toolkit";
+import { ExerciseBodyTarget } from "./ExerciseBodyTarget";
 
 export interface Exercise {
     id: EntityId,
     name: string,
     exerciseCategoryId: EntityId,
-    difficultyId: EntityId
+    difficultyId: EntityId,
+    exerciseBodyTargets: Array<ExerciseBodyTarget>
 };

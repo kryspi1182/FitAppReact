@@ -27,7 +27,7 @@ const userTrainingsSlice = createSlice({
     initialState: userTrainingsAdapter.getInitialState(),
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(fetchMatchingMeals.fulfilled, (state, action: PayloadAction<Array<Training>>) => {
+        builder.addCase(fetchMatchingTrainings.fulfilled, (state, action: PayloadAction<Array<Training>>) => {
             if (action.payload) {
                 userTrainingsAdapter.upsertMany(state, action);
             }

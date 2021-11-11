@@ -12,6 +12,8 @@ import medicalConditionsReducer from './medicalConditionsSlice';
 import userSavedDietsReducer from './userSavedDietsSlice';
 import mealsReducer from './mealsSlice';
 import userTrainingsReducer from './userTrainingsSlice';
+import exercisesReducer from './exercisesSlice';
+import bodyTargetsReducer from './bodyTargetsSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -36,6 +38,8 @@ const store = configureStore({
         userSavedDiets: userSavedDietsReducer,
         meals: mealsReducer,
         userTrainings: userTrainingsReducer,
+        exercises: exercisesReducer,
+        bodyTargets: bodyTargetsReducer,
         //@ts-ignore
         router: connectRouter(history)
     },

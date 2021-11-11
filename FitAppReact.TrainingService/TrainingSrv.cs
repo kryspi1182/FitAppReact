@@ -31,7 +31,7 @@ namespace FitAppReact.TrainingService
                 .Include(x => x.TrainingExercises)
                 .ToArray();
             var trainingConditions = mapper.Map<TrainingCondition[]>(userTrainingParams.trainingConditions);
-            var result = trainings.Where(x => CheckTraining(x, trainingConditions, userTrainingParams.bodyTarget));
+            var result = trainings.Where(x => CheckTraining(x, trainingConditions, userTrainingParams.bodyTarget)).ToArray();
             return mapper.Map<TrainingDTO[]>(result);
         }
 
@@ -40,11 +40,23 @@ namespace FitAppReact.TrainingService
             var exercises = appDbContext.TrainingExercises
                 .Where(x => training.TrainingExercises.Contains(x))
                 .Include(x => x.Exercise)
+                    .ThenInclude(x => x.ExerciseBodyTargets)
                 .Select(x => x.Exercise)
                 .ToArray();
 
-            //if exercise targets a body part which has a severe condition, return false
-            //if exercise does not target bodyTarget, return false
+            var forbiddenTargets = trainingConditions
+                .Where(x => x.TrainingConditionSeverityId == ((int)TrainingConditionSeverityEnum.Severe))
+                .Select(x => x.BodyTargetId);
+
+            foreach(var exercise in exercises)
+            {
+                if (exercise.ExerciseBodyTargets.Where(x => forbiddenTargets.Contains(x.BodyTargetId)).Count() > 0
+                    || (exercise.ExerciseBodyTargets.Where(x => x.BodyTargetId == ((int)bodyTarget)).Count() == 0
+                    && exercise.ExerciseCategoryId == ((int)ExerciseCategoryEnum.Main)))
+                {
+                    return false;
+                }
+            }
 
             return true;
         }

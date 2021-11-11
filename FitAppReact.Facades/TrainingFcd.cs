@@ -13,15 +13,28 @@ namespace FitAppReact.Facades
     public class TrainingFcd : ITrainingFcd
     {
         private readonly ITrainingSrv trainingSrv;
-
-        public TrainingFcd(ITrainingSrv _trainingSrv)
+        private readonly IExerciseSrv exerciseSrv;
+        private readonly IBodyTargetSrv bodyTargetSrv;
+        public TrainingFcd(ITrainingSrv _trainingSrv, IExerciseSrv _exerciseSrv, IBodyTargetSrv _bodyTargetSrv)
         {
             trainingSrv = _trainingSrv;
+            exerciseSrv = _exerciseSrv;
+            bodyTargetSrv = _bodyTargetSrv;
         }
 
         public IEnumerable<TrainingDTO> GetMatchingTrainings(UserTrainingParams userTrainingParams)
         {
             return trainingSrv.GetMatchingTrainings(userTrainingParams);
+        }
+
+        public IEnumerable<ExerciseDTO> GetExercises()
+        {
+            return exerciseSrv.GetExercises();
+        }
+
+        public IEnumerable<BodyTargetDTO> GetBodyTargets()
+        {
+            return bodyTargetSrv.GetBodyTargets();
         }
     }
 }

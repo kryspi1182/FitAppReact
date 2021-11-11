@@ -13,5 +13,6 @@ namespace FitAppReact.Common.ModelsDTO
         public string Description { get; set; }
         public int TrainingCategoryId { get; set; }
         public int DifficultyId { get; set; }
+        public ICollection<TrainingExerciseDTO> TrainingExercises { get; set; }
     }
 }
