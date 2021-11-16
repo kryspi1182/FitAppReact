@@ -73,7 +73,7 @@ namespace FitAppReact.DietService
             double fraction = 0;
             switch(mealCategory)
             {
-                case MealCategoryEnum.BreakfastDinner:
+                case MealCategoryEnum.Breakfast:
                     fraction = 0.2;
                     break;
                 case MealCategoryEnum.Lunch:
@@ -81,6 +81,12 @@ namespace FitAppReact.DietService
                     break;
                 case MealCategoryEnum.Snack:
                     fraction = 0.1;
+                    break;
+                case MealCategoryEnum.SecondBreakfast:
+                    fraction = 0.1;
+                    break;
+                case MealCategoryEnum.Dinner:
+                    fraction = 0.2;
                     break;
             }
             foreach(MealProduct mealProduct in meal.MealProducts)

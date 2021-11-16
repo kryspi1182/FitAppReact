@@ -13,6 +13,7 @@ import { Container, Row } from 'reactstrap';
 
 import { selectAllUserSavedDiets } from '../../store/userSavedDietsSlice';
 import WeekDietBox from '../common/WeekDietBox';
+import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
 
 const UserSavedDiets: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,23 +26,23 @@ const UserSavedDiets: React.FC = () => {
             let snacks = [] as EntityId[];
             let dinners = [] as EntityId[];
             for(var i = 0; i < userDiet.meals.length; i++) {
-                switch(i%5) {
-                    case 0:
+                switch(userDiet.meals[i].meal.mealCategoryId) {
+                    case MealCategoryEnum.Breakfast:
                         breakfasts.push(userDiet.meals[i].mealId);
                     break;
-                    case 1:
+                    case MealCategoryEnum.SecondBreakfast:
                         secondBreakfasts.push(userDiet.meals[i].mealId);
                     break;
-                    case 2:
+                    case MealCategoryEnum.Lunch:
                         lunches.push(userDiet.meals[i].mealId);
                     break;
-                    case 3:
+                    case MealCategoryEnum.Snack:
                         snacks.push(userDiet.meals[i].mealId);
                     break;
-                    case 4:
+                    case MealCategoryEnum.Dinner:
                         dinners.push(userDiet.meals[i].mealId);
                     break;
-                };
+                }
             }
             return (
             <Accordion>

@@ -39,7 +39,7 @@ namespace FitAppReact.Facades
 
         public IEnumerable<MealDTO> GetDietMealsForBreakfast(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.BreakfastDinner);
+            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Breakfast);
         }
         public IEnumerable<MealDTO> GetDietMealsForLunch(Macros requirements)
         {
@@ -47,7 +47,7 @@ namespace FitAppReact.Facades
         }
         public IEnumerable<MealDTO> GetDietMealsForDinner(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.BreakfastDinner);
+            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Dinner);
         }
         public IEnumerable<MealDTO> GetDietMealsForSnack(Macros requirements)
         {

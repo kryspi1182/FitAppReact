@@ -122,9 +122,11 @@ namespace FitAppReact.EntityFramework.InitialData
         private void MealCategories()
         {
             modelBuilder.Entity<MealCategory>().HasData(
-                new MealCategory { Id = 1, Name = "Breakfast/Dinner" },
+                new MealCategory { Id = 1, Name = "Breakfast" },
                 new MealCategory { Id = 2, Name = "Lunch" },
-                new MealCategory { Id = 3, Name = "Snack" }
+                new MealCategory { Id = 3, Name = "Snack" },
+                new MealCategory { Id = 4, Name = "Second breakfast" },
+                new MealCategory { Id = 5, Name = "Dinner" }
                 );
         }
         private void Meals()
@@ -136,11 +138,11 @@ namespace FitAppReact.EntityFramework.InitialData
                 new Meal { Id = 4, MealCategoryId = 1, Name = "Breakfast 4", Description = "Description of breakfast 4", Recipe = "Recipe of breakfast 4" },
                 new Meal { Id = 5, MealCategoryId = 1, Name = "Breakfast 5", Description = "Description of breakfast 5", Recipe = "Recipe of breakfast 5" },
 
-                new Meal { Id = 6, MealCategoryId = 1, Name = "Dinner 1", Description = "Description of dinner 1", Recipe = "Recipe of dinner 1" },
-                new Meal { Id = 7, MealCategoryId = 1, Name = "Dinner 2", Description = "Description of dinner 2", Recipe = "Recipe of dinner 2" },
-                new Meal { Id = 8, MealCategoryId = 1, Name = "Dinner 3", Description = "Description of dinner 3", Recipe = "Recipe of dinner 3" },
-                new Meal { Id = 9, MealCategoryId = 1, Name = "Dinner 4", Description = "Description of dinner 4", Recipe = "Recipe of dinner 4" },
-                new Meal { Id = 10, MealCategoryId = 1, Name = "Dinner 5", Description = "Description of dinner 5", Recipe = "Recipe of dinner 5" },
+                new Meal { Id = 6, MealCategoryId = 5, Name = "Dinner 1", Description = "Description of dinner 1", Recipe = "Recipe of dinner 1" },
+                new Meal { Id = 7, MealCategoryId = 5, Name = "Dinner 2", Description = "Description of dinner 2", Recipe = "Recipe of dinner 2" },
+                new Meal { Id = 8, MealCategoryId = 5, Name = "Dinner 3", Description = "Description of dinner 3", Recipe = "Recipe of dinner 3" },
+                new Meal { Id = 9, MealCategoryId = 5, Name = "Dinner 4", Description = "Description of dinner 4", Recipe = "Recipe of dinner 4" },
+                new Meal { Id = 10, MealCategoryId = 5, Name = "Dinner 5", Description = "Description of dinner 5", Recipe = "Recipe of dinner 5" },
 
                 new Meal { Id = 11, MealCategoryId = 2, Name = "Lunch 1", Description = "Description of lunch 1", Recipe = "Recipe of lunch 1" },
                 new Meal { Id = 12, MealCategoryId = 2, Name = "Lunch 2", Description = "Description of lunch 2", Recipe = "Recipe of lunch 2" },
@@ -153,6 +155,12 @@ namespace FitAppReact.EntityFramework.InitialData
                 new Meal { Id = 18, MealCategoryId = 3, Name = "Snack 3", Description = "Description of snack 3", Recipe = "Recipe of snack 3" },
                 new Meal { Id = 19, MealCategoryId = 3, Name = "Snack 4", Description = "Description of snack 4", Recipe = "Recipe of snack 4" },
                 new Meal { Id = 20, MealCategoryId = 3, Name = "Snack 5", Description = "Description of snack 5", Recipe = "Recipe of snack 5" },
+
+                new Meal { Id = 21, MealCategoryId = 4, Name = "Second breakfast 1", Description = "Description of Second breakfast 1", Recipe = "Recipe of Second breakfast 1" },
+                new Meal { Id = 22, MealCategoryId = 4, Name = "Second breakfast 2", Description = "Description of Second breakfast 2", Recipe = "Recipe of Second breakfast 2" },
+                new Meal { Id = 23, MealCategoryId = 4, Name = "Second breakfast 3", Description = "Description of Second breakfast 3", Recipe = "Recipe of Second breakfast 3" },
+                new Meal { Id = 24, MealCategoryId = 4, Name = "Second breakfast 4", Description = "Description of Second breakfast 4", Recipe = "Recipe of Second breakfast 4" },
+                new Meal { Id = 25, MealCategoryId = 4, Name = "Second breakfast 5", Description = "Description of Second breakfast 5", Recipe = "Recipe of Second breakfast 5" },
 
                 new Meal { Id = 61, MealCategoryId = 1, Name = "Breakfast 61", Description = "Description of Breakfast 61", Recipe = "Recipe of Breakfast 61" },
                 new Meal { Id = 62, MealCategoryId = 1, Name = "Breakfast 62", Description = "Description of Breakfast 62", Recipe = "Recipe of Breakfast 62" },
@@ -195,46 +203,46 @@ namespace FitAppReact.EntityFramework.InitialData
                 new Meal { Id = 99, MealCategoryId = 1, Name = "Breakfast 99", Description = "Description of Breakfast 99", Recipe = "Recipe of Breakfast 99" },
                 new Meal { Id = 100, MealCategoryId = 1, Name = "Breakfast 100", Description = "Description of Breakfast 100", Recipe = "Recipe of Breakfast 100" },
 
-                new Meal { Id = 101, MealCategoryId = 1, Name = "Dinner 101", Description = "Description of Dinner 101", Recipe = "Recipe of Dinner 101" },
-                new Meal { Id = 102, MealCategoryId = 1, Name = "Dinner 102", Description = "Description of Dinner 102", Recipe = "Recipe of Dinner 102" },
-                new Meal { Id = 103, MealCategoryId = 1, Name = "Dinner 103", Description = "Description of Dinner 103", Recipe = "Recipe of Dinner 103" },
-                new Meal { Id = 104, MealCategoryId = 1, Name = "Dinner 104", Description = "Description of Dinner 104", Recipe = "Recipe of Dinner 104" },
-                new Meal { Id = 105, MealCategoryId = 1, Name = "Dinner 105", Description = "Description of Dinner 105", Recipe = "Recipe of Dinner 105" },
-                new Meal { Id = 106, MealCategoryId = 1, Name = "Dinner 106", Description = "Description of Dinner 106", Recipe = "Recipe of Dinner 106" },
-                new Meal { Id = 107, MealCategoryId = 1, Name = "Dinner 107", Description = "Description of Dinner 107", Recipe = "Recipe of Dinner 107" },
-                new Meal { Id = 108, MealCategoryId = 1, Name = "Dinner 108", Description = "Description of Dinner 108", Recipe = "Recipe of Dinner 108" },
-                new Meal { Id = 109, MealCategoryId = 1, Name = "Dinner 109", Description = "Description of Dinner 109", Recipe = "Recipe of Dinner 109" },
-                new Meal { Id = 110, MealCategoryId = 1, Name = "Dinner 110", Description = "Description of Dinner 110", Recipe = "Recipe of Dinner 110" },
-                new Meal { Id = 111, MealCategoryId = 1, Name = "Dinner 111", Description = "Description of Dinner 111", Recipe = "Recipe of Dinner 111" },
-                new Meal { Id = 112, MealCategoryId = 1, Name = "Dinner 112", Description = "Description of Dinner 112", Recipe = "Recipe of Dinner 112" },
-                new Meal { Id = 113, MealCategoryId = 1, Name = "Dinner 113", Description = "Description of Dinner 113", Recipe = "Recipe of Dinner 113" },
-                new Meal { Id = 114, MealCategoryId = 1, Name = "Dinner 114", Description = "Description of Dinner 114", Recipe = "Recipe of Dinner 114" },
-                new Meal { Id = 115, MealCategoryId = 1, Name = "Dinner 115", Description = "Description of Dinner 115", Recipe = "Recipe of Dinner 115" },
-                new Meal { Id = 116, MealCategoryId = 1, Name = "Dinner 116", Description = "Description of Dinner 116", Recipe = "Recipe of Dinner 116" },
-                new Meal { Id = 117, MealCategoryId = 1, Name = "Dinner 117", Description = "Description of Dinner 117", Recipe = "Recipe of Dinner 117" },
-                new Meal { Id = 118, MealCategoryId = 1, Name = "Dinner 118", Description = "Description of Dinner 118", Recipe = "Recipe of Dinner 118" },
-                new Meal { Id = 119, MealCategoryId = 1, Name = "Dinner 119", Description = "Description of Dinner 119", Recipe = "Recipe of Dinner 119" },
-                new Meal { Id = 120, MealCategoryId = 1, Name = "Dinner 120", Description = "Description of Dinner 120", Recipe = "Recipe of Dinner 120" },
-                new Meal { Id = 121, MealCategoryId = 1, Name = "Dinner 121", Description = "Description of Dinner 121", Recipe = "Recipe of Dinner 121" },
-                new Meal { Id = 122, MealCategoryId = 1, Name = "Dinner 122", Description = "Description of Dinner 122", Recipe = "Recipe of Dinner 122" },
-                new Meal { Id = 123, MealCategoryId = 1, Name = "Dinner 123", Description = "Description of Dinner 123", Recipe = "Recipe of Dinner 123" },
-                new Meal { Id = 124, MealCategoryId = 1, Name = "Dinner 124", Description = "Description of Dinner 124", Recipe = "Recipe of Dinner 124" },
-                new Meal { Id = 125, MealCategoryId = 1, Name = "Dinner 125", Description = "Description of Dinner 125", Recipe = "Recipe of Dinner 125" },
-                new Meal { Id = 126, MealCategoryId = 1, Name = "Dinner 126", Description = "Description of Dinner 126", Recipe = "Recipe of Dinner 126" },
-                new Meal { Id = 127, MealCategoryId = 1, Name = "Dinner 127", Description = "Description of Dinner 127", Recipe = "Recipe of Dinner 127" },
-                new Meal { Id = 128, MealCategoryId = 1, Name = "Dinner 128", Description = "Description of Dinner 128", Recipe = "Recipe of Dinner 128" },
-                new Meal { Id = 129, MealCategoryId = 1, Name = "Dinner 129", Description = "Description of Dinner 129", Recipe = "Recipe of Dinner 129" },
-                new Meal { Id = 130, MealCategoryId = 1, Name = "Dinner 130", Description = "Description of Dinner 130", Recipe = "Recipe of Dinner 130" },
-                new Meal { Id = 131, MealCategoryId = 1, Name = "Dinner 131", Description = "Description of Dinner 131", Recipe = "Recipe of Dinner 131" },
-                new Meal { Id = 132, MealCategoryId = 1, Name = "Dinner 132", Description = "Description of Dinner 132", Recipe = "Recipe of Dinner 132" },
-                new Meal { Id = 133, MealCategoryId = 1, Name = "Dinner 133", Description = "Description of Dinner 133", Recipe = "Recipe of Dinner 133" },
-                new Meal { Id = 134, MealCategoryId = 1, Name = "Dinner 134", Description = "Description of Dinner 134", Recipe = "Recipe of Dinner 134" },
-                new Meal { Id = 135, MealCategoryId = 1, Name = "Dinner 135", Description = "Description of Dinner 135", Recipe = "Recipe of Dinner 135" },
-                new Meal { Id = 136, MealCategoryId = 1, Name = "Dinner 136", Description = "Description of Dinner 136", Recipe = "Recipe of Dinner 136" },
-                new Meal { Id = 137, MealCategoryId = 1, Name = "Dinner 137", Description = "Description of Dinner 137", Recipe = "Recipe of Dinner 137" },
-                new Meal { Id = 138, MealCategoryId = 1, Name = "Dinner 138", Description = "Description of Dinner 138", Recipe = "Recipe of Dinner 138" },
-                new Meal { Id = 139, MealCategoryId = 1, Name = "Dinner 139", Description = "Description of Dinner 139", Recipe = "Recipe of Dinner 139" },
-                new Meal { Id = 140, MealCategoryId = 1, Name = "Dinner 140", Description = "Description of Dinner 140", Recipe = "Recipe of Dinner 140" },
+                new Meal { Id = 101, MealCategoryId = 5, Name = "Dinner 101", Description = "Description of Dinner 101", Recipe = "Recipe of Dinner 101" },
+                new Meal { Id = 102, MealCategoryId = 5, Name = "Dinner 102", Description = "Description of Dinner 102", Recipe = "Recipe of Dinner 102" },
+                new Meal { Id = 103, MealCategoryId = 5, Name = "Dinner 103", Description = "Description of Dinner 103", Recipe = "Recipe of Dinner 103" },
+                new Meal { Id = 104, MealCategoryId = 5, Name = "Dinner 104", Description = "Description of Dinner 104", Recipe = "Recipe of Dinner 104" },
+                new Meal { Id = 105, MealCategoryId = 5, Name = "Dinner 105", Description = "Description of Dinner 105", Recipe = "Recipe of Dinner 105" },
+                new Meal { Id = 106, MealCategoryId = 5, Name = "Dinner 106", Description = "Description of Dinner 106", Recipe = "Recipe of Dinner 106" },
+                new Meal { Id = 107, MealCategoryId = 5, Name = "Dinner 107", Description = "Description of Dinner 107", Recipe = "Recipe of Dinner 107" },
+                new Meal { Id = 108, MealCategoryId = 5, Name = "Dinner 108", Description = "Description of Dinner 108", Recipe = "Recipe of Dinner 108" },
+                new Meal { Id = 109, MealCategoryId = 5, Name = "Dinner 109", Description = "Description of Dinner 109", Recipe = "Recipe of Dinner 109" },
+                new Meal { Id = 110, MealCategoryId = 5, Name = "Dinner 110", Description = "Description of Dinner 110", Recipe = "Recipe of Dinner 110" },
+                new Meal { Id = 111, MealCategoryId = 5, Name = "Dinner 111", Description = "Description of Dinner 111", Recipe = "Recipe of Dinner 111" },
+                new Meal { Id = 112, MealCategoryId = 5, Name = "Dinner 112", Description = "Description of Dinner 112", Recipe = "Recipe of Dinner 112" },
+                new Meal { Id = 113, MealCategoryId = 5, Name = "Dinner 113", Description = "Description of Dinner 113", Recipe = "Recipe of Dinner 113" },
+                new Meal { Id = 114, MealCategoryId = 5, Name = "Dinner 114", Description = "Description of Dinner 114", Recipe = "Recipe of Dinner 114" },
+                new Meal { Id = 115, MealCategoryId = 5, Name = "Dinner 115", Description = "Description of Dinner 115", Recipe = "Recipe of Dinner 115" },
+                new Meal { Id = 116, MealCategoryId = 5, Name = "Dinner 116", Description = "Description of Dinner 116", Recipe = "Recipe of Dinner 116" },
+                new Meal { Id = 117, MealCategoryId = 5, Name = "Dinner 117", Description = "Description of Dinner 117", Recipe = "Recipe of Dinner 117" },
+                new Meal { Id = 118, MealCategoryId = 5, Name = "Dinner 118", Description = "Description of Dinner 118", Recipe = "Recipe of Dinner 118" },
+                new Meal { Id = 119, MealCategoryId = 5, Name = "Dinner 119", Description = "Description of Dinner 119", Recipe = "Recipe of Dinner 119" },
+                new Meal { Id = 120, MealCategoryId = 5, Name = "Dinner 120", Description = "Description of Dinner 120", Recipe = "Recipe of Dinner 120" },
+                new Meal { Id = 121, MealCategoryId = 5, Name = "Dinner 121", Description = "Description of Dinner 121", Recipe = "Recipe of Dinner 121" },
+                new Meal { Id = 122, MealCategoryId = 5, Name = "Dinner 122", Description = "Description of Dinner 122", Recipe = "Recipe of Dinner 122" },
+                new Meal { Id = 123, MealCategoryId = 5, Name = "Dinner 123", Description = "Description of Dinner 123", Recipe = "Recipe of Dinner 123" },
+                new Meal { Id = 124, MealCategoryId = 5, Name = "Dinner 124", Description = "Description of Dinner 124", Recipe = "Recipe of Dinner 124" },
+                new Meal { Id = 125, MealCategoryId = 5, Name = "Dinner 125", Description = "Description of Dinner 125", Recipe = "Recipe of Dinner 125" },
+                new Meal { Id = 126, MealCategoryId = 5, Name = "Dinner 126", Description = "Description of Dinner 126", Recipe = "Recipe of Dinner 126" },
+                new Meal { Id = 127, MealCategoryId = 5, Name = "Dinner 127", Description = "Description of Dinner 127", Recipe = "Recipe of Dinner 127" },
+                new Meal { Id = 128, MealCategoryId = 5, Name = "Dinner 128", Description = "Description of Dinner 128", Recipe = "Recipe of Dinner 128" },
+                new Meal { Id = 129, MealCategoryId = 5, Name = "Dinner 129", Description = "Description of Dinner 129", Recipe = "Recipe of Dinner 129" },
+                new Meal { Id = 130, MealCategoryId = 5, Name = "Dinner 130", Description = "Description of Dinner 130", Recipe = "Recipe of Dinner 130" },
+                new Meal { Id = 131, MealCategoryId = 5, Name = "Dinner 131", Description = "Description of Dinner 131", Recipe = "Recipe of Dinner 131" },
+                new Meal { Id = 132, MealCategoryId = 5, Name = "Dinner 132", Description = "Description of Dinner 132", Recipe = "Recipe of Dinner 132" },
+                new Meal { Id = 133, MealCategoryId = 5, Name = "Dinner 133", Description = "Description of Dinner 133", Recipe = "Recipe of Dinner 133" },
+                new Meal { Id = 134, MealCategoryId = 5, Name = "Dinner 134", Description = "Description of Dinner 134", Recipe = "Recipe of Dinner 134" },
+                new Meal { Id = 135, MealCategoryId = 5, Name = "Dinner 135", Description = "Description of Dinner 135", Recipe = "Recipe of Dinner 135" },
+                new Meal { Id = 136, MealCategoryId = 5, Name = "Dinner 136", Description = "Description of Dinner 136", Recipe = "Recipe of Dinner 136" },
+                new Meal { Id = 137, MealCategoryId = 5, Name = "Dinner 137", Description = "Description of Dinner 137", Recipe = "Recipe of Dinner 137" },
+                new Meal { Id = 138, MealCategoryId = 5, Name = "Dinner 138", Description = "Description of Dinner 138", Recipe = "Recipe of Dinner 138" },
+                new Meal { Id = 139, MealCategoryId = 5, Name = "Dinner 139", Description = "Description of Dinner 139", Recipe = "Recipe of Dinner 139" },
+                new Meal { Id = 140, MealCategoryId = 5, Name = "Dinner 140", Description = "Description of Dinner 140", Recipe = "Recipe of Dinner 140" },
 
                 new Meal { Id = 141, MealCategoryId = 2, Name = "Lunch 141", Description = "Description of Lunch 141", Recipe = "Recipe of Lunch 141" },
                 new Meal { Id = 142, MealCategoryId = 2, Name = "Lunch 142", Description = "Description of Lunch 142", Recipe = "Recipe of Lunch 142" },
@@ -316,8 +324,48 @@ namespace FitAppReact.EntityFramework.InitialData
                 new Meal { Id = 217, MealCategoryId = 3, Name = "Snack 217", Description = "Description of Snack 217", Recipe = "Recipe of Snack 217" },
                 new Meal { Id = 218, MealCategoryId = 3, Name = "Snack 218", Description = "Description of Snack 218", Recipe = "Recipe of Snack 218" },
                 new Meal { Id = 219, MealCategoryId = 3, Name = "Snack 219", Description = "Description of Snack 219", Recipe = "Recipe of Snack 219" },
-                new Meal { Id = 220, MealCategoryId = 3, Name = "Snack 220", Description = "Description of Snack 220", Recipe = "Recipe of Snack 220" }
+                new Meal { Id = 220, MealCategoryId = 3, Name = "Snack 220", Description = "Description of Snack 220", Recipe = "Recipe of Snack 220" },
 
+                new Meal { Id = 221, MealCategoryId = 4, Name = "Second breakfast 221", Description = "Description of Second breakfast 221", Recipe = "Recipe of Second breakfast 221" },
+                new Meal { Id = 222, MealCategoryId = 4, Name = "Second breakfast 222", Description = "Description of Second breakfast 222", Recipe = "Recipe of Second breakfast 222" },
+                new Meal { Id = 223, MealCategoryId = 4, Name = "Second breakfast 223", Description = "Description of Second breakfast 223", Recipe = "Recipe of Second breakfast 223" },
+                new Meal { Id = 224, MealCategoryId = 4, Name = "Second breakfast 224", Description = "Description of Second breakfast 224", Recipe = "Recipe of Second breakfast 224" },
+                new Meal { Id = 225, MealCategoryId = 4, Name = "Second breakfast 225", Description = "Description of Second breakfast 225", Recipe = "Recipe of Second breakfast 225" },
+                new Meal { Id = 226, MealCategoryId = 4, Name = "Second breakfast 226", Description = "Description of Second breakfast 226", Recipe = "Recipe of Second breakfast 226" },
+                new Meal { Id = 227, MealCategoryId = 4, Name = "Second breakfast 227", Description = "Description of Second breakfast 227", Recipe = "Recipe of Second breakfast 227" },
+                new Meal { Id = 228, MealCategoryId = 4, Name = "Second breakfast 228", Description = "Description of Second breakfast 228", Recipe = "Recipe of Second breakfast 228" },
+                new Meal { Id = 229, MealCategoryId = 4, Name = "Second breakfast 229", Description = "Description of Second breakfast 229", Recipe = "Recipe of Second breakfast 229" },
+                new Meal { Id = 230, MealCategoryId = 4, Name = "Second breakfast 230", Description = "Description of Second breakfast 230", Recipe = "Recipe of Second breakfast 230" },
+                new Meal { Id = 231, MealCategoryId = 4, Name = "Second breakfast 231", Description = "Description of Second breakfast 231", Recipe = "Recipe of Second breakfast 231" },
+                new Meal { Id = 232, MealCategoryId = 4, Name = "Second breakfast 232", Description = "Description of Second breakfast 232", Recipe = "Recipe of Second breakfast 232" },
+                new Meal { Id = 233, MealCategoryId = 4, Name = "Second breakfast 233", Description = "Description of Second breakfast 233", Recipe = "Recipe of Second breakfast 233" },
+                new Meal { Id = 234, MealCategoryId = 4, Name = "Second breakfast 234", Description = "Description of Second breakfast 234", Recipe = "Recipe of Second breakfast 234" },
+                new Meal { Id = 235, MealCategoryId = 4, Name = "Second breakfast 235", Description = "Description of Second breakfast 235", Recipe = "Recipe of Second breakfast 235" },
+                new Meal { Id = 236, MealCategoryId = 4, Name = "Second breakfast 236", Description = "Description of Second breakfast 236", Recipe = "Recipe of Second breakfast 236" },
+                new Meal { Id = 237, MealCategoryId = 4, Name = "Second breakfast 237", Description = "Description of Second breakfast 237", Recipe = "Recipe of Second breakfast 237" },
+                new Meal { Id = 238, MealCategoryId = 4, Name = "Second breakfast 238", Description = "Description of Second breakfast 238", Recipe = "Recipe of Second breakfast 238" },
+                new Meal { Id = 239, MealCategoryId = 4, Name = "Second breakfast 239", Description = "Description of Second breakfast 239", Recipe = "Recipe of Second breakfast 239" },
+                new Meal { Id = 240, MealCategoryId = 4, Name = "Second breakfast 240", Description = "Description of Second breakfast 240", Recipe = "Recipe of Second breakfast 240" },
+                new Meal { Id = 241, MealCategoryId = 4, Name = "Second breakfast 241", Description = "Description of Second breakfast 241", Recipe = "Recipe of Second breakfast 241" },
+                new Meal { Id = 242, MealCategoryId = 4, Name = "Second breakfast 242", Description = "Description of Second breakfast 242", Recipe = "Recipe of Second breakfast 242" },
+                new Meal { Id = 243, MealCategoryId = 4, Name = "Second breakfast 243", Description = "Description of Second breakfast 243", Recipe = "Recipe of Second breakfast 243" },
+                new Meal { Id = 244, MealCategoryId = 4, Name = "Second breakfast 244", Description = "Description of Second breakfast 244", Recipe = "Recipe of Second breakfast 244" },
+                new Meal { Id = 245, MealCategoryId = 4, Name = "Second breakfast 245", Description = "Description of Second breakfast 245", Recipe = "Recipe of Second breakfast 245" },
+                new Meal { Id = 246, MealCategoryId = 4, Name = "Second breakfast 246", Description = "Description of Second breakfast 246", Recipe = "Recipe of Second breakfast 246" },
+                new Meal { Id = 247, MealCategoryId = 4, Name = "Second breakfast 247", Description = "Description of Second breakfast 247", Recipe = "Recipe of Second breakfast 247" },
+                new Meal { Id = 248, MealCategoryId = 4, Name = "Second breakfast 248", Description = "Description of Second breakfast 248", Recipe = "Recipe of Second breakfast 248" },
+                new Meal { Id = 249, MealCategoryId = 4, Name = "Second breakfast 249", Description = "Description of Second breakfast 249", Recipe = "Recipe of Second breakfast 249" },
+                new Meal { Id = 250, MealCategoryId = 4, Name = "Second breakfast 250", Description = "Description of Second breakfast 250", Recipe = "Recipe of Second breakfast 250" },
+                new Meal { Id = 251, MealCategoryId = 4, Name = "Second breakfast 251", Description = "Description of Second breakfast 251", Recipe = "Recipe of Second breakfast 251" },
+                new Meal { Id = 252, MealCategoryId = 4, Name = "Second breakfast 252", Description = "Description of Second breakfast 252", Recipe = "Recipe of Second breakfast 252" },
+                new Meal { Id = 253, MealCategoryId = 4, Name = "Second breakfast 253", Description = "Description of Second breakfast 253", Recipe = "Recipe of Second breakfast 253" },
+                new Meal { Id = 254, MealCategoryId = 4, Name = "Second breakfast 254", Description = "Description of Second breakfast 254", Recipe = "Recipe of Second breakfast 254" },
+                new Meal { Id = 255, MealCategoryId = 4, Name = "Second breakfast 255", Description = "Description of Second breakfast 255", Recipe = "Recipe of Second breakfast 255" },
+                new Meal { Id = 256, MealCategoryId = 4, Name = "Second breakfast 256", Description = "Description of Second breakfast 256", Recipe = "Recipe of Second breakfast 256" },
+                new Meal { Id = 257, MealCategoryId = 4, Name = "Second breakfast 257", Description = "Description of Second breakfast 257", Recipe = "Recipe of Second breakfast 257" },
+                new Meal { Id = 258, MealCategoryId = 4, Name = "Second breakfast 258", Description = "Description of Second breakfast 258", Recipe = "Recipe of Second breakfast 258" },
+                new Meal { Id = 259, MealCategoryId = 4, Name = "Second breakfast 259", Description = "Description of Second breakfast 259", Recipe = "Recipe of Second breakfast 259" },
+                new Meal { Id = 260, MealCategoryId = 4, Name = "Second breakfast 260", Description = "Description of Second breakfast 260", Recipe = "Recipe of Second breakfast 260" }
 
                 );
         }
@@ -1042,9 +1090,187 @@ namespace FitAppReact.EntityFramework.InitialData
 
                 new MealProduct { Id = 542, MealId = 220, ProductId = 12, Quantity = 2 },
                 new MealProduct { Id = 543, MealId = 220, ProductId = 17, Quantity = 4 },
-                new MealProduct { Id = 544, MealId = 220, ProductId = 31, Quantity = 4 }
+                new MealProduct { Id = 544, MealId = 220, ProductId = 31, Quantity = 4 },
 
+                new MealProduct { Id = 545, MealId = 221, ProductId = 32, Quantity = 2 },
+                new MealProduct { Id = 546, MealId = 221, ProductId = 19, Quantity = 4 },
+                new MealProduct { Id = 547, MealId = 221, ProductId = 26, Quantity = 4 },
 
+                new MealProduct { Id = 548, MealId = 222, ProductId = 35, Quantity = 4 },
+                new MealProduct { Id = 549, MealId = 222, ProductId = 36, Quantity = 3 },
+                new MealProduct { Id = 550, MealId = 222, ProductId = 20, Quantity = 3 },
+
+                new MealProduct { Id = 551, MealId = 223, ProductId = 18, Quantity = 3 },
+                new MealProduct { Id = 552, MealId = 223, ProductId = 28, Quantity = 1 },
+                new MealProduct { Id = 553, MealId = 223, ProductId = 18, Quantity = 1 },
+
+                new MealProduct { Id = 554, MealId = 224, ProductId = 30, Quantity = 3 },
+                new MealProduct { Id = 555, MealId = 224, ProductId = 19, Quantity = 4 },
+                new MealProduct { Id = 556, MealId = 224, ProductId = 31, Quantity = 2 },
+
+                new MealProduct { Id = 557, MealId = 225, ProductId = 7, Quantity = 1 },
+                new MealProduct { Id = 558, MealId = 225, ProductId = 37, Quantity = 1 },
+                new MealProduct { Id = 559, MealId = 225, ProductId = 12, Quantity = 3 },
+
+                new MealProduct { Id = 560, MealId = 226, ProductId = 30, Quantity = 3 },
+                new MealProduct { Id = 561, MealId = 226, ProductId = 28, Quantity = 2 },
+                new MealProduct { Id = 562, MealId = 226, ProductId = 1, Quantity = 4 },
+
+                new MealProduct { Id = 563, MealId = 227, ProductId = 33, Quantity = 2 },
+                new MealProduct { Id = 564, MealId = 227, ProductId = 20, Quantity = 2 },
+                new MealProduct { Id = 565, MealId = 227, ProductId = 4, Quantity = 2 },
+
+                new MealProduct { Id = 566, MealId = 228, ProductId = 5, Quantity = 4 },
+                new MealProduct { Id = 567, MealId = 228, ProductId = 15, Quantity = 1 },
+                new MealProduct { Id = 568, MealId = 228, ProductId = 13, Quantity = 1 },
+
+                new MealProduct { Id = 569, MealId = 229, ProductId = 5, Quantity = 4 },
+                new MealProduct { Id = 570, MealId = 229, ProductId = 32, Quantity = 3 },
+                new MealProduct { Id = 571, MealId = 229, ProductId = 25, Quantity = 3 },
+
+                new MealProduct { Id = 572, MealId = 230, ProductId = 28, Quantity = 3 },
+                new MealProduct { Id = 573, MealId = 230, ProductId = 9, Quantity = 1 },
+                new MealProduct { Id = 574, MealId = 230, ProductId = 10, Quantity = 1 },
+
+                new MealProduct { Id = 575, MealId = 231, ProductId = 36, Quantity = 3 },
+                new MealProduct { Id = 576, MealId = 231, ProductId = 11, Quantity = 4 },
+                new MealProduct { Id = 577, MealId = 231, ProductId = 12, Quantity = 4 },
+
+                new MealProduct { Id = 578, MealId = 232, ProductId = 5, Quantity = 2 },
+                new MealProduct { Id = 579, MealId = 232, ProductId = 25, Quantity = 3 },
+                new MealProduct { Id = 580, MealId = 232, ProductId = 9, Quantity = 1 },
+
+                new MealProduct { Id = 581, MealId = 233, ProductId = 4, Quantity = 2 },
+                new MealProduct { Id = 582, MealId = 233, ProductId = 13, Quantity = 4 },
+                new MealProduct { Id = 583, MealId = 223, ProductId = 35, Quantity = 4 },
+
+                new MealProduct { Id = 584, MealId = 234, ProductId = 22, Quantity = 4 },
+                new MealProduct { Id = 585, MealId = 234, ProductId = 6, Quantity = 2 },
+                new MealProduct { Id = 586, MealId = 234, ProductId = 16, Quantity = 4 },
+
+                new MealProduct { Id = 587, MealId = 235, ProductId = 7, Quantity = 4 },
+                new MealProduct { Id = 588, MealId = 235, ProductId = 35, Quantity = 3 },
+                new MealProduct { Id = 589, MealId = 235, ProductId = 31, Quantity = 2 },
+
+                new MealProduct { Id = 590, MealId = 236, ProductId = 19, Quantity = 4 },
+                new MealProduct { Id = 591, MealId = 236, ProductId = 23, Quantity = 4 },
+                new MealProduct { Id = 592, MealId = 236, ProductId = 35, Quantity = 1 },
+
+                new MealProduct { Id = 593, MealId = 237, ProductId = 22, Quantity = 2 },
+                new MealProduct { Id = 594, MealId = 237, ProductId = 12, Quantity = 2 },
+                new MealProduct { Id = 595, MealId = 237, ProductId = 28, Quantity = 4 },
+
+                new MealProduct { Id = 596, MealId = 238, ProductId = 9, Quantity = 3 },
+                new MealProduct { Id = 597, MealId = 238, ProductId = 13, Quantity = 4 },
+                new MealProduct { Id = 598, MealId = 238, ProductId = 17, Quantity = 2 },
+
+                new MealProduct { Id = 599, MealId = 239, ProductId = 12, Quantity = 4 },
+                new MealProduct { Id = 600, MealId = 239, ProductId = 18, Quantity = 2 },
+                new MealProduct { Id = 601, MealId = 239, ProductId = 31, Quantity = 3 },
+
+                new MealProduct { Id = 602, MealId = 240, ProductId = 4, Quantity = 2 },
+                new MealProduct { Id = 603, MealId = 240, ProductId = 20, Quantity = 3 },
+                new MealProduct { Id = 604, MealId = 240, ProductId = 30, Quantity = 4 },
+
+                new MealProduct { Id = 605, MealId = 241, ProductId = 22, Quantity = 3 },
+                new MealProduct { Id = 606, MealId = 241, ProductId = 18, Quantity = 3 },
+                new MealProduct { Id = 607, MealId = 241, ProductId = 9, Quantity = 4 },
+
+                new MealProduct { Id = 608, MealId = 242, ProductId = 36, Quantity = 4 },
+                new MealProduct { Id = 609, MealId = 242, ProductId = 21, Quantity = 4 },
+                new MealProduct { Id = 610, MealId = 242, ProductId = 36, Quantity = 4 },
+
+                new MealProduct { Id = 611, MealId = 243, ProductId = 10, Quantity = 2 },
+                new MealProduct { Id = 612, MealId = 243, ProductId = 29, Quantity = 2 },
+                new MealProduct { Id = 613, MealId = 243, ProductId = 2, Quantity = 2 },
+
+                new MealProduct { Id = 614, MealId = 244, ProductId = 30, Quantity = 1 },
+                new MealProduct { Id = 615, MealId = 244, ProductId = 16, Quantity = 1 },
+                new MealProduct { Id = 616, MealId = 244, ProductId = 6, Quantity = 2 },
+
+                new MealProduct { Id = 617, MealId = 245, ProductId = 30, Quantity = 4 },
+                new MealProduct { Id = 618, MealId = 245, ProductId = 1, Quantity = 2 },
+                new MealProduct { Id = 619, MealId = 245, ProductId = 5, Quantity = 3 },
+
+                new MealProduct { Id = 620, MealId = 246, ProductId = 15, Quantity = 2 },
+                new MealProduct { Id = 621, MealId = 246, ProductId = 25, Quantity = 4 },
+                new MealProduct { Id = 622, MealId = 246, ProductId = 8, Quantity = 2 },
+
+                new MealProduct { Id = 623, MealId = 247, ProductId = 9, Quantity = 3 },
+                new MealProduct { Id = 624, MealId = 247, ProductId = 14, Quantity = 4 },
+                new MealProduct { Id = 625, MealId = 247, ProductId = 37, Quantity = 3 },
+
+                new MealProduct { Id = 626, MealId = 248, ProductId = 17, Quantity = 2 },
+                new MealProduct { Id = 627, MealId = 248, ProductId = 33, Quantity = 1 },
+                new MealProduct { Id = 628, MealId = 248, ProductId = 25, Quantity = 2 },
+
+                new MealProduct { Id = 629, MealId = 249, ProductId = 9, Quantity = 4 },
+                new MealProduct { Id = 630, MealId = 249, ProductId = 18, Quantity = 4 },
+                new MealProduct { Id = 631, MealId = 249, ProductId = 26, Quantity = 4 },
+
+                new MealProduct { Id = 632, MealId = 250, ProductId = 22, Quantity = 2 },
+                new MealProduct { Id = 633, MealId = 250, ProductId = 21, Quantity = 2 },
+                new MealProduct { Id = 634, MealId = 250, ProductId = 35, Quantity = 1 },
+
+                new MealProduct { Id = 635, MealId = 251, ProductId = 5, Quantity = 2 },
+                new MealProduct { Id = 636, MealId = 251, ProductId = 27, Quantity = 3 },
+                new MealProduct { Id = 637, MealId = 251, ProductId = 20, Quantity = 1 },
+
+                new MealProduct { Id = 638, MealId = 252, ProductId = 32, Quantity = 4 },
+                new MealProduct { Id = 639, MealId = 252, ProductId = 27, Quantity = 4 },
+                new MealProduct { Id = 640, MealId = 252, ProductId = 16, Quantity = 3 },
+
+                new MealProduct { Id = 641, MealId = 253, ProductId = 34, Quantity = 4 },
+                new MealProduct { Id = 642, MealId = 253, ProductId = 35, Quantity = 4 },
+                new MealProduct { Id = 643, MealId = 253, ProductId = 4, Quantity = 2 },
+
+                new MealProduct { Id = 644, MealId = 254, ProductId = 23, Quantity = 2 },
+                new MealProduct { Id = 645, MealId = 254, ProductId = 36, Quantity = 2 },
+                new MealProduct { Id = 646, MealId = 254, ProductId = 21, Quantity = 2 },
+
+                new MealProduct { Id = 647, MealId = 255, ProductId = 23, Quantity = 3 },
+                new MealProduct { Id = 648, MealId = 255, ProductId = 19, Quantity = 4 },
+                new MealProduct { Id = 649, MealId = 255, ProductId = 23, Quantity = 1 },
+
+                new MealProduct { Id = 650, MealId = 256, ProductId = 13, Quantity = 2 },
+                new MealProduct { Id = 651, MealId = 256, ProductId = 6, Quantity = 3 },
+                new MealProduct { Id = 652, MealId = 256, ProductId = 2, Quantity = 2 },
+
+                new MealProduct { Id = 653, MealId = 257, ProductId = 3, Quantity = 2 },
+                new MealProduct { Id = 654, MealId = 257, ProductId = 24, Quantity = 2 },
+                new MealProduct { Id = 655, MealId = 257, ProductId = 20, Quantity = 1 },
+
+                new MealProduct { Id = 656, MealId = 258, ProductId = 14, Quantity = 1 },
+                new MealProduct { Id = 657, MealId = 258, ProductId = 22, Quantity = 3 },
+                new MealProduct { Id = 658, MealId = 258, ProductId = 33, Quantity = 3 },
+
+                new MealProduct { Id = 659, MealId = 259, ProductId = 21, Quantity = 4 },
+                new MealProduct { Id = 660, MealId = 259, ProductId = 33, Quantity = 1 },
+                new MealProduct { Id = 661, MealId = 259, ProductId = 12, Quantity = 2 },
+
+                new MealProduct { Id = 662, MealId = 260, ProductId = 12, Quantity = 2 },
+                new MealProduct { Id = 663, MealId = 260, ProductId = 17, Quantity = 4 },
+                new MealProduct { Id = 664, MealId = 260, ProductId = 31, Quantity = 4 },
+
+                new MealProduct { Id = 665, MealId = 21, ProductId = 5, Quantity = 1 },
+                new MealProduct { Id = 666, MealId = 21, ProductId = 10, Quantity = 2 },
+                new MealProduct { Id = 667, MealId = 21, ProductId = 21, Quantity = 1 },
+
+                new MealProduct { Id = 668, MealId = 22, ProductId = 36, Quantity = 1 },
+                new MealProduct { Id = 669, MealId = 22, ProductId = 36, Quantity = 3 },
+                new MealProduct { Id = 670, MealId = 22, ProductId = 6, Quantity = 1 },
+
+                new MealProduct { Id = 671, MealId = 23, ProductId = 29, Quantity = 1 },
+                new MealProduct { Id = 672, MealId = 23, ProductId = 37, Quantity = 1 },
+                new MealProduct { Id = 673, MealId = 23, ProductId = 8, Quantity = 2 },
+
+                new MealProduct { Id = 674, MealId = 24, ProductId = 30, Quantity = 3 },
+                new MealProduct { Id = 675, MealId = 24, ProductId = 25, Quantity = 2 },
+                new MealProduct { Id = 676, MealId = 24, ProductId = 30, Quantity = 1 },
+
+                new MealProduct { Id = 677, MealId = 25, ProductId = 28, Quantity = 2 },
+                new MealProduct { Id = 678, MealId = 25, ProductId = 8, Quantity = 1 },
+                new MealProduct { Id = 679, MealId = 25, ProductId = 28, Quantity = 1 }
                 );
         }
         private void Roles()
