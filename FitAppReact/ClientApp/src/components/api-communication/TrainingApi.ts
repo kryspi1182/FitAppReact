@@ -31,5 +31,14 @@ export const trainingApi = {
         catch (e) {
             console.log("error w training api " + e);
         }
+    },
+    async getTrainings() {
+        try {
+            return await connection.api.get<Array<Training>>(`training/trainings/get`)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w training api " + e);
+        }
     }
 };

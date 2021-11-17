@@ -13,5 +13,6 @@ namespace FitAppReact.Interfaces.Facades
         public IEnumerable<TrainingDTO> GetMatchingTrainings(UserTrainingParams userTrainingParams);
         public IEnumerable<ExerciseDTO> GetExercises();
         public IEnumerable<BodyTargetDTO> GetBodyTargets();
+        public IEnumerable<TrainingDTO> GetTrainings();
     }
 }

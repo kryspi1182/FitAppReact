@@ -88,5 +88,32 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+        [HttpPost]
+        [Route("userSavedTraining/add")]
+        public IActionResult AddUserSavedTraining([FromBody] UserSavedTrainingParams userSavedTrainingParams)
+        {
+            try
+            {
+                var result = userFcd.AddUserSavedTraining(userSavedTrainingParams);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+        [HttpGet]
+        [Route("userSavedTraining/{id}")]
+        public IActionResult GetUserSavedTrainings(string id)
+        {
+            try
+            {
+                return Ok(userFcd.GetUserSavedTrainings(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

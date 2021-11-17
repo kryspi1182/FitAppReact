@@ -35,6 +35,15 @@ namespace FitAppReact.TrainingService
             return mapper.Map<TrainingDTO[]>(result);
         }
 
+        public IEnumerable<TrainingDTO> GetTrainings()
+        {
+            var result = appDbContext.Trainings
+                .Include(x => x.TrainingExercises)
+                .ToArray();
+
+            return mapper.Map<TrainingDTO[]>(result);
+        }
+
         private bool CheckTraining(Training training, IEnumerable<TrainingCondition> trainingConditions, BodyTargetEnum bodyTarget)
         {
             var exercises = appDbContext.TrainingExercises

@@ -36,5 +36,9 @@ namespace FitAppReact.Facades
         {
             return bodyTargetSrv.GetBodyTargets();
         }
+        public IEnumerable<TrainingDTO> GetTrainings()
+        {
+            return trainingSrv.GetTrainings();
+        }
     }
 }

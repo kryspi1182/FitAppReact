@@ -14,6 +14,8 @@ import mealsReducer from './mealsSlice';
 import userTrainingsReducer from './userTrainingsSlice';
 import exercisesReducer from './exercisesSlice';
 import bodyTargetsReducer from './bodyTargetsSlice';
+import userSavedTrainingsReducer from './userSavedTrainingsSlice';
+import trainingsReducer from './trainingsSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -40,6 +42,8 @@ const store = configureStore({
         userTrainings: userTrainingsReducer,
         exercises: exercisesReducer,
         bodyTargets: bodyTargetsReducer,
+        userSavedTrainings: userSavedTrainingsReducer,
+        trainings: trainingsReducer,
         //@ts-ignore
         router: connectRouter(history)
     },

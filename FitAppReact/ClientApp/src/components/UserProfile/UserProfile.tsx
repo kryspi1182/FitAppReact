@@ -10,6 +10,8 @@ import { fetchUserSavedDiets } from '../../store/userSavedDietsSlice';
 import { fetchMeals } from '../../store/mealsSlice';
 import { fetchExercises } from '../../store/exercisesSlice';
 import { fetchBodyTargets } from '../../store/bodyTargetsSlice';
+import { fetchUserSavedTrainings } from '../../store/userSavedTrainingsSlice';
+import { fetchTrainings } from '../../store/trainingsSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();
@@ -23,9 +25,11 @@ const UserProfile: React.FC = () => {
         dispatch(fetchMeals());
         dispatch(fetchExercises());
         dispatch(fetchBodyTargets());
+        dispatch(fetchTrainings());
         if (userObj && userObj.profile.sub) {
             dispatch(fetchUser(userObj.profile.sub));
             dispatch(fetchUserSavedDiets(userObj.profile.sub));
+            dispatch(fetchUserSavedTrainings(userObj.profile.sub));
         }
             
     }, [dispatch]);

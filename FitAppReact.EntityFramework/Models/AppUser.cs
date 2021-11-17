@@ -18,6 +18,7 @@ namespace FitAppReact.EntityFramework.Models
         public ICollection<UserMedicalCondition> MedicalConditions { get; set; }
         public ICollection<UserUnwantedProduct> UnwantedProducts { get; set; }
         public ICollection<UserSavedDiet> UserSavedDiets { get; set; }
+        public ICollection<UserSavedTraining> UserSavedTrainings { get; set; }
 
     }
 }

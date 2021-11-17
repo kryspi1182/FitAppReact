@@ -60,5 +60,19 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpGet]
+        [Route("trainings/get")]
+        public IActionResult GetTrainings()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetTrainings());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }
