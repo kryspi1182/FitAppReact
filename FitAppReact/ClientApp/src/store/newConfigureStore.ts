@@ -16,6 +16,10 @@ import exercisesReducer from './exercisesSlice';
 import bodyTargetsReducer from './bodyTargetsSlice';
 import userSavedTrainingsReducer from './userSavedTrainingsSlice';
 import trainingsReducer from './trainingsSlice';
+import trainingCategoriesReducer from './trainingCategoriesSlice';
+import difficultiesReducer from './difficultiesSlice';
+import trainingConditionsReducer from './trainingConditionsSlice';
+import trainingConditionSeveritiesReducer from './trainingConditionSeveritiesSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -44,6 +48,10 @@ const store = configureStore({
         bodyTargets: bodyTargetsReducer,
         userSavedTrainings: userSavedTrainingsReducer,
         trainings: trainingsReducer,
+        trainingCategories: trainingCategoriesReducer,
+        difficulties: difficultiesReducer,
+        trainingConditions: trainingConditionsReducer,
+        trainingConditionSeverities: trainingConditionSeveritiesReducer,
         //@ts-ignore
         router: connectRouter(history)
     },

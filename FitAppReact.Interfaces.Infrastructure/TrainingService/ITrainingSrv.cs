@@ -11,6 +11,7 @@ namespace FitAppReact.Interfaces.Infrastructure.TrainingService
     public interface ITrainingSrv
     {
         public IEnumerable<TrainingDTO> GetMatchingTrainings(UserTrainingParams userTrainingParams);
+        public IEnumerable<TrainingDTO> GetMatchingTrainingsUserData(UserTrainingParams userTrainingParams);
         public IEnumerable<TrainingDTO> GetTrainings();
     }
 }

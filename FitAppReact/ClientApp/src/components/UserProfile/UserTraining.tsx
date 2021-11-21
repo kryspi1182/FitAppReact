@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Container, Col, Row } from 'reactstrap';
 
-import { fetchMatchingTrainings, selectAllUserTrainings } from '../../store/userTrainingsSlice';
+import { fetchMatchingTrainings, fetchMatchingTrainingsUserData, selectAllUserTrainings } from '../../store/userTrainingsSlice';
 import { UserTrainingParams } from '../../models/UserTrainingParams';
 import { TrainingCategoryEnum } from '../../models/enums/TrainingCategoryEnum';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
@@ -13,6 +13,9 @@ import { TrainingCondition } from '../../models/TrainingCondition';
 import { BodyTargetEnum } from '../../models/enums/BodyTargetEnum';
 import TrainingBox from '../common/TrainingBox';
 import TrainingResult from './TrainingResult';
+import CustomTraining from './CustomTraining';
+import { selectUser } from '../../store/userSlice';
+import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
 
 const useStyles = makeStyles({
     button: {
@@ -30,6 +33,8 @@ const UserTraining: React.FC = () => {
     const [showTraining, setShowTraining] = React.useState(false);
 
     const userTrainings = useSelector(selectAllUserTrainings);
+    const trainingConditions = useSelector(selectAllTrainingConditions);
+    const user = useSelector(selectUser);
 
     React.useEffect(() => {
         switch(step) {
@@ -60,12 +65,10 @@ const UserTraining: React.FC = () => {
     React.useEffect(() => {
         if(startTrainingProcess) {
             let params = {
-                trainingCategory: TrainingCategoryEnum.Weight,
-                difficulty: DifficultyEnum.Beginner,
-                trainingConditions: [] as TrainingCondition[],
-                bodyTarget: BodyTargetEnum.Arms
+                difficulty: user.difficultyId,
+                trainingConditions: trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id)),
             } as UserTrainingParams;
-            dispatch(fetchMatchingTrainings(params));
+            dispatch(fetchMatchingTrainingsUserData(params));
         }
     }, [startTrainingProcess]);
 
@@ -116,7 +119,7 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Back</Button>
-            
+            <CustomTraining />
         </>)}
         </Row>
         <Row>

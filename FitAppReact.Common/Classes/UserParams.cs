@@ -15,7 +15,9 @@ namespace FitAppReact.Common.Classes
         public double activity { get; set; }
         public int age { get; set; }
         public GenderEnum gender { get; set; }
+        public DifficultyEnum difficulty { get; set; }
         public ICollection<UserMedicalConditionDTO> medicalConditions { get; set; }
         public ICollection<UserUnwantedProductDTO> unwantedProducts { get; set; }
+        public ICollection<UserTrainingConditionDTO> trainingConditions { get; set; }
     }
 }

@@ -17,6 +17,15 @@ export const fetchMatchingTrainings = createAsyncThunk('training/match', async (
     }
 });
 
+export const fetchMatchingTrainingsUserData = createAsyncThunk('training/match/user', async (params: UserTrainingParams) => {
+    try {
+        return await trainingApi.getMatchingTrainingsUserData(params);
+    }
+    catch (e) {
+        return e.json();
+    }
+});
+
 export const {
     selectAll: selectAllUserTrainings,
     selectById: selectUserTrainingById,
@@ -28,6 +37,13 @@ const userTrainingsSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder.addCase(fetchMatchingTrainings.fulfilled, (state, action: PayloadAction<Array<Training>>) => {
+            //console.log(action.payload);
+            if (action.payload) {
+                userTrainingsAdapter.upsertMany(state, action);
+            }
+        })
+        .addCase(fetchMatchingTrainingsUserData.fulfilled, (state, action: PayloadAction<Array<Training>>) => {
+            //console.log(action.payload);
             if (action.payload) {
                 userTrainingsAdapter.upsertMany(state, action);
             }

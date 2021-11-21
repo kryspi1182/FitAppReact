@@ -33,6 +33,20 @@ namespace FitAppReact.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("matchingTrainings/user")]
+        public IActionResult GetMatchingTrainingsUserData([FromBody] UserTrainingParams userTrainingParams)
+        {
+            try
+            {
+                return Ok(trainingFcd.GetMatchingTrainingsUserData(userTrainingParams));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
         [HttpGet]
         [Route("exercises/get")]
         public IActionResult GetExercises()
@@ -68,6 +82,62 @@ namespace FitAppReact.Controllers
             try
             {
                 return Ok(trainingFcd.GetTrainings());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("trainingCategories/get")]
+        public IActionResult GetTrainingCategories()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetTrainingCategories());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("difficulties/get")]
+        public IActionResult GetDifficulties()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetDifficutlies());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("trainingConditions/get")]
+        public IActionResult GetTrainingConditions()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetTrainingConditions());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("trainingConditionSeverities/get")]
+        public IActionResult GetTrainingConditionSeverities()
+        {
+            try
+            {
+                return Ok(trainingFcd.GetTrainingConditionSeverities());
             }
             catch (Exception e)
             {

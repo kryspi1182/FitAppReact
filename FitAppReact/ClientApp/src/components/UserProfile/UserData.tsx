@@ -17,6 +17,11 @@ import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
 import { selectAllProducts } from '../../store/productsSlice';
 import { UserMedicalCondition } from '../../models/UserMedicalCondition';
 import { UserUnwantedProduct } from '../../models/UserUnwantedProduct';
+import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
+import { selectAllTrainingConditionSeverities } from '../../store/trainingConditionSeveritiesSlice';
+import { selectAllBodyTargets } from '../../store/bodyTargetsSlice';
+import { UserTrainingCondition } from '../../models/UserTrainingCondition';
+import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
 
 const useStyles = makeStyles({
     formControl: {
@@ -36,6 +41,9 @@ const UserData: React.FC = () => {
     const dispatch = useDispatch();
     const medicalConditions = useSelector(selectAllMedicalConditions);
     const products = useSelector(selectAllProducts);
+    const trainingConditions = useSelector(selectAllTrainingConditions);
+    const trainingConditionSeverities = useSelector(selectAllTrainingConditionSeverities);
+    const bodyTargets = useSelector(selectAllBodyTargets);
 
     const mappedMedicalConditions = medicalConditions.map(x => {
         return {id: x.id, name: x.name} as AutocompleteItem;
@@ -43,10 +51,23 @@ const UserData: React.FC = () => {
     const mappedProducts = products.map(x => {
         return {id: x.id, name: x.name} as AutocompleteItem;
     });
+    const mappedTrainingConditions = trainingConditions.map(trainingCondition => {
+        var trainingConditionSeverity = trainingConditionSeverities.find(severity => severity.id === trainingCondition.trainingConditionSeverityId);
+        var bodyTarget = bodyTargets.find(target => target.id === trainingCondition.bodyTargetId);
+        var result = {} as AutocompleteItem;
+        result.id = trainingCondition.id;
+        if (trainingConditionSeverity && bodyTarget) {
+            result.name = trainingConditionSeverity.name + "(" + bodyTarget.target + ")";
+        }
+        return result;
+    });
+
     const [selectedMedicalConditions, setSelectedMedicalConditions] = React.useState(user.medicalConditions);
     const [selectedUnwantedProducts, setSelectedUnwantedProducts] = React.useState(user.unwantedProducts);
+    const [selectedTrainingConditions, setSelectedTrainingConditions] = React.useState(user.trainingConditions);
     const [selectedMappedMedicalConditions, setSelectedMappedMedicalConditions] = React.useState(user.medicalConditions ? mappedMedicalConditions.filter(mapped => user.medicalConditions.some(med => med.medicalConditionId === mapped.id)): [] as AutocompleteItem[]);
     const [selectedMappedUnwantedProducts, setSelectedMappedUnwantedProducts] = React.useState(user.unwantedProducts ? mappedProducts.filter(mapped => user.unwantedProducts.some(prod => prod.productId === mapped.id)): [] as AutocompleteItem[]);
+    const [selectedMappedTrainingConditions, setSelectedMappedTrainingConditions] = React.useState(user.trainingConditions ? mappedTrainingConditions.filter(mapped => user.trainingConditions.some(cond => cond.trainingConditionId === mapped.id)): [] as AutocompleteItem[]);
     const mapItemsToMedicalConditions = (items: AutocompleteItem[]) => {
         setSelectedMappedMedicalConditions(items);
         const medCons = medicalConditions.filter(medCon => items.some(item => item.id === medCon.id));
@@ -62,6 +83,14 @@ const UserData: React.FC = () => {
             return { userId: user.id, productId: prod.id } as UserUnwantedProduct;
         });
         setSelectedUnwantedProducts(userUnProds);
+    };
+    const mapItemsToTrainingConditions = (items: AutocompleteItem[]) => {
+        setSelectedMappedTrainingConditions(items);
+        const conditions = trainingConditions.filter(condition => items.some(x => x.id === condition.id));
+        const userTrainingConditions = conditions.map(cond => {
+            return {userId: user.id, trainingConditionId: cond.id} as UserTrainingCondition;
+        });
+        setSelectedTrainingConditions(userTrainingConditions);
     };
 
     React.useEffect(() => {
@@ -80,6 +109,10 @@ const UserData: React.FC = () => {
         formik.setFieldValue('unwantedProducts', selectedUnwantedProducts);
     }, [selectedUnwantedProducts]);
 
+    React.useEffect(() => {
+        formik.setFieldValue('trainingConditions', selectedTrainingConditions);
+    }, [selectedTrainingConditions]);
+
     const formik = useFormik({
         initialValues: {
             activity: user.activity,
@@ -87,8 +120,10 @@ const UserData: React.FC = () => {
             height: user.height,
             age: user.age,
             gender: user.gender,
+            difficulty: user.difficultyId,
             unwantedProducts: selectedUnwantedProducts,
-            medicalConditions: selectedMedicalConditions
+            medicalConditions: selectedMedicalConditions,
+            trainingConditions: selectedTrainingConditions
         } as UserParams,
         validationSchema: Yup.object({
             age: Yup.number()
@@ -223,6 +258,37 @@ const UserData: React.FC = () => {
                             title="Unwanted products"
                             setSelected={mapItemsToUnwantedProducts}
                             selectedValues={selectedMappedUnwantedProducts}
+                        />
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <FormControl className={classes.formControl}>
+                        <Select
+                            id="user-difficulty"
+                            label="Difficulty"
+                            onChange={(event) => {
+                                formik.setFieldValue('difficulty', event.target.value as number);
+                            }}
+                            value={formik.values.difficulty}
+                        >
+                            <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
+                            <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
+                            <MenuItem value={DifficultyEnum.Advanced}>Advanced</MenuItem>
+                            <MenuItem value={DifficultyEnum.Professional}>Professional</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+                <Col>
+                    <FormControl>
+                        <InputLabel>Noteworthy conditions</InputLabel>
+                        <AutocompleteInput 
+                            items={mappedTrainingConditions}
+                            id="user-training-conditions"
+                            title="Noteworthy conditions"
+                            setSelected={mapItemsToTrainingConditions}
+                            selectedValues={selectedMappedTrainingConditions}
                         />
                     </FormControl>
                 </Col>

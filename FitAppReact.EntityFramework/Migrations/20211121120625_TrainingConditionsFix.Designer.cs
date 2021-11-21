@@ -4,14 +4,16 @@ using FitAppReact.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitAppReact.EntityFramework.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211121120625_TrainingConditionsFix")]
+    partial class TrainingConditionsFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DifficultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -90,8 +89,6 @@ namespace FitAppReact.EntityFramework.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DifficultyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -8280,14 +8277,14 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1416bb4e-78bb-4711-b6f9-72d27bf4181e",
-                            ConcurrencyStamp = "82338267-3605-49aa-92f5-cc06d16edc81",
+                            Id = "c058421a-1968-4084-b02b-4f5960083c2f",
+                            ConcurrencyStamp = "234424c7-90b6-4351-b9f1-f7de911c5f34",
                             Name = "User"
                         },
                         new
                         {
-                            Id = "d8aaa542-bd77-478b-9a65-e3cf22d768bd",
-                            ConcurrencyStamp = "0bb10cd3-dfe8-4374-a2a2-11520dd3f68c",
+                            Id = "c0a7cdac-e17b-4d71-9b9c-04e61f6f7e16",
+                            ConcurrencyStamp = "685ff195-13a5-4165-9aab-e062b0934206",
                             Name = "Administrator"
                         });
                 });
@@ -8398,15 +8395,6 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("FitAppReact.EntityFramework.Models.AppUser", b =>
-                {
-                    b.HasOne("FitAppReact.EntityFramework.Models.Difficulty", "Difficulty")
-                        .WithMany()
-                        .HasForeignKey("DifficultyId");
-
-                    b.Navigation("Difficulty");
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.Exercise", b =>
@@ -8641,7 +8629,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         .IsRequired();
 
                     b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
-                        .WithMany("TrainingConditions")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("TrainingCondition");
@@ -8720,8 +8708,6 @@ namespace FitAppReact.EntityFramework.Migrations
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.AppUser", b =>
                 {
                     b.Navigation("MedicalConditions");
-
-                    b.Navigation("TrainingConditions");
 
                     b.Navigation("UnwantedProducts");
 

@@ -35,6 +35,17 @@ namespace FitAppReact.TrainingService
             return mapper.Map<TrainingDTO[]>(result);
         }
 
+        public IEnumerable<TrainingDTO> GetMatchingTrainingsUserData(UserTrainingParams userTrainingParams)
+        {
+            var trainings = appDbContext.Trainings
+                .Where(x => x.DifficultyId == ((int)userTrainingParams.difficulty))
+                .Include(x => x.TrainingExercises)
+                .ToArray();
+            var trainingConditions = mapper.Map<TrainingCondition[]>(userTrainingParams.trainingConditions);
+            var result = trainings.Where(x => CheckTraining(x, trainingConditions)).ToArray();
+            return mapper.Map<TrainingDTO[]>(result);
+        }
+
         public IEnumerable<TrainingDTO> GetTrainings()
         {
             var result = appDbContext.Trainings
@@ -62,6 +73,30 @@ namespace FitAppReact.TrainingService
                 if (exercise.ExerciseBodyTargets.Where(x => forbiddenTargets.Contains(x.BodyTargetId)).Count() > 0
                     || (exercise.ExerciseBodyTargets.Where(x => x.BodyTargetId == ((int)bodyTarget)).Count() == 0
                     && exercise.ExerciseCategoryId == ((int)ExerciseCategoryEnum.Main)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool CheckTraining(Training training, IEnumerable<TrainingCondition> trainingConditions)
+        {
+            var exercises = appDbContext.TrainingExercises
+                .Where(x => training.TrainingExercises.Contains(x))
+                .Include(x => x.Exercise)
+                    .ThenInclude(x => x.ExerciseBodyTargets)
+                .Select(x => x.Exercise)
+                .ToArray();
+
+            var forbiddenTargets = trainingConditions
+                .Where(x => x.TrainingConditionSeverityId == ((int)TrainingConditionSeverityEnum.Severe))
+                .Select(x => x.BodyTargetId);
+
+            foreach (var exercise in exercises)
+            {
+                if (exercise.ExerciseBodyTargets.Where(x => forbiddenTargets.Contains(x.BodyTargetId)).Count() > 0)
                 {
                     return false;
                 }
