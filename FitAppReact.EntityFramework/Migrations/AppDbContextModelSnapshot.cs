@@ -37,6 +37,9 @@ namespace FitAppReact.EntityFramework.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DifficultyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -87,6 +90,8 @@ namespace FitAppReact.EntityFramework.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DifficultyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -213,6 +218,50 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("ExerciseCategoryId");
 
                     b.ToTable("Exercises");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DifficultyId = 1,
+                            ExerciseCategoryId = 1,
+                            Name = "Light jog"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DifficultyId = 1,
+                            ExerciseCategoryId = 2,
+                            Name = "Bicep curls"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DifficultyId = 1,
+                            ExerciseCategoryId = 3,
+                            Name = "Arm stretch"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DifficultyId = 1,
+                            ExerciseCategoryId = 1,
+                            Name = "Jumping rope"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DifficultyId = 2,
+                            ExerciseCategoryId = 2,
+                            Name = "Squats"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DifficultyId = 1,
+                            ExerciseCategoryId = 3,
+                            Name = "Bends"
+                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.ExerciseBodyTarget", b =>
@@ -235,6 +284,74 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("ExerciseBodyTargets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BodyTargetId = 1,
+                            ExerciseId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BodyTargetId = 3,
+                            ExerciseId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BodyTargetId = 3,
+                            ExerciseId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BodyTargetId = 5,
+                            ExerciseId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BodyTargetId = 1,
+                            ExerciseId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BodyTargetId = 2,
+                            ExerciseId = 4
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BodyTargetId = 3,
+                            ExerciseId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BodyTargetId = 2,
+                            ExerciseId = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BodyTargetId = 5,
+                            ExerciseId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BodyTargetId = 6,
+                            ExerciseId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BodyTargetId = 2,
+                            ExerciseId = 6
+                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.ExerciseCategory", b =>
@@ -383,7 +500,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 6,
                             Description = "Description of dinner 1",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 1",
                             Recipe = "Recipe of dinner 1"
                         },
@@ -391,7 +508,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 7,
                             Description = "Description of dinner 2",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 2",
                             Recipe = "Recipe of dinner 2"
                         },
@@ -399,7 +516,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 8,
                             Description = "Description of dinner 3",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 3",
                             Recipe = "Recipe of dinner 3"
                         },
@@ -407,7 +524,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 9,
                             Description = "Description of dinner 4",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 4",
                             Recipe = "Recipe of dinner 4"
                         },
@@ -415,7 +532,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 10,
                             Description = "Description of dinner 5",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 5",
                             Recipe = "Recipe of dinner 5"
                         },
@@ -498,6 +615,46 @@ namespace FitAppReact.EntityFramework.Migrations
                             MealCategoryId = 3,
                             Name = "Snack 5",
                             Recipe = "Recipe of snack 5"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Description = "Description of Second breakfast 1",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 1",
+                            Recipe = "Recipe of Second breakfast 1"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Description = "Description of Second breakfast 2",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 2",
+                            Recipe = "Recipe of Second breakfast 2"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Description = "Description of Second breakfast 3",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 3",
+                            Recipe = "Recipe of Second breakfast 3"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Description = "Description of Second breakfast 4",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 4",
+                            Recipe = "Recipe of Second breakfast 4"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Description = "Description of Second breakfast 5",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 5",
+                            Recipe = "Recipe of Second breakfast 5"
                         },
                         new
                         {
@@ -823,7 +980,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 101,
                             Description = "Description of Dinner 101",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 101",
                             Recipe = "Recipe of Dinner 101"
                         },
@@ -831,7 +988,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 102,
                             Description = "Description of Dinner 102",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 102",
                             Recipe = "Recipe of Dinner 102"
                         },
@@ -839,7 +996,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 103,
                             Description = "Description of Dinner 103",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 103",
                             Recipe = "Recipe of Dinner 103"
                         },
@@ -847,7 +1004,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 104,
                             Description = "Description of Dinner 104",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 104",
                             Recipe = "Recipe of Dinner 104"
                         },
@@ -855,7 +1012,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 105,
                             Description = "Description of Dinner 105",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 105",
                             Recipe = "Recipe of Dinner 105"
                         },
@@ -863,7 +1020,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 106,
                             Description = "Description of Dinner 106",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 106",
                             Recipe = "Recipe of Dinner 106"
                         },
@@ -871,7 +1028,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 107,
                             Description = "Description of Dinner 107",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 107",
                             Recipe = "Recipe of Dinner 107"
                         },
@@ -879,7 +1036,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 108,
                             Description = "Description of Dinner 108",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 108",
                             Recipe = "Recipe of Dinner 108"
                         },
@@ -887,7 +1044,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 109,
                             Description = "Description of Dinner 109",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 109",
                             Recipe = "Recipe of Dinner 109"
                         },
@@ -895,7 +1052,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 110,
                             Description = "Description of Dinner 110",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 110",
                             Recipe = "Recipe of Dinner 110"
                         },
@@ -903,7 +1060,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 111,
                             Description = "Description of Dinner 111",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 111",
                             Recipe = "Recipe of Dinner 111"
                         },
@@ -911,7 +1068,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 112,
                             Description = "Description of Dinner 112",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 112",
                             Recipe = "Recipe of Dinner 112"
                         },
@@ -919,7 +1076,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 113,
                             Description = "Description of Dinner 113",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 113",
                             Recipe = "Recipe of Dinner 113"
                         },
@@ -927,7 +1084,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 114,
                             Description = "Description of Dinner 114",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 114",
                             Recipe = "Recipe of Dinner 114"
                         },
@@ -935,7 +1092,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 115,
                             Description = "Description of Dinner 115",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 115",
                             Recipe = "Recipe of Dinner 115"
                         },
@@ -943,7 +1100,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 116,
                             Description = "Description of Dinner 116",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 116",
                             Recipe = "Recipe of Dinner 116"
                         },
@@ -951,7 +1108,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 117,
                             Description = "Description of Dinner 117",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 117",
                             Recipe = "Recipe of Dinner 117"
                         },
@@ -959,7 +1116,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 118,
                             Description = "Description of Dinner 118",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 118",
                             Recipe = "Recipe of Dinner 118"
                         },
@@ -967,7 +1124,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 119,
                             Description = "Description of Dinner 119",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 119",
                             Recipe = "Recipe of Dinner 119"
                         },
@@ -975,7 +1132,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 120,
                             Description = "Description of Dinner 120",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 120",
                             Recipe = "Recipe of Dinner 120"
                         },
@@ -983,7 +1140,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 121,
                             Description = "Description of Dinner 121",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 121",
                             Recipe = "Recipe of Dinner 121"
                         },
@@ -991,7 +1148,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 122,
                             Description = "Description of Dinner 122",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 122",
                             Recipe = "Recipe of Dinner 122"
                         },
@@ -999,7 +1156,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 123,
                             Description = "Description of Dinner 123",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 123",
                             Recipe = "Recipe of Dinner 123"
                         },
@@ -1007,7 +1164,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 124,
                             Description = "Description of Dinner 124",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 124",
                             Recipe = "Recipe of Dinner 124"
                         },
@@ -1015,7 +1172,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 125,
                             Description = "Description of Dinner 125",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 125",
                             Recipe = "Recipe of Dinner 125"
                         },
@@ -1023,7 +1180,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 126,
                             Description = "Description of Dinner 126",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 126",
                             Recipe = "Recipe of Dinner 126"
                         },
@@ -1031,7 +1188,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 127,
                             Description = "Description of Dinner 127",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 127",
                             Recipe = "Recipe of Dinner 127"
                         },
@@ -1039,7 +1196,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 128,
                             Description = "Description of Dinner 128",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 128",
                             Recipe = "Recipe of Dinner 128"
                         },
@@ -1047,7 +1204,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 129,
                             Description = "Description of Dinner 129",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 129",
                             Recipe = "Recipe of Dinner 129"
                         },
@@ -1055,7 +1212,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 130,
                             Description = "Description of Dinner 130",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 130",
                             Recipe = "Recipe of Dinner 130"
                         },
@@ -1063,7 +1220,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 131,
                             Description = "Description of Dinner 131",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 131",
                             Recipe = "Recipe of Dinner 131"
                         },
@@ -1071,7 +1228,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 132,
                             Description = "Description of Dinner 132",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 132",
                             Recipe = "Recipe of Dinner 132"
                         },
@@ -1079,7 +1236,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 133,
                             Description = "Description of Dinner 133",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 133",
                             Recipe = "Recipe of Dinner 133"
                         },
@@ -1087,7 +1244,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 134,
                             Description = "Description of Dinner 134",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 134",
                             Recipe = "Recipe of Dinner 134"
                         },
@@ -1095,7 +1252,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 135,
                             Description = "Description of Dinner 135",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 135",
                             Recipe = "Recipe of Dinner 135"
                         },
@@ -1103,7 +1260,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 136,
                             Description = "Description of Dinner 136",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 136",
                             Recipe = "Recipe of Dinner 136"
                         },
@@ -1111,7 +1268,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 137,
                             Description = "Description of Dinner 137",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 137",
                             Recipe = "Recipe of Dinner 137"
                         },
@@ -1119,7 +1276,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 138,
                             Description = "Description of Dinner 138",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 138",
                             Recipe = "Recipe of Dinner 138"
                         },
@@ -1127,7 +1284,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 139,
                             Description = "Description of Dinner 139",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 139",
                             Recipe = "Recipe of Dinner 139"
                         },
@@ -1135,7 +1292,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 140,
                             Description = "Description of Dinner 140",
-                            MealCategoryId = 1,
+                            MealCategoryId = 5,
                             Name = "Dinner 140",
                             Recipe = "Recipe of Dinner 140"
                         },
@@ -1778,6 +1935,326 @@ namespace FitAppReact.EntityFramework.Migrations
                             MealCategoryId = 3,
                             Name = "Snack 220",
                             Recipe = "Recipe of Snack 220"
+                        },
+                        new
+                        {
+                            Id = 221,
+                            Description = "Description of Second breakfast 221",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 221",
+                            Recipe = "Recipe of Second breakfast 221"
+                        },
+                        new
+                        {
+                            Id = 222,
+                            Description = "Description of Second breakfast 222",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 222",
+                            Recipe = "Recipe of Second breakfast 222"
+                        },
+                        new
+                        {
+                            Id = 223,
+                            Description = "Description of Second breakfast 223",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 223",
+                            Recipe = "Recipe of Second breakfast 223"
+                        },
+                        new
+                        {
+                            Id = 224,
+                            Description = "Description of Second breakfast 224",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 224",
+                            Recipe = "Recipe of Second breakfast 224"
+                        },
+                        new
+                        {
+                            Id = 225,
+                            Description = "Description of Second breakfast 225",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 225",
+                            Recipe = "Recipe of Second breakfast 225"
+                        },
+                        new
+                        {
+                            Id = 226,
+                            Description = "Description of Second breakfast 226",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 226",
+                            Recipe = "Recipe of Second breakfast 226"
+                        },
+                        new
+                        {
+                            Id = 227,
+                            Description = "Description of Second breakfast 227",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 227",
+                            Recipe = "Recipe of Second breakfast 227"
+                        },
+                        new
+                        {
+                            Id = 228,
+                            Description = "Description of Second breakfast 228",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 228",
+                            Recipe = "Recipe of Second breakfast 228"
+                        },
+                        new
+                        {
+                            Id = 229,
+                            Description = "Description of Second breakfast 229",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 229",
+                            Recipe = "Recipe of Second breakfast 229"
+                        },
+                        new
+                        {
+                            Id = 230,
+                            Description = "Description of Second breakfast 230",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 230",
+                            Recipe = "Recipe of Second breakfast 230"
+                        },
+                        new
+                        {
+                            Id = 231,
+                            Description = "Description of Second breakfast 231",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 231",
+                            Recipe = "Recipe of Second breakfast 231"
+                        },
+                        new
+                        {
+                            Id = 232,
+                            Description = "Description of Second breakfast 232",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 232",
+                            Recipe = "Recipe of Second breakfast 232"
+                        },
+                        new
+                        {
+                            Id = 233,
+                            Description = "Description of Second breakfast 233",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 233",
+                            Recipe = "Recipe of Second breakfast 233"
+                        },
+                        new
+                        {
+                            Id = 234,
+                            Description = "Description of Second breakfast 234",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 234",
+                            Recipe = "Recipe of Second breakfast 234"
+                        },
+                        new
+                        {
+                            Id = 235,
+                            Description = "Description of Second breakfast 235",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 235",
+                            Recipe = "Recipe of Second breakfast 235"
+                        },
+                        new
+                        {
+                            Id = 236,
+                            Description = "Description of Second breakfast 236",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 236",
+                            Recipe = "Recipe of Second breakfast 236"
+                        },
+                        new
+                        {
+                            Id = 237,
+                            Description = "Description of Second breakfast 237",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 237",
+                            Recipe = "Recipe of Second breakfast 237"
+                        },
+                        new
+                        {
+                            Id = 238,
+                            Description = "Description of Second breakfast 238",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 238",
+                            Recipe = "Recipe of Second breakfast 238"
+                        },
+                        new
+                        {
+                            Id = 239,
+                            Description = "Description of Second breakfast 239",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 239",
+                            Recipe = "Recipe of Second breakfast 239"
+                        },
+                        new
+                        {
+                            Id = 240,
+                            Description = "Description of Second breakfast 240",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 240",
+                            Recipe = "Recipe of Second breakfast 240"
+                        },
+                        new
+                        {
+                            Id = 241,
+                            Description = "Description of Second breakfast 241",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 241",
+                            Recipe = "Recipe of Second breakfast 241"
+                        },
+                        new
+                        {
+                            Id = 242,
+                            Description = "Description of Second breakfast 242",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 242",
+                            Recipe = "Recipe of Second breakfast 242"
+                        },
+                        new
+                        {
+                            Id = 243,
+                            Description = "Description of Second breakfast 243",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 243",
+                            Recipe = "Recipe of Second breakfast 243"
+                        },
+                        new
+                        {
+                            Id = 244,
+                            Description = "Description of Second breakfast 244",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 244",
+                            Recipe = "Recipe of Second breakfast 244"
+                        },
+                        new
+                        {
+                            Id = 245,
+                            Description = "Description of Second breakfast 245",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 245",
+                            Recipe = "Recipe of Second breakfast 245"
+                        },
+                        new
+                        {
+                            Id = 246,
+                            Description = "Description of Second breakfast 246",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 246",
+                            Recipe = "Recipe of Second breakfast 246"
+                        },
+                        new
+                        {
+                            Id = 247,
+                            Description = "Description of Second breakfast 247",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 247",
+                            Recipe = "Recipe of Second breakfast 247"
+                        },
+                        new
+                        {
+                            Id = 248,
+                            Description = "Description of Second breakfast 248",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 248",
+                            Recipe = "Recipe of Second breakfast 248"
+                        },
+                        new
+                        {
+                            Id = 249,
+                            Description = "Description of Second breakfast 249",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 249",
+                            Recipe = "Recipe of Second breakfast 249"
+                        },
+                        new
+                        {
+                            Id = 250,
+                            Description = "Description of Second breakfast 250",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 250",
+                            Recipe = "Recipe of Second breakfast 250"
+                        },
+                        new
+                        {
+                            Id = 251,
+                            Description = "Description of Second breakfast 251",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 251",
+                            Recipe = "Recipe of Second breakfast 251"
+                        },
+                        new
+                        {
+                            Id = 252,
+                            Description = "Description of Second breakfast 252",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 252",
+                            Recipe = "Recipe of Second breakfast 252"
+                        },
+                        new
+                        {
+                            Id = 253,
+                            Description = "Description of Second breakfast 253",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 253",
+                            Recipe = "Recipe of Second breakfast 253"
+                        },
+                        new
+                        {
+                            Id = 254,
+                            Description = "Description of Second breakfast 254",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 254",
+                            Recipe = "Recipe of Second breakfast 254"
+                        },
+                        new
+                        {
+                            Id = 255,
+                            Description = "Description of Second breakfast 255",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 255",
+                            Recipe = "Recipe of Second breakfast 255"
+                        },
+                        new
+                        {
+                            Id = 256,
+                            Description = "Description of Second breakfast 256",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 256",
+                            Recipe = "Recipe of Second breakfast 256"
+                        },
+                        new
+                        {
+                            Id = 257,
+                            Description = "Description of Second breakfast 257",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 257",
+                            Recipe = "Recipe of Second breakfast 257"
+                        },
+                        new
+                        {
+                            Id = 258,
+                            Description = "Description of Second breakfast 258",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 258",
+                            Recipe = "Recipe of Second breakfast 258"
+                        },
+                        new
+                        {
+                            Id = 259,
+                            Description = "Description of Second breakfast 259",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 259",
+                            Recipe = "Recipe of Second breakfast 259"
+                        },
+                        new
+                        {
+                            Id = 260,
+                            Description = "Description of Second breakfast 260",
+                            MealCategoryId = 4,
+                            Name = "Second breakfast 260",
+                            Recipe = "Recipe of Second breakfast 260"
                         });
                 });
 
@@ -1799,7 +2276,7 @@ namespace FitAppReact.EntityFramework.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Breakfast/Dinner"
+                            Name = "Breakfast"
                         },
                         new
                         {
@@ -1810,6 +2287,16 @@ namespace FitAppReact.EntityFramework.Migrations
                         {
                             Id = 3,
                             Name = "Snack"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Second breakfast"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Dinner"
                         });
                 });
 
@@ -5617,6 +6104,951 @@ namespace FitAppReact.EntityFramework.Migrations
                             MealId = 220,
                             ProductId = 31,
                             Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 545,
+                            MealId = 221,
+                            ProductId = 32,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 546,
+                            MealId = 221,
+                            ProductId = 19,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 547,
+                            MealId = 221,
+                            ProductId = 26,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 548,
+                            MealId = 222,
+                            ProductId = 35,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 549,
+                            MealId = 222,
+                            ProductId = 36,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 550,
+                            MealId = 222,
+                            ProductId = 20,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 551,
+                            MealId = 223,
+                            ProductId = 18,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 552,
+                            MealId = 223,
+                            ProductId = 28,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 553,
+                            MealId = 223,
+                            ProductId = 18,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 554,
+                            MealId = 224,
+                            ProductId = 30,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 555,
+                            MealId = 224,
+                            ProductId = 19,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 556,
+                            MealId = 224,
+                            ProductId = 31,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 557,
+                            MealId = 225,
+                            ProductId = 7,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 558,
+                            MealId = 225,
+                            ProductId = 37,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 559,
+                            MealId = 225,
+                            ProductId = 12,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 560,
+                            MealId = 226,
+                            ProductId = 30,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 561,
+                            MealId = 226,
+                            ProductId = 28,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 562,
+                            MealId = 226,
+                            ProductId = 1,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 563,
+                            MealId = 227,
+                            ProductId = 33,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 564,
+                            MealId = 227,
+                            ProductId = 20,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 565,
+                            MealId = 227,
+                            ProductId = 4,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 566,
+                            MealId = 228,
+                            ProductId = 5,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 567,
+                            MealId = 228,
+                            ProductId = 15,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 568,
+                            MealId = 228,
+                            ProductId = 13,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 569,
+                            MealId = 229,
+                            ProductId = 5,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 570,
+                            MealId = 229,
+                            ProductId = 32,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 571,
+                            MealId = 229,
+                            ProductId = 25,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 572,
+                            MealId = 230,
+                            ProductId = 28,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 573,
+                            MealId = 230,
+                            ProductId = 9,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 574,
+                            MealId = 230,
+                            ProductId = 10,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 575,
+                            MealId = 231,
+                            ProductId = 36,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 576,
+                            MealId = 231,
+                            ProductId = 11,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 577,
+                            MealId = 231,
+                            ProductId = 12,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 578,
+                            MealId = 232,
+                            ProductId = 5,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 579,
+                            MealId = 232,
+                            ProductId = 25,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 580,
+                            MealId = 232,
+                            ProductId = 9,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 581,
+                            MealId = 233,
+                            ProductId = 4,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 582,
+                            MealId = 233,
+                            ProductId = 13,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 583,
+                            MealId = 223,
+                            ProductId = 35,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 584,
+                            MealId = 234,
+                            ProductId = 22,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 585,
+                            MealId = 234,
+                            ProductId = 6,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 586,
+                            MealId = 234,
+                            ProductId = 16,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 587,
+                            MealId = 235,
+                            ProductId = 7,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 588,
+                            MealId = 235,
+                            ProductId = 35,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 589,
+                            MealId = 235,
+                            ProductId = 31,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 590,
+                            MealId = 236,
+                            ProductId = 19,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 591,
+                            MealId = 236,
+                            ProductId = 23,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 592,
+                            MealId = 236,
+                            ProductId = 35,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 593,
+                            MealId = 237,
+                            ProductId = 22,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 594,
+                            MealId = 237,
+                            ProductId = 12,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 595,
+                            MealId = 237,
+                            ProductId = 28,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 596,
+                            MealId = 238,
+                            ProductId = 9,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 597,
+                            MealId = 238,
+                            ProductId = 13,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 598,
+                            MealId = 238,
+                            ProductId = 17,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 599,
+                            MealId = 239,
+                            ProductId = 12,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 600,
+                            MealId = 239,
+                            ProductId = 18,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 601,
+                            MealId = 239,
+                            ProductId = 31,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 602,
+                            MealId = 240,
+                            ProductId = 4,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 603,
+                            MealId = 240,
+                            ProductId = 20,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 604,
+                            MealId = 240,
+                            ProductId = 30,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 605,
+                            MealId = 241,
+                            ProductId = 22,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 606,
+                            MealId = 241,
+                            ProductId = 18,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 607,
+                            MealId = 241,
+                            ProductId = 9,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 608,
+                            MealId = 242,
+                            ProductId = 36,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 609,
+                            MealId = 242,
+                            ProductId = 21,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 610,
+                            MealId = 242,
+                            ProductId = 36,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 611,
+                            MealId = 243,
+                            ProductId = 10,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 612,
+                            MealId = 243,
+                            ProductId = 29,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 613,
+                            MealId = 243,
+                            ProductId = 2,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 614,
+                            MealId = 244,
+                            ProductId = 30,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 615,
+                            MealId = 244,
+                            ProductId = 16,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 616,
+                            MealId = 244,
+                            ProductId = 6,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 617,
+                            MealId = 245,
+                            ProductId = 30,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 618,
+                            MealId = 245,
+                            ProductId = 1,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 619,
+                            MealId = 245,
+                            ProductId = 5,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 620,
+                            MealId = 246,
+                            ProductId = 15,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 621,
+                            MealId = 246,
+                            ProductId = 25,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 622,
+                            MealId = 246,
+                            ProductId = 8,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 623,
+                            MealId = 247,
+                            ProductId = 9,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 624,
+                            MealId = 247,
+                            ProductId = 14,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 625,
+                            MealId = 247,
+                            ProductId = 37,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 626,
+                            MealId = 248,
+                            ProductId = 17,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 627,
+                            MealId = 248,
+                            ProductId = 33,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 628,
+                            MealId = 248,
+                            ProductId = 25,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 629,
+                            MealId = 249,
+                            ProductId = 9,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 630,
+                            MealId = 249,
+                            ProductId = 18,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 631,
+                            MealId = 249,
+                            ProductId = 26,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 632,
+                            MealId = 250,
+                            ProductId = 22,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 633,
+                            MealId = 250,
+                            ProductId = 21,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 634,
+                            MealId = 250,
+                            ProductId = 35,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 635,
+                            MealId = 251,
+                            ProductId = 5,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 636,
+                            MealId = 251,
+                            ProductId = 27,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 637,
+                            MealId = 251,
+                            ProductId = 20,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 638,
+                            MealId = 252,
+                            ProductId = 32,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 639,
+                            MealId = 252,
+                            ProductId = 27,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 640,
+                            MealId = 252,
+                            ProductId = 16,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 641,
+                            MealId = 253,
+                            ProductId = 34,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 642,
+                            MealId = 253,
+                            ProductId = 35,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 643,
+                            MealId = 253,
+                            ProductId = 4,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 644,
+                            MealId = 254,
+                            ProductId = 23,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 645,
+                            MealId = 254,
+                            ProductId = 36,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 646,
+                            MealId = 254,
+                            ProductId = 21,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 647,
+                            MealId = 255,
+                            ProductId = 23,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 648,
+                            MealId = 255,
+                            ProductId = 19,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 649,
+                            MealId = 255,
+                            ProductId = 23,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 650,
+                            MealId = 256,
+                            ProductId = 13,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 651,
+                            MealId = 256,
+                            ProductId = 6,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 652,
+                            MealId = 256,
+                            ProductId = 2,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 653,
+                            MealId = 257,
+                            ProductId = 3,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 654,
+                            MealId = 257,
+                            ProductId = 24,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 655,
+                            MealId = 257,
+                            ProductId = 20,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 656,
+                            MealId = 258,
+                            ProductId = 14,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 657,
+                            MealId = 258,
+                            ProductId = 22,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 658,
+                            MealId = 258,
+                            ProductId = 33,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 659,
+                            MealId = 259,
+                            ProductId = 21,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 660,
+                            MealId = 259,
+                            ProductId = 33,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 661,
+                            MealId = 259,
+                            ProductId = 12,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 662,
+                            MealId = 260,
+                            ProductId = 12,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 663,
+                            MealId = 260,
+                            ProductId = 17,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 664,
+                            MealId = 260,
+                            ProductId = 31,
+                            Quantity = 4m
+                        },
+                        new
+                        {
+                            Id = 665,
+                            MealId = 21,
+                            ProductId = 5,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 666,
+                            MealId = 21,
+                            ProductId = 10,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 667,
+                            MealId = 21,
+                            ProductId = 21,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 668,
+                            MealId = 22,
+                            ProductId = 36,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 669,
+                            MealId = 22,
+                            ProductId = 36,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 670,
+                            MealId = 22,
+                            ProductId = 6,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 671,
+                            MealId = 23,
+                            ProductId = 29,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 672,
+                            MealId = 23,
+                            ProductId = 37,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 673,
+                            MealId = 23,
+                            ProductId = 8,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 674,
+                            MealId = 24,
+                            ProductId = 30,
+                            Quantity = 3m
+                        },
+                        new
+                        {
+                            Id = 675,
+                            MealId = 24,
+                            ProductId = 25,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 676,
+                            MealId = 24,
+                            ProductId = 30,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 677,
+                            MealId = 25,
+                            ProductId = 28,
+                            Quantity = 2m
+                        },
+                        new
+                        {
+                            Id = 678,
+                            MealId = 25,
+                            ProductId = 8,
+                            Quantity = 1m
+                        },
+                        new
+                        {
+                            Id = 679,
+                            MealId = 25,
+                            ProductId = 28,
+                            Quantity = 1m
                         });
                 });
 
@@ -6256,6 +7688,24 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("TrainingCategoryId");
 
                     b.ToTable("Trainings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Beginner friendly workout aiming to grow one of the most popular muscles - biceps.",
+                            DifficultyId = 1,
+                            Name = "Bicepz gainz",
+                            TrainingCategoryId = 7
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Get dem quads going bois",
+                            DifficultyId = 1,
+                            Name = "Quads for days",
+                            TrainingCategoryId = 7
+                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.TrainingCategory", b =>
@@ -6317,6 +7767,138 @@ namespace FitAppReact.EntityFramework.Migrations
                             Id = 7,
                             Description = "Training focused on muscle movement with additional resistance in the form of a heavy weight. If exercises are not done correctly, there is a serious risk of injury.",
                             Name = "Weight"
+                        });
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.TrainingCondition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BodyTargetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainingConditionSeverityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BodyTargetId");
+
+                    b.HasIndex("TrainingConditionSeverityId");
+
+                    b.ToTable("TrainingConditions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BodyTargetId = 1,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BodyTargetId = 1,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BodyTargetId = 1,
+                            TrainingConditionSeverityId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BodyTargetId = 2,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BodyTargetId = 2,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BodyTargetId = 2,
+                            TrainingConditionSeverityId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BodyTargetId = 3,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BodyTargetId = 3,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BodyTargetId = 3,
+                            TrainingConditionSeverityId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BodyTargetId = 4,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BodyTargetId = 4,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BodyTargetId = 4,
+                            TrainingConditionSeverityId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BodyTargetId = 5,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BodyTargetId = 5,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BodyTargetId = 5,
+                            TrainingConditionSeverityId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            BodyTargetId = 6,
+                            TrainingConditionSeverityId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            BodyTargetId = 6,
+                            TrainingConditionSeverityId = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BodyTargetId = 6,
+                            TrainingConditionSeverityId = 3
                         });
                 });
 
@@ -6384,6 +7966,56 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasIndex("TrainingId");
 
                     b.ToTable("TrainingExercises");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ExerciseId = 4,
+                            RepsPerSeries = 1,
+                            Series = 10,
+                            TrainingId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ExerciseId = 2,
+                            RepsPerSeries = 20,
+                            Series = 5,
+                            TrainingId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ExerciseId = 3,
+                            RepsPerSeries = 10,
+                            Series = 10,
+                            TrainingId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ExerciseId = 1,
+                            RepsPerSeries = 30,
+                            Series = 10,
+                            TrainingId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ExerciseId = 5,
+                            RepsPerSeries = 10,
+                            Series = 10,
+                            TrainingId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ExerciseId = 6,
+                            RepsPerSeries = 10,
+                            Series = 10,
+                            TrainingId = 2
+                        });
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserMedicalCondition", b =>
@@ -6450,17 +8082,14 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.ToTable("UserSavedDietMeals");
                 });
 
-            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserTrainingCondition", b =>
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedTraining", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BodyTargetId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrainingConditionSeverityId")
+                    b.Property<int>("TrainingId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -6468,9 +8097,29 @@ namespace FitAppReact.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BodyTargetId");
+                    b.HasIndex("TrainingId");
 
-                    b.HasIndex("TrainingConditionSeverityId");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserSavedTrainings");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserTrainingCondition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("TrainingConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingConditionId");
 
                     b.HasIndex("UserId");
 
@@ -6631,14 +8280,14 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ef7b21fc-c5d7-47cc-b63c-11d7429485cc",
-                            ConcurrencyStamp = "1881cc10-22b1-48ed-9c77-492b5a5022b4",
+                            Id = "1416bb4e-78bb-4711-b6f9-72d27bf4181e",
+                            ConcurrencyStamp = "82338267-3605-49aa-92f5-cc06d16edc81",
                             Name = "User"
                         },
                         new
                         {
-                            Id = "79ccb0ef-da7d-4b6a-8738-2d18ea93bb73",
-                            ConcurrencyStamp = "b00abb16-d62d-479c-9399-e2a471b23f38",
+                            Id = "d8aaa542-bd77-478b-9a65-e3cf22d768bd",
+                            ConcurrencyStamp = "0bb10cd3-dfe8-4374-a2a2-11520dd3f68c",
                             Name = "Administrator"
                         });
                 });
@@ -6749,6 +8398,15 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.AppUser", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.Difficulty", "Difficulty")
+                        .WithMany()
+                        .HasForeignKey("DifficultyId");
+
+                    b.Navigation("Difficulty");
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.Exercise", b =>
@@ -6876,6 +8534,25 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.Navigation("TrainingCategory");
                 });
 
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.TrainingCondition", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.BodyTarget", "BodyTarget")
+                        .WithMany()
+                        .HasForeignKey("BodyTargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitAppReact.EntityFramework.Models.TrainingConditionSeverity", "TrainingConditionSeverity")
+                        .WithMany()
+                        .HasForeignKey("TrainingConditionSeverityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BodyTarget");
+
+                    b.Navigation("TrainingConditionSeverity");
+                });
+
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.TrainingExercise", b =>
                 {
                     b.HasOne("FitAppReact.EntityFramework.Models.Exercise", "Exercise")
@@ -6938,27 +8615,36 @@ namespace FitAppReact.EntityFramework.Migrations
                     b.Navigation("UserSavedDiet");
                 });
 
-            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserTrainingCondition", b =>
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserSavedTraining", b =>
                 {
-                    b.HasOne("FitAppReact.EntityFramework.Models.BodyTarget", "BodyTarget")
+                    b.HasOne("FitAppReact.EntityFramework.Models.Training", "Training")
                         .WithMany()
-                        .HasForeignKey("BodyTargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FitAppReact.EntityFramework.Models.TrainingConditionSeverity", "TrainingConditionSeverity")
-                        .WithMany()
-                        .HasForeignKey("TrainingConditionSeverityId")
+                        .HasForeignKey("TrainingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
-                        .WithMany()
+                        .WithMany("UserSavedTrainings")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("BodyTarget");
+                    b.Navigation("Training");
 
-                    b.Navigation("TrainingConditionSeverity");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FitAppReact.EntityFramework.Models.UserTrainingCondition", b =>
+                {
+                    b.HasOne("FitAppReact.EntityFramework.Models.TrainingCondition", "TrainingCondition")
+                        .WithMany()
+                        .HasForeignKey("TrainingConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitAppReact.EntityFramework.Models.AppUser", "User")
+                        .WithMany("TrainingConditions")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("TrainingCondition");
 
                     b.Navigation("User");
                 });
@@ -7035,9 +8721,13 @@ namespace FitAppReact.EntityFramework.Migrations
                 {
                     b.Navigation("MedicalConditions");
 
+                    b.Navigation("TrainingConditions");
+
                     b.Navigation("UnwantedProducts");
 
                     b.Navigation("UserSavedDiets");
+
+                    b.Navigation("UserSavedTrainings");
                 });
 
             modelBuilder.Entity("FitAppReact.EntityFramework.Models.Exercise", b =>

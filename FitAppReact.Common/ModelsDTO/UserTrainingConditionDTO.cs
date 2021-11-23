@@ -10,7 +10,6 @@ namespace FitAppReact.Common.ModelsDTO
     {
         public int Id { get; set; }
         public string UserId { get; set; }
-        public int BodyTargetId { get; set; }
-        public int TrainingConditionSeverityId { get; set; }
+        public int TrainingConditionId { get; set; }
     }
 }

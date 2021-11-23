@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import SaveIcon from '@material-ui/icons/Save';
+import LineWeightIcon from '@material-ui/icons/LineWeight';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SideMenu, {menuOption} from '../common/SideMenu';
@@ -14,6 +15,7 @@ import UserTraining from './UserTraining';
 import UserDiet from './UserDiet';
 import { fetchUser, selectUser } from '../../store/userSlice';
 import UserSavedDiets from './UserSavedDiets';
+import UserSavedTrainings from './UserSavedTrainings';
 
 const useStyles = makeStyles({
     container: {
@@ -44,6 +46,9 @@ const UserProfileEdit: React.FC = () => {
             case "training":
                 setTitle("Your training");
                 break;
+            case "savedTraining":
+                setTitle("Your saved trainings");
+                break;
         }
     }, [chosenMenu]);
     options.push({
@@ -70,6 +75,12 @@ const UserProfileEdit: React.FC = () => {
         clickHandler: setChosenMenu,
         clickValue: "training"
     } as menuOption);
+    options.push({
+        icon: LineWeightIcon,
+        label: "Saved trainings",
+        clickHandler: setChosenMenu,
+        clickValue: "savedTrainings"
+    } as menuOption);
     return(<>
         <Container className={classes.container}>
             <Row>
@@ -85,6 +96,7 @@ const UserProfileEdit: React.FC = () => {
                     {(chosenMenu === "diet") && <UserDiet />}
                     {(chosenMenu === "savedDiets") && <UserSavedDiets />}
                     {(chosenMenu === "training") && <UserTraining />}
+                    {(chosenMenu === "savedTrainings") && <UserSavedTrainings />}
                 </Col>
             </Row>
         </Container>

@@ -78,7 +78,7 @@ const UserDiet: React.FC = () => {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.BreakfastDinner
+                mealCategory: MealCategoryEnum.Breakfast
             } as UserDietParams;
             const lunchParams = {
                 macros: macros,
@@ -92,9 +92,23 @@ const UserDiet: React.FC = () => {
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
                 mealCategory: MealCategoryEnum.Snack
             } as UserDietParams;
+            const secondBreakfastParams = {
+                macros: macros,
+                unwantedProductIds: user.unwantedProducts.map(x => x.productId),
+                conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
+                mealCategory: MealCategoryEnum.SecondBreakfast
+            } as UserDietParams;
+            const dinnerParams = {
+                macros: macros,
+                unwantedProductIds: user.unwantedProducts.map(x => x.productId),
+                conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
+                mealCategory: MealCategoryEnum.Dinner
+            } as UserDietParams;
             dispatch(fetchMatchingMeals(breakfastParams));
             dispatch(fetchMatchingMeals(lunchParams));
             dispatch(fetchMatchingMeals(snackParams));
+            dispatch(fetchMatchingMeals(secondBreakfastParams));
+            dispatch(fetchMatchingMeals(dinnerParams));
             setStep(3);
         }
     }, [startDietProcess]);

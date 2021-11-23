@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authentication;
 using FitAppReact.Interfaces.Infrastructure.UserService;
 using FitAppReact.UserService;
 using System.Linq;
+using FitAppReact.Interfaces.Infrastructure.TrainingService;
+using FitAppReact.TrainingService;
 
 namespace FitAppReact.DI
 {
@@ -50,7 +52,7 @@ namespace FitAppReact.DI
             #region Facades
             serviceCollection.AddScoped<IDietFcd, DietFcd>();
             serviceCollection.AddScoped<IUserFcd, UserFcd>();
-
+            serviceCollection.AddScoped<ITrainingFcd, TrainingFcd>();
             #endregion
 
             #region Services
@@ -60,6 +62,13 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<IProductSrv, ProductSrv>();
             serviceCollection.AddScoped<IMedicalConditionSrv, MedicalConditionSrv>();
             serviceCollection.AddScoped<IUserSavedDietSrv, UserSavedDietSrv>();
+            serviceCollection.AddScoped<ITrainingSrv, TrainingSrv>();
+            serviceCollection.AddScoped<IExerciseSrv, ExerciseSrv>();
+            serviceCollection.AddScoped<IBodyTargetSrv, BodyTargetSrv>();
+            serviceCollection.AddScoped<IUserSavedTrainingSrv, UserSavedTrainingSrv>();
+            serviceCollection.AddScoped<ITrainingCategorySrv, TrainingCategoriesSrv>();
+            serviceCollection.AddScoped<IDifficultySrv, DifficultySrv>();
+            serviceCollection.AddScoped<ITrainingConditionSrv, TrainingCondtionSrv>();
             #endregion
 
             #region Mapper

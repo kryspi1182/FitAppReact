@@ -8,6 +8,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import MealDetails from './components/MealDetails';
 
 import './custom.css'
 
@@ -17,5 +18,6 @@ export default () => (
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/user-profile' component={UserProfile} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+        <AuthorizeRoute exact path='/meal/details/:Id' component={MealDetails} />
     </Layout>
 );
