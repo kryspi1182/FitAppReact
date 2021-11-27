@@ -2,38 +2,81 @@ import * as React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import { selectUser } from '../store/userSlice';
+import { useSelector } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import { FlashOnRounded } from '@material-ui/icons';
+import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
 
-export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
-    public state = {
-        isOpen: false
+// export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
+//     public state = {
+//         isOpen: false
+//     };
+    
+//     public render() {
+        
+//         return (
+//             <header>
+//                 <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+//                     <Container>
+//                         <NavbarBrand tag={Link} to="/">FitAppReact</NavbarBrand>
+//                         <NavbarToggler onClick={this.toggle} className="mr-2"/>
+//                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
+//                             <ul className="navbar-nav flex-grow">
+//                                 <NavItem>
+//                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+//                                 </NavItem>
+//                                 <NavItem>
+//                                     <NavLink tag={Link} className="text-dark" to="/user-profile">My Profile</NavLink>
+//                                 </NavItem>
+//                             </ul>
+//                         </Collapse>
+//                     </Container>
+//                 </Navbar>
+//             </header>
+//         );
+//     }
+
+//     private toggle = () => {
+//         this.setState({
+//             isOpen: !this.state.isOpen
+//         });
+//     }
+// }
+
+const NavMenuFc : React.FC = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const toggle = () => {
+        setIsOpen(!isOpen);
     };
 
-    public render() {
-        return (
-            <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
-                    <Container>
-                        <NavbarBrand tag={Link} to="/">FitAppReact</NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} className="mr-2"/>
-                        <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
-                            <ul className="navbar-nav flex-grow">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/user-profile">My Profile</NavLink>
-                                </NavItem>
-                            </ul>
-                        </Collapse>
-                    </Container>
-                </Navbar>
-            </header>
-        );
-    }
+    const user = useSelector(selectUser);
+    const showLogout = user.id !== "0";
 
-    private toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+    return (
+        <header>
+            <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Container>
+                    <NavbarBrand tag={Link} to="/">FitAppReact</NavbarBrand>
+                    <NavbarToggler onClick={toggle} className="mr-2"/>
+                    <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={isOpen} navbar>
+                        <ul className="navbar-nav flex-grow">
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/user-hub">User hub</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to={ApplicationPaths.Profile}>My profile</NavLink>
+                            </NavItem>
+                        </ul>
+                    </Collapse>
+                </Container>
+            </Navbar>
+        </header>
+    );
 }
+
+export default NavMenuFc;
