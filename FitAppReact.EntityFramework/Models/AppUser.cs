@@ -17,6 +17,8 @@ namespace FitAppReact.EntityFramework.Models
         public decimal Activity { get; set; }
         public int? DifficultyId { get; set; }
         public Difficulty Difficulty { get; set; }
+        public int? WeightTargetId { get; set; }
+        public WeightTarget WeightTarget { get; set; }
         public ICollection<UserMedicalCondition> MedicalConditions { get; set; }
         public ICollection<UserUnwantedProduct> UnwantedProducts { get; set; }
         public ICollection<UserSavedDiet> UserSavedDiets { get; set; }

@@ -22,6 +22,8 @@ import { selectAllTrainingConditionSeverities } from '../../store/trainingCondit
 import { selectAllBodyTargets } from '../../store/bodyTargetsSlice';
 import { UserTrainingCondition } from '../../models/UserTrainingCondition';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
+import { selectAllWeightTargets } from '../../store/weightTargetSlice';
+import { WeightTargetEnum } from '../../models/enums/WeightTargetEnum';
 
 const useStyles = makeStyles({
     formControl: {
@@ -44,6 +46,7 @@ const UserData: React.FC = () => {
     const trainingConditions = useSelector(selectAllTrainingConditions);
     const trainingConditionSeverities = useSelector(selectAllTrainingConditionSeverities);
     const bodyTargets = useSelector(selectAllBodyTargets);
+    const weightTargets = useSelector(selectAllWeightTargets);
 
     const mappedMedicalConditions = medicalConditions.map(x => {
         return {id: x.id, name: x.name} as AutocompleteItem;
@@ -121,6 +124,7 @@ const UserData: React.FC = () => {
             age: user.age,
             gender: user.gender,
             difficulty: user.difficultyId,
+            weightTargetId: user.weightTargetId,
             unwantedProducts: selectedUnwantedProducts,
             medicalConditions: selectedMedicalConditions,
             trainingConditions: selectedTrainingConditions
@@ -234,6 +238,23 @@ const UserData: React.FC = () => {
                             variant="outlined"
                         />
                     </FormControl> 
+                </Col>
+                <Col className={classes.column}>
+                    <FormControl className={classes.formControl} variant="outlined">
+                        <InputLabel>Target</InputLabel>
+                        <Select
+                            id="user-data-target"
+                            label="Target"
+                            onChange={(event) => {
+                                formik.setFieldValue('weightTargetId', event.target.value as number);
+                            }}
+                            value={formik.values.weightTargetId}
+                        >
+                            <MenuItem value={WeightTargetEnum.LoseWeight}>Lose weight</MenuItem>
+                            <MenuItem value={WeightTargetEnum.MaintainWeight}>Maintain weight</MenuItem>
+                            <MenuItem value={WeightTargetEnum.GainWeight}>Gain target</MenuItem>
+                        </Select>
+                    </FormControl>
                 </Col>
             </Row>
             <Row>

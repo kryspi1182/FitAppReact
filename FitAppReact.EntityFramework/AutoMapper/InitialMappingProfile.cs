@@ -87,6 +87,9 @@ namespace FitAppReact.EntityFramework.AutoMapper
 
             CreateMap<UserSavedTraining, UserSavedTrainingDTO>();
             CreateMap<UserSavedTrainingDTO, UserSavedTraining>();
+
+            CreateMap<WeightTarget, WeightTargetDTO>();
+            CreateMap<WeightTargetDTO, WeightTarget>();
         }
     }
 }

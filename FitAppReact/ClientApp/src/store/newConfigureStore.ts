@@ -20,6 +20,7 @@ import trainingCategoriesReducer from './trainingCategoriesSlice';
 import difficultiesReducer from './difficultiesSlice';
 import trainingConditionsReducer from './trainingConditionsSlice';
 import trainingConditionSeveritiesReducer from './trainingConditionSeveritiesSlice';
+import weightTargetReducer from './weightTargetSlice';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
 const history = createBrowserHistory({ basename: baseUrl });
@@ -52,6 +53,7 @@ const store = configureStore({
         difficulties: difficultiesReducer,
         trainingConditions: trainingConditionsReducer,
         trainingConditionSeverities: trainingConditionSeveritiesReducer,
+        weightTargets: weightTargetReducer,
         //@ts-ignore
         router: connectRouter(history)
     },

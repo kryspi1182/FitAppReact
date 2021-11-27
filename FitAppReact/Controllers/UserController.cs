@@ -61,6 +61,19 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+        [HttpGet]
+        [Route("weightTargets")]
+        public IActionResult GetWeightTargets()
+        {
+            try
+            {
+                return Ok(userFcd.GetWeightTargets());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
         [HttpPost]
         [Route("userSavedDiet/add")]
         public IActionResult AddUserSavedDiet([FromBody] UserSavedDietParams userSavedDietParams)

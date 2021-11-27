@@ -17,5 +17,6 @@ namespace FitAppReact.Interfaces.Facades
         public IEnumerable<UserSavedDietDTO> GetUserSavedDiets(string id);
         public UserSavedTrainingDTO AddUserSavedTraining(UserSavedTrainingParams userSavedTrainingParams);
         public IEnumerable<UserSavedTrainingDTO> GetUserSavedTrainings(string id);
+        public IEnumerable<WeightTargetDTO> GetWeightTargets();
     }
 }

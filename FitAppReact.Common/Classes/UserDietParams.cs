@@ -13,5 +13,6 @@ namespace FitAppReact.Common.Classes
         public IEnumerable<int> unwantedProductIds { get; set; }
         public IEnumerable<int> conditionIds { get; set; }
         public MealCategoryEnum mealCategory { get; set; }
+        public WeightTargetEnum weightTarget { get; set; }
     }
 }
