@@ -17,6 +17,9 @@ using FitAppReact.UserService;
 using System.Linq;
 using FitAppReact.Interfaces.Infrastructure.TrainingService;
 using FitAppReact.TrainingService;
+using FitAppReact.Common.Configurations;
+using FitAppReact.EmailService;
+using FitAppReact.Interfaces.Infrastructure.EmailService;
 
 namespace FitAppReact.DI
 {
@@ -49,10 +52,15 @@ namespace FitAppReact.DI
 
             #endregion
 
+            #region Configs
+            serviceCollection.AddSingleton<IEmailConfiguration>(configuration.GetSection("EmailConfig").Get<EmailConfiguration>());
+            #endregion
+
             #region Facades
             serviceCollection.AddScoped<IDietFcd, DietFcd>();
             serviceCollection.AddScoped<IUserFcd, UserFcd>();
             serviceCollection.AddScoped<ITrainingFcd, TrainingFcd>();
+            serviceCollection.AddScoped<IEmailFcd, EmailFcd>();
             #endregion
 
             #region Services
@@ -69,6 +77,7 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<ITrainingCategorySrv, TrainingCategoriesSrv>();
             serviceCollection.AddScoped<IDifficultySrv, DifficultySrv>();
             serviceCollection.AddScoped<ITrainingConditionSrv, TrainingCondtionSrv>();
+            serviceCollection.AddScoped<IEmailSrv, EmailSrv>();
             #endregion
 
             #region Mapper
