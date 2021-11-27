@@ -40,6 +40,7 @@ namespace FitAppReact.EntityFramework.InitialData
             ExerciseBodyTargets();
             Trainings();
             TrainingExercises();
+            WeightTargets();
 
             Roles();
         }
@@ -1402,6 +1403,14 @@ namespace FitAppReact.EntityFramework.InitialData
                 new TrainingExercise {  Id = 4, ExerciseId = 1, TrainingId = 2, Series = 10, RepsPerSeries = 30 },
                 new TrainingExercise {  Id = 5, ExerciseId = 5, TrainingId = 2, Series = 10, RepsPerSeries = 10 },
                 new TrainingExercise {  Id = 6, ExerciseId = 6, TrainingId = 2, Series = 10, RepsPerSeries = 10 }
+                );
+        }
+        private void WeightTargets()
+        {
+            modelBuilder.Entity<WeightTarget>().HasData(
+                new WeightTarget { Id = 1, Name = "Lose weight" },
+                new WeightTarget { Id = 2, Name = "Maintain weight" },
+                new WeightTarget { Id = 3, Name = "Gain weight" }
                 );
         }
         #endregion

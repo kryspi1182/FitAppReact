@@ -51,6 +51,7 @@ namespace FitAppReact.UserService
             user.Height = (decimal)userParams.height;
             user.Weight = (decimal)userParams.weight;
             user.DifficultyId = (int)userParams.difficulty;
+            user.WeightTargetId = (int)userParams.weightTargetId;
 
             if(userParams.medicalConditions != null)
             {

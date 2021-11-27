@@ -32,7 +32,7 @@ namespace FitAppReact.DietService
                 .Where(meal => meal.MealCategoryId == ((int)mealCategory))
                 .ToList();
 
-            var finalResult = result.FindAll(meal => CheckMeal(meal, requirements, mealCategory)).ToArray();
+            var finalResult = result.FindAll(meal => CheckMeal(meal, requirements, mealCategory, null)).ToArray();
 
             return mapper.Map<MealDTO[]>(finalResult);
         }
@@ -48,7 +48,7 @@ namespace FitAppReact.DietService
                     && !meal.MealProducts.Any(product => product.Product.ProductHazards.Any(hazard => userDietParams.conditionIds.Contains(hazard.HazardId))))
                 .ToList();
 
-            var finalResult = result.FindAll(meal => CheckMeal(meal, userDietParams.macros, userDietParams.mealCategory)).ToArray();
+            var finalResult = result.FindAll(meal => CheckMeal(meal, userDietParams.macros, userDietParams.mealCategory, userDietParams.weightTarget)).ToArray();
 
             return mapper.Map<MealDTO[]>(finalResult);
         }
@@ -67,8 +67,21 @@ namespace FitAppReact.DietService
 
         #region Private
 
-        private bool CheckMeal(Meal meal, Macros requirements, MealCategoryEnum mealCategory)
+        private bool CheckMeal(Meal meal, Macros requirements, MealCategoryEnum mealCategory, WeightTargetEnum? weightTarget)
         {
+            double target = 1;
+            switch(weightTarget)
+            {
+                case WeightTargetEnum.LoseWeight:
+                    target = 0.9;
+                    break;
+                case WeightTargetEnum.GainWeight:
+                    target = 1.1;
+                    break;
+                default:
+                    target = 1;
+                    break;
+            }
             Macros mealMacros = new Macros();
             double fraction = 0;
             switch(mealCategory)
@@ -100,7 +113,7 @@ namespace FitAppReact.DietService
                 mealMacros.Salt += (int)mealProduct.Product.Salt;
             }
             //TODO: change margin of error when more complete data exists in the database
-            if((mealMacros.Calories > requirements.Calories * fraction * 1.2 || mealMacros.Calories < requirements.Calories * fraction * 0.8) /*||
+            if((mealMacros.Calories > requirements.Calories * fraction * target * 1.2 || mealMacros.Calories < requirements.Calories * fraction * target * 0.8) /*||
                 (mealMacros.Carbohydrates > requirements.Carbohydrates * 1.5 || mealMacros.Carbohydrates < requirements.Carbohydrates * 0.5) ||
                 (mealMacros.Fat > requirements.Fat * 1.5 || mealMacros.Fat < requirements.Fat * 0.5) ||
                 (mealMacros.Fibre > requirements.Fibre * 1.5 || mealMacros.Fibre < requirements.Fibre * 0.5) ||

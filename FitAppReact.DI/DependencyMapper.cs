@@ -78,6 +78,7 @@ namespace FitAppReact.DI
             serviceCollection.AddScoped<IDifficultySrv, DifficultySrv>();
             serviceCollection.AddScoped<ITrainingConditionSrv, TrainingCondtionSrv>();
             serviceCollection.AddScoped<IEmailSrv, EmailSrv>();
+            serviceCollection.AddScoped<IWeightTargetSrv, WeightTargetSrv>();
             #endregion
 
             #region Mapper

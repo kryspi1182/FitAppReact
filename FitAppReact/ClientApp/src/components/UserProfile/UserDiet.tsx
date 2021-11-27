@@ -78,31 +78,36 @@ const UserDiet: React.FC = () => {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.Breakfast
+                mealCategory: MealCategoryEnum.Breakfast,
+                weightTarget: user.weightTargetId
             } as UserDietParams;
             const lunchParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.Lunch
+                mealCategory: MealCategoryEnum.Lunch,
+                weightTarget: user.weightTargetId
             } as UserDietParams;
             const snackParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.Snack
+                mealCategory: MealCategoryEnum.Snack,
+                weightTarget: user.weightTargetId
             } as UserDietParams;
             const secondBreakfastParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.SecondBreakfast
+                mealCategory: MealCategoryEnum.SecondBreakfast,
+                weightTarget: user.weightTargetId
             } as UserDietParams;
             const dinnerParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
                 conditionIds: user.medicalConditions.map(x => x.medicalConditionId),
-                mealCategory: MealCategoryEnum.Dinner
+                mealCategory: MealCategoryEnum.Dinner,
+                weightTarget: user.weightTargetId
             } as UserDietParams;
             dispatch(fetchMatchingMeals(breakfastParams));
             dispatch(fetchMatchingMeals(lunchParams));

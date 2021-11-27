@@ -40,6 +40,7 @@ namespace FitAppReact.EntityFramework
         public DbSet<TrainingExercise> TrainingExercises { get; set; }
         public DbSet<UserTrainingCondition> UserTrainingConditions { get; set; }
         public DbSet<UserSavedTraining> UserSavedTrainings { get; set; }
+        public DbSet<WeightTarget> WeightTargets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
