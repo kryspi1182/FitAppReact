@@ -16,6 +16,7 @@ import TrainingResult from './TrainingResult';
 import CustomTraining from './CustomTraining';
 import { selectUser } from '../../store/userSlice';
 import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
+import ErrorBox from '../common/ErrorBox';
 
 const useStyles = makeStyles({
     button: {
@@ -31,6 +32,7 @@ const UserTraining: React.FC = () => {
     const [title, setTitle] = React.useState("Find trainings based on:");
     const [startTrainingProcess, setStartTrainingProcess] = React.useState(false);
     const [showTraining, setShowTraining] = React.useState(false);
+    const [showError, setShowError] = React.useState(false);
 
     const userTrainings = useSelector(selectAllUserTrainings);
     const trainingConditions = useSelector(selectAllTrainingConditions);
@@ -73,8 +75,14 @@ const UserTraining: React.FC = () => {
     }, [startTrainingProcess]);
 
     React.useEffect(() => {
+        setShowTraining(true);
         if(userTrainings.length > 0) {
-            setShowTraining(true);
+            
+            setShowError(false);
+        }
+        else {
+            //setShowTraining(false);
+            setShowError(true);
         }
     }, [userTrainings]);
     
@@ -123,7 +131,8 @@ const UserTraining: React.FC = () => {
         </>)}
         </Row>
         <Row>
-            {(showTraining && <TrainingResult />)}
+            {(showTraining && !showError && <TrainingResult />)}
+            {(showError && showTraining && <ErrorBox message="No matching trainings were found." />)}
         </Row>
     </Container>
     </>)
