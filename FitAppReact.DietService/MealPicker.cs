@@ -113,7 +113,7 @@ namespace FitAppReact.DietService
                 mealMacros.Salt += (int)mealProduct.Product.Salt;
             }
             //TODO: change margin of error when more complete data exists in the database
-            if((mealMacros.Calories > requirements.Calories * fraction * target * 1.2 || mealMacros.Calories < requirements.Calories * fraction * target * 0.8) /*||
+            if((mealMacros.Calories > requirements.Calories * fraction *  1.2 || mealMacros.Calories < requirements.Calories * fraction *  0.8) /*||
                 (mealMacros.Carbohydrates > requirements.Carbohydrates * 1.5 || mealMacros.Carbohydrates < requirements.Carbohydrates * 0.5) ||
                 (mealMacros.Fat > requirements.Fat * 1.5 || mealMacros.Fat < requirements.Fat * 0.5) ||
                 (mealMacros.Fibre > requirements.Fibre * 1.5 || mealMacros.Fibre < requirements.Fibre * 0.5) ||

@@ -18,6 +18,7 @@ import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
 import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { UserDietParams } from '../../models/UserDietParams';
 import CustomDiet from './CustomDiet';
+import ErrorBox from '../common/ErrorBox';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -39,6 +40,7 @@ const UserDiet: React.FC = () => {
     const [generateCustomDiet, setGenerateCustomDiet] = React.useState(false);
     const [step, setStep] = React.useState(1);
     const [title, setTitle] = React.useState("Generate diet based on your:");
+    const [notFirstRender, setNotFirstRender] = React.useState(false);
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
@@ -74,6 +76,7 @@ const UserDiet: React.FC = () => {
 
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
+            console.log("do you even reach here you cuck");
             const breakfastParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
@@ -115,9 +118,20 @@ const UserDiet: React.FC = () => {
             dispatch(fetchMatchingMeals(secondBreakfastParams));
             dispatch(fetchMatchingMeals(dinnerParams));
             setStep(3);
+            setNotFirstRender(true);
         }
+        else if (startDietProcess) {
+            setNotFirstRender(true);
+        }
+        
     }, [startDietProcess]);
     React.useEffect(() => {
+        if (startCustomDietProcess) {
+            setNotFirstRender(true);
+        }
+    }, [startCustomDietProcess]);
+    React.useEffect(() => {
+        console.log("what the actual fuck");
         if(meals.some((meal) => meal.mealCategoryId === 1) 
         && meals.some((meal) => meal.mealCategoryId === 2)
         && meals.some((meal) => meal.mealCategoryId === 3))
@@ -183,8 +197,9 @@ const UserDiet: React.FC = () => {
         </>)}
         </Row>
         <Row>
-            {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
+            {(notFirstRender && generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
             {(generateCustomDiet && <DietResult generateDiet={generateCustomDiet} setGenerateDiet={setGenerateCustomDiet} dietType={DietTypeEnum.Custom}/>)}
+            {(notFirstRender && !generateDiet && !generateCustomDiet && <ErrorBox message="No matching meals found. Make sure your data is typed in correctly, either in the form or in your profile, depending on the option you choose." />)}
         </Row>
     </Container>
         

@@ -33,6 +33,7 @@ const UserTraining: React.FC = () => {
     const [startTrainingProcess, setStartTrainingProcess] = React.useState(false);
     const [showTraining, setShowTraining] = React.useState(false);
     const [showError, setShowError] = React.useState(false);
+    const [notFirstRender, setNotFirstRender] = React.useState(false);
 
     const userTrainings = useSelector(selectAllUserTrainings);
     const trainingConditions = useSelector(selectAllTrainingConditions);
@@ -66,22 +67,24 @@ const UserTraining: React.FC = () => {
     }, [chosenOption]);
     React.useEffect(() => {
         if(startTrainingProcess) {
+            setNotFirstRender(true);
+            console.log(showError);
             let params = {
                 difficulty: user.difficultyId,
                 trainingConditions: trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id)),
             } as UserTrainingParams;
             dispatch(fetchMatchingTrainingsUserData(params));
+            
         }
     }, [startTrainingProcess]);
 
     React.useEffect(() => {
-        setShowTraining(true);
         if(userTrainings.length > 0) {
-            
+            setShowTraining(true);
             setShowError(false);
         }
         else {
-            //setShowTraining(false);
+            setShowTraining(false);
             setShowError(true);
         }
     }, [userTrainings]);
@@ -127,12 +130,12 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Back</Button>
-            <CustomTraining />
+            <CustomTraining notify={setNotFirstRender}/>
         </>)}
         </Row>
         <Row>
-            {(showTraining && !showError && <TrainingResult />)}
-            {(showError && showTraining && <ErrorBox message="No matching trainings were found." />)}
+            {(showTraining && notFirstRender && <TrainingResult />)}
+            {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}
         </Row>
     </Container>
     </>)

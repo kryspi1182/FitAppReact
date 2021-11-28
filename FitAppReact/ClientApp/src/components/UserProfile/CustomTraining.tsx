@@ -32,7 +32,11 @@ const useStyles = makeStyles({
     }
 });
 
-const CustomTraining: React.FC = () => {
+type Props = {
+    notify: Function
+};
+
+const CustomTraining: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
     const classes = useStyles();
     const trainingConditions = useSelector(selectAllTrainingConditions);
@@ -72,6 +76,7 @@ const CustomTraining: React.FC = () => {
                 trainingConditions: values.trainingConditions
             } as UserTrainingParams;
             dispatch(fetchMatchingTrainings(params));
+            props.notify(true);
         }
     });
     return(<Container>

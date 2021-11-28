@@ -18,7 +18,6 @@ import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { Meal } from '../../models/Meal';
 import { UserSavedDietParams } from '../../models/UserSavedDietParams';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
-import ErrorBox from '../common/ErrorBox';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -131,13 +130,6 @@ const DietResult: React.FC<Props> = (props) => {
                 </Button>)}
             </Row>
         </Container>)}
-        {((dietReady && (
-        dietBreakfast.length !== 7
-        || dietSecondBreakfast.length !== 7
-        || dietLunch.length !== 7
-        || dietSnack.length !== 7
-        || dietDinner.length !== 7)) &&
-        <ErrorBox message="Meals suiting given parameters were not found."/>)}
     </Container>)
 };
 
