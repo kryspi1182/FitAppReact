@@ -75,7 +75,6 @@ const UserDiet: React.FC = () => {
 
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
-            console.log("do you even reach here you cuck");
             const breakfastParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
@@ -121,22 +120,26 @@ const UserDiet: React.FC = () => {
         
     }, [startDietProcess]);
     React.useEffect(() => {
-        console.log("what the actual fuck");
-        if(meals.some((meal) => meal.mealCategoryId === 1) 
-        && meals.some((meal) => meal.mealCategoryId === 2)
-        && meals.some((meal) => meal.mealCategoryId === 3))
+        if(meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Breakfast) 
+        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.SecondBreakfast)
+        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Lunch)
+        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Snack)
+        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner))
         {
             setGenerateDiet(true);
-            setGenerateCustomDiet(false);
+            setGenerateCustomDiet(false); 
         }
             
     }, [meals]);
     React.useEffect(() => {
-        if(customMeals.some((meal) => meal.mealCategoryId === 1) 
-        && customMeals.some((meal) => meal.mealCategoryId === 2)
-        && customMeals.some((meal) => meal.mealCategoryId === 3)
+        if(customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Breakfast) 
+        && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.SecondBreakfast)
+        && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Lunch)
+        && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Snack)
+        && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner)
         && startCustomDietProcess)
         {
+            
             setGenerateCustomDiet(true);
             setGenerateDiet(false);
         }
