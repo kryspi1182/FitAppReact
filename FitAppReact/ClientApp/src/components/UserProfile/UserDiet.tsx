@@ -40,7 +40,6 @@ const UserDiet: React.FC = () => {
     const [generateCustomDiet, setGenerateCustomDiet] = React.useState(false);
     const [step, setStep] = React.useState(1);
     const [title, setTitle] = React.useState("Generate diet based on your:");
-    const [notFirstRender, setNotFirstRender] = React.useState(false);
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
@@ -118,18 +117,9 @@ const UserDiet: React.FC = () => {
             dispatch(fetchMatchingMeals(secondBreakfastParams));
             dispatch(fetchMatchingMeals(dinnerParams));
             setStep(3);
-            setNotFirstRender(true);
-        }
-        else if (startDietProcess) {
-            setNotFirstRender(true);
         }
         
     }, [startDietProcess]);
-    React.useEffect(() => {
-        if (startCustomDietProcess) {
-            setNotFirstRender(true);
-        }
-    }, [startCustomDietProcess]);
     React.useEffect(() => {
         console.log("what the actual fuck");
         if(meals.some((meal) => meal.mealCategoryId === 1) 
@@ -197,9 +187,8 @@ const UserDiet: React.FC = () => {
         </>)}
         </Row>
         <Row>
-            {(notFirstRender && generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
+            {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
             {(generateCustomDiet && <DietResult generateDiet={generateCustomDiet} setGenerateDiet={setGenerateCustomDiet} dietType={DietTypeEnum.Custom}/>)}
-            {(notFirstRender && !generateDiet && !generateCustomDiet && <ErrorBox message="No matching meals found. Make sure your data is typed in correctly, either in the form or in your profile, depending on the option you choose." />)}
         </Row>
     </Container>
         
