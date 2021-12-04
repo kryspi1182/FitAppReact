@@ -14,7 +14,7 @@ const UserSavedTrainings: React.FC = () => {
     const savedTrainings = useSelector(selectAllUserSavedTrainings);
     const userTrainings = allTrainings.filter(training => savedTrainings.some(savedTraining => savedTraining.trainingId === training.id));
 
-    return(<TrainingList trainings={userTrainings} />);
+    return(<TrainingList trainings={userTrainings} saveEnabled={false} />);
 };
 
 export default UserSavedTrainings;

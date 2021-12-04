@@ -29,6 +29,10 @@ const useStyles = makeStyles({
     },
     column: {
         margin: '10px',
+    },
+    row: {
+        marginTop: "10px",
+        marginBottom: "10px"
     }
 });
 
@@ -81,85 +85,90 @@ const CustomTraining: React.FC<Props> = (props) => {
     });
     return(<Container>
         <form onSubmit={formik.handleSubmit} id="custom-training">
+            <Row className={classes.row}>
+                <Col>
+                    <FormControl>
+                        <InputLabel>Category</InputLabel>
+                        <Select
+                            id="custom-training-category"
+                            label="Category"
+                            onChange={(event) => {
+                                formik.setFieldValue('trainingCategory', event.target.value as number);
+                            }}
+                            value={formik.values.trainingCategory}
+                        >
+                            <MenuItem value={TrainingCategoryEnum.Circuit}>Circuit</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Fartlek}>Fartlek</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Flexibility}>Flexibility</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Continuous}>Continuous</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Interval}>Interval</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Plyometric}>Plyometric</MenuItem>
+                            <MenuItem value={TrainingCategoryEnum.Weight}>Weight</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+                <Col>
+                    <FormControl>
+                        <InputLabel>Difficulty</InputLabel>
+                        <Select
+                            id="custom-training-difficulty"
+                            label="Difficulty"
+                            onChange={(event) => {
+                                formik.setFieldValue('difficulty', event.target.value as number);
+                            }}
+                            value={formik.values.difficulty}
+                        >
+                            <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
+                            <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
+                            <MenuItem value={DifficultyEnum.Advanced}>Advanced</MenuItem>
+                            <MenuItem value={DifficultyEnum.Professional}>Professional</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+                <Col>
+                    <FormControl>
+                        <InputLabel>Body target</InputLabel>
+                        <Select
+                            id="custom-training-target"
+                            label="Body target"
+                            onChange={(event) => {
+                                formik.setFieldValue('bodyTarget', event.target.value as number);
+                            }}
+                            value={formik.values.bodyTarget}
+                        >
+                            <MenuItem value={BodyTargetEnum.Arms}>Arms</MenuItem>
+                            <MenuItem value={BodyTargetEnum.Back}>Back</MenuItem>
+                            <MenuItem value={BodyTargetEnum.Chest}>Chest</MenuItem>
+                            <MenuItem value={BodyTargetEnum.Stomach}>Stomach</MenuItem>
+                            <MenuItem value={BodyTargetEnum.Legs}>Legs</MenuItem>
+                            <MenuItem value={BodyTargetEnum.Cardio}>Cardio</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row className={classes.row}>
+                <Col>
+                    <FormControl>
+                        <AutocompleteInput 
+                            items={mappedTrainingConditions}
+                            id="custom-training-conditions"
+                            title="Noteworthy conditions"
+                            setSelected={mapItemsToTrainingConditions}
+                            selectedValues={selectedMappedTrainingConditions}
+                        />
+                    </FormControl>
+                </Col>
+            </Row>
             <Row>
-                <FormControl>
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                        id="custom-training-category"
-                        label="Category"
-                        onChange={(event) => {
-                            formik.setFieldValue('trainingCategory', event.target.value as number);
-                        }}
-                        value={formik.values.trainingCategory}
+                <Col>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
                     >
-                        <MenuItem value={TrainingCategoryEnum.Circuit}>Circuit</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Fartlek}>Fartlek</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Flexibility}>Flexibility</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Continuous}>Continuous</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Interval}>Interval</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Plyometric}>Plyometric</MenuItem>
-                        <MenuItem value={TrainingCategoryEnum.Weight}>Weight</MenuItem>
-                    </Select>
-                </FormControl>
-            </Row>
-            <Row>
-                <FormControl>
-                    <InputLabel>Difficulty</InputLabel>
-                    <Select
-                        id="custom-training-difficulty"
-                        label="Difficulty"
-                        onChange={(event) => {
-                            formik.setFieldValue('difficulty', event.target.value as number);
-                        }}
-                        value={formik.values.difficulty}
-                    >
-                        <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
-                        <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
-                        <MenuItem value={DifficultyEnum.Advanced}>Advanced</MenuItem>
-                        <MenuItem value={DifficultyEnum.Professional}>Professional</MenuItem>
-                    </Select>
-                </FormControl>
-            </Row>
-            <Row>
-                <FormControl>
-                    <InputLabel>Body target</InputLabel>
-                    <Select
-                        id="custom-training-target"
-                        label="Body target"
-                        onChange={(event) => {
-                            formik.setFieldValue('bodyTarget', event.target.value as number);
-                        }}
-                        value={formik.values.bodyTarget}
-                    >
-                        <MenuItem value={BodyTargetEnum.Arms}>Arms</MenuItem>
-                        <MenuItem value={BodyTargetEnum.Back}>Back</MenuItem>
-                        <MenuItem value={BodyTargetEnum.Chest}>Chest</MenuItem>
-                        <MenuItem value={BodyTargetEnum.Stomach}>Stomach</MenuItem>
-                        <MenuItem value={BodyTargetEnum.Legs}>Legs</MenuItem>
-                        <MenuItem value={BodyTargetEnum.Cardio}>Cardio</MenuItem>
-                    </Select>
-                </FormControl>
-            </Row>
-            <Row>
-                <FormControl>
-                    <InputLabel>Noteworthy conditions</InputLabel>
-                    <AutocompleteInput 
-                        items={mappedTrainingConditions}
-                        id="custom-training-conditions"
-                        title="Noteworthy conditions"
-                        setSelected={mapItemsToTrainingConditions}
-                        selectedValues={selectedMappedTrainingConditions}
-                    />
-                </FormControl>
-            </Row>
-            <Row>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                >
-                    Submit
-                </Button>
+                        Submit
+                    </Button>
+                </Col>
             </Row>
         </form>
     </Container>);

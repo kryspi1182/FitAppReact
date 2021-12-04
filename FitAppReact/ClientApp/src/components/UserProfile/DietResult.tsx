@@ -4,7 +4,7 @@ import { EntityId } from '@reduxjs/toolkit';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals } from '../../store/userMealsSlice';
 import { selectAllCustomMeals } from '../../store/customMealsSlice';
@@ -18,6 +18,8 @@ import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { Meal } from '../../models/Meal';
 import { UserSavedDietParams } from '../../models/UserSavedDietParams';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
+import ModalWithContent from '../common/ModalWithContent';
+import TextInputModal from '../common/TextInputModal';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -44,6 +46,8 @@ const DietResult: React.FC<Props> = (props) => {
     const [dietSnack, setDietSnack] = React.useState(Array<EntityId>());
     const [dietDinner, setDietDinner] = React.useState(Array<EntityId>());
     const [dietSaved, setDietSaved] = React.useState(false);
+    const [dietName, setDietName] = React.useState("");
+    const [inputValue, setInputValue] = React.useState("");
 
     const meals = useSelector(selectAllUserMeals);
     const customMeals = useSelector(selectAllCustomMeals);
@@ -75,8 +79,7 @@ const DietResult: React.FC<Props> = (props) => {
 
     const saveDiet = () => {
         const dietMeals = [...dietBreakfast, ...dietSecondBreakfast, ...dietLunch, ...dietSnack, ...dietDinner];
-        var dietName = prompt("Name your diet:", "Diet");
-        if(dietName) {
+        if(dietName !== "") {
             const savedDietParams = {
                 userId: user.id,
                 name: dietName,
@@ -108,6 +111,12 @@ const DietResult: React.FC<Props> = (props) => {
             
     }, [props.generateDiet]);
 
+    React.useEffect(() => {
+        if (dietName !== "") {
+            saveDiet();
+        }
+    }, [dietName]);
+
     return (<Container>
         {((dietReady 
         && dietBreakfast.length === 7
@@ -117,17 +126,19 @@ const DietResult: React.FC<Props> = (props) => {
         && dietDinner.length === 7) && 
         <Container>
             <Row>
+                <Col>
                 <WeekDietBox 
                     breakfasts={dietBreakfast}
                     secondBreakfasts={dietSecondBreakfast}
                     lunches={dietLunch}
                     snacks={dietSnack}
                     dinners={dietDinner}/>
+                </Col>
             </Row>
             <Row>
-                {(!dietSaved && <Button onClick={saveDiet}>
-                    Save diet
-                </Button>)}
+                <Col>
+                {(!dietSaved && <ModalWithContent title="Save diet" content={<TextInputModal title="Save diet" setInput={setDietName} />} />)}
+                </Col>
             </Row>
         </Container>)}
     </Container>)

@@ -15,7 +15,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mate
 import { Training } from '../../models/Training';
 
 type Props = {
-    trainings: Training[]
+    trainings: Training[],
+    saveEnabled: boolean
 };
 
 const TrainingList: React.FC<Props> = (props) => {
@@ -34,9 +35,11 @@ const TrainingList: React.FC<Props> = (props) => {
                         <Typography>{trainingCategories[catId-1]}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <Container>
                         {props.trainings
                         .filter(training => training.trainingCategoryId === catId)
-                        .map(training => <TrainingBox training={training} />)}
+                        .map(training => <TrainingBox training={training} saveEnabled={props.saveEnabled} />)}
+                        </Container>
                     </AccordionDetails>
                 </Accordion>
             }

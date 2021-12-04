@@ -11,7 +11,7 @@ const TrainingResult: React.FC = () => {
     const userTrainings = useSelector(selectAllUserTrainings);
     return(
         <>
-            {(userTrainings.length > 0 && <TrainingList trainings={userTrainings} />)}
+            {(userTrainings.length > 0 && <TrainingList trainings={userTrainings} saveEnabled={true} />)}
             
         </>);
 }

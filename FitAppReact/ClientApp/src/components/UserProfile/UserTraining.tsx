@@ -22,6 +22,10 @@ const useStyles = makeStyles({
     button: {
         margin: '10px'
     },
+    result: {
+        marginTop: "10px",
+        marginBottom: "10px"
+    }
 });
 
 const UserTraining: React.FC = () => {
@@ -95,6 +99,7 @@ const UserTraining: React.FC = () => {
             <Col><h4>{title}</h4></Col>
         </Row>
         <Row>
+            <Col>
         {(chosenOption === "none" && <>
             <Button 
                 onClick={() => {setChosenOption("data")}}
@@ -132,10 +137,13 @@ const UserTraining: React.FC = () => {
             >Back</Button>
             <CustomTraining notify={setNotFirstRender}/>
         </>)}
+        </Col>
         </Row>
         <Row>
+            <Col className={classes.result}>
             {(showTraining && notFirstRender && <TrainingResult />)}
             {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}
+            </Col>
         </Row>
     </Container>
     </>)

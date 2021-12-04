@@ -155,7 +155,7 @@ const UserData: React.FC = () => {
     return(<Container className={classes.container}>
         <form onSubmit={formik.handleSubmit} id="user-data-form">
             <Row>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="3">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-age"
@@ -171,7 +171,7 @@ const UserData: React.FC = () => {
                         />
                     </FormControl>
                 </Col>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl} variant="outlined">
                         <InputLabel>Gender</InputLabel>
                         <Select
@@ -187,7 +187,26 @@ const UserData: React.FC = () => {
                         </Select>
                     </FormControl>
                 </Col>
-                <Col className={classes.column}>
+                
+            </Row>
+            <Row>
+                <Col className={classes.column} xs="3">
+                    <FormControl className={classes.formControl}>
+                        <TextField
+                            id="user-data-weight"
+                            label="Weight (kg)"
+                            type="number"
+                            InputProps={{inputProps: {min: 30, max: 500}}}
+                            onChange={(event) => {
+                                if(!isNaN(parseInt(event.target.value)))
+                                    formik.setFieldValue('weight', parseInt(event.target.value));
+                            }}
+                            value={formik.values.weight}
+                            variant="outlined"
+                        />
+                    </FormControl>
+                </Col>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl} variant="outlined">
                         <InputLabel>Activity</InputLabel>
                         <Select
@@ -207,23 +226,7 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className={classes.column}>
-                    <FormControl className={classes.formControl}>
-                        <TextField
-                            id="user-data-weight"
-                            label="Weight (kg)"
-                            type="number"
-                            InputProps={{inputProps: {min: 30, max: 500}}}
-                            onChange={(event) => {
-                                if(!isNaN(parseInt(event.target.value)))
-                                    formik.setFieldValue('weight', parseInt(event.target.value));
-                            }}
-                            value={formik.values.weight}
-                            variant="outlined"
-                        />
-                    </FormControl>
-                </Col>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="3">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-height"
@@ -239,7 +242,7 @@ const UserData: React.FC = () => {
                         />
                     </FormControl> 
                 </Col>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl} variant="outlined">
                         <InputLabel>Target</InputLabel>
                         <Select
@@ -258,7 +261,7 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="9">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedMedicalConditions} 
@@ -271,7 +274,7 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className={classes.column}>
+                <Col className={classes.column} xs="9">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedProducts} 
@@ -284,7 +287,20 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             <Row>
-                <Col>
+                <Col className={classes.column} xs="9">
+                    <FormControl>
+                        <AutocompleteInput 
+                            items={mappedTrainingConditions}
+                            id="user-training-conditions"
+                            title="Noteworthy conditions"
+                            setSelected={mapItemsToTrainingConditions}
+                            selectedValues={selectedMappedTrainingConditions}
+                        />
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row>
+                <Col className={classes.column} xs="9">
                     <FormControl className={classes.formControl}>
                         <Select
                             id="user-difficulty"
@@ -301,19 +317,8 @@ const UserData: React.FC = () => {
                         </Select>
                     </FormControl>
                 </Col>
-                <Col>
-                    <FormControl>
-                        <InputLabel>Noteworthy conditions</InputLabel>
-                        <AutocompleteInput 
-                            items={mappedTrainingConditions}
-                            id="user-training-conditions"
-                            title="Noteworthy conditions"
-                            setSelected={mapItemsToTrainingConditions}
-                            selectedValues={selectedMappedTrainingConditions}
-                        />
-                    </FormControl>
-                </Col>
             </Row>
+            
             <Row>
                 <Col className={classes.column}>
                     <Button
