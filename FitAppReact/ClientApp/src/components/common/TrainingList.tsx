@@ -18,6 +18,7 @@ import { TrainingCondition } from '../../models/TrainingCondition';
 type Props = {
     trainings: Training[],
     saveEnabled: boolean,
+    deleteEnabled: boolean,
     trainingConditions: TrainingCondition[],
 };
 
@@ -40,7 +41,11 @@ const TrainingList: React.FC<Props> = (props) => {
                         <Container>
                         {props.trainings
                         .filter(training => training.trainingCategoryId === catId)
-                        .map(training => <TrainingBox training={training} saveEnabled={props.saveEnabled} trainingConditions={props.trainingConditions} />)}
+                        .map(training => <TrainingBox 
+                            training={training} 
+                            saveEnabled={props.saveEnabled}
+                            deleteEnabled={props.deleteEnabled} 
+                            trainingConditions={props.trainingConditions} />)}
                         </Container>
                     </AccordionDetails>
                 </Accordion>

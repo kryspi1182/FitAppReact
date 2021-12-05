@@ -12,5 +12,6 @@ namespace FitAppReact.Interfaces.Infrastructure.UserService
     {
         public IEnumerable<UserSavedTrainingDTO> GetUserSavedTrainings(string id);
         public Task<UserSavedTrainingDTO> AddUserSavedTraining(UserSavedTrainingParams userSavedTrainingParams);
+        public Task<UserSavedTrainingDTO> DeleteUserSavedTraining(int id);
     }
 }

@@ -32,6 +32,15 @@ export const addUserSavedTraining = createAsyncThunk('userSavedTrainings/add', a
     }
 });
 
+export const deleteUserSavedTraining = createAsyncThunk('userSavedTrainings/delete', async (id: EntityId) => {
+    try {
+        return await userApi.deleteUserSavedTraining(id);
+    }
+    catch (e) {
+        return e.json();
+    }
+});
+
 export const {
     selectAll: selectAllUserSavedTrainings,
     selectById: selectUserSavedTrainingById,
@@ -48,6 +57,10 @@ const userSavedTrainingsSlice = createSlice({
         }).addCase(addUserSavedTraining.fulfilled, (state, action: PayloadAction<UserSavedTraining>) => {
             if (action.payload) {
                 userSavedTrainingAdapter.upsertOne(state, action);
+            }
+        }).addCase(deleteUserSavedTraining.fulfilled, (state, action: PayloadAction<UserSavedTraining>) => {
+            if (action.payload) {
+                userSavedTrainingAdapter.removeOne(state, action.payload.id);
             }
         })
     }

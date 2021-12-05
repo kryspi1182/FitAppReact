@@ -18,7 +18,11 @@ const UserSavedTrainings: React.FC = () => {
     const userTrainings = allTrainings.filter(training => savedTrainings.some(savedTraining => savedTraining.trainingId === training.id));
     const userTrainingConditions = allTrainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))
 
-    return(<TrainingList trainings={userTrainings} saveEnabled={false} trainingConditions={userTrainingConditions}/>);
+    return(<TrainingList 
+        trainings={userTrainings} 
+        saveEnabled={false} 
+        deleteEnabled={true}
+        trainingConditions={userTrainingConditions}/>);
 };
 
 export default UserSavedTrainings;

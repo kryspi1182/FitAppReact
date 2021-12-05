@@ -66,6 +66,10 @@ const UserTraining: React.FC = () => {
                 break;
             case "none":
                 setStep(1);
+                setStartTrainingProcess(false);
+                setShowTraining(false);
+                setShowError(false);
+                setNotFirstRender(false);
                 break;
         }
     }, [chosenOption]);

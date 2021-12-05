@@ -128,5 +128,35 @@ namespace FitAppReact.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpPost]
+        [Route("userSavedTraining/delete/{id}")]
+        public IActionResult DeleteUserSavedTraining(string id)
+        {
+            try
+            {
+                var result = userFcd.DeleteUserSavedTraining(int.Parse(id));
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("userSavedDiet/delete/{id}")]
+        public IActionResult DeleteUserSavedDiet(string id)
+        {
+            try
+            {
+                var result = userFcd.DeleteUserSavedDiet(int.Parse(id));
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
     }
 }

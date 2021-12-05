@@ -53,5 +53,19 @@ namespace FitAppReact.UserService
 
             return result;
         }
+
+        public async Task<UserSavedTrainingDTO> DeleteUserSavedTraining(int id)
+        {
+            var training = appDbContext.UserSavedTrainings
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            var result = mapper.Map<UserSavedTrainingDTO>(training);
+            appDbContext.UserSavedTrainings.Remove(training);
+            await appDbContext.SaveChangesAsync();
+
+            return result;
+        }
     }
 }

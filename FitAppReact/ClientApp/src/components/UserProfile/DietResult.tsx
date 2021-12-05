@@ -11,7 +11,7 @@ import { selectAllCustomMeals } from '../../store/customMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { fetchProducts } from '../../store/productsSlice';
 import { DietMeals } from '../../models/DietMeals';
-import { addUserSavedDiet } from '../../store/userSavedDietsSlice';
+import { addUserSavedDiet, selectAllUserSavedDiets } from '../../store/userSavedDietsSlice';
 import { selectUser } from '../../store/userSlice';
 import WeekDietBox from '../common/WeekDietBox';
 import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
@@ -20,6 +20,7 @@ import { UserSavedDietParams } from '../../models/UserSavedDietParams';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
 import ModalWithContent from '../common/ModalWithContent';
 import TextInputModal from '../common/TextInputModal';
+import SaveDietModal from './SaveDietModal';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -52,6 +53,7 @@ const DietResult: React.FC<Props> = (props) => {
     const meals = useSelector(selectAllUserMeals);
     const customMeals = useSelector(selectAllCustomMeals);
     const user = useSelector(selectUser);
+    const userSavedDiets = useSelector(selectAllUserSavedDiets);
     var resultMeals = [] as Meal[];
     switch(props.dietType) {
         case DietTypeEnum.Data:
@@ -137,7 +139,7 @@ const DietResult: React.FC<Props> = (props) => {
             </Row>
             <Row>
                 <Col>
-                {(!dietSaved && <ModalWithContent title="Save diet" content={<TextInputModal title="Save diet" setInput={setDietName} />} />)}
+                {(!dietSaved && <ModalWithContent title="Save diet" content={<SaveDietModal setInput={setDietName} />} />)}
                 </Col>
             </Row>
         </Container>)}

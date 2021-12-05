@@ -12,7 +12,7 @@ import { selectAllExercises } from '../../store/exercisesSlice';
 import ExerciseBox from './ExerciseBox';
 import { Accordion, AccordionDetails, AccordionSummary, ListItem, Typography } from '@material-ui/core';
 import { Exercise } from '../../models/Exercise';
-import { addUserSavedTraining } from '../../store/userSavedTrainingsSlice';
+import { addUserSavedTraining, deleteUserSavedTraining, selectAllUserSavedTrainings } from '../../store/userSavedTrainingsSlice';
 import { UserSavedTrainingParams } from '../../models/UserSavedTrainingParams';
 import { selectUser } from '../../store/userSlice';
 import { TrainingCondition } from '../../models/TrainingCondition';
@@ -21,6 +21,7 @@ import { TrainingConditionSeverityEnum } from '../../models/enums/TrainingCondit
 type Props = {
     training: Training,
     saveEnabled: boolean,
+    deleteEnabled: boolean,
     trainingConditions: TrainingCondition[]
 };
 
@@ -52,9 +53,9 @@ const useStyles = makeStyles({
 });
 
 const TrainingBox: React.FC<Props> = (props) => {
-    //TODO: get user/custom conditions as props, pass severity to box to indicate a potentially dangerous exercise
     const dispatch = useDispatch();
     const exercises = useSelector(selectAllExercises);
+    const userSavedTrainings = useSelector(selectAllUserSavedTrainings);
     const user = useSelector(selectUser);
     const classes = useStyles();
     const trainingExercises = exercises.filter(exercise => props.training.trainingExercises
@@ -73,7 +74,22 @@ const TrainingBox: React.FC<Props> = (props) => {
             trainingId: props.training.id
         } as UserSavedTrainingParams;
         dispatch(addUserSavedTraining(params));
+        setSaved(true);
     }
+
+    const handleDelete = () => {
+        var training = userSavedTrainings.find(x => x.trainingId === props.training.id);
+        if (training)
+            dispatch(deleteUserSavedTraining(training.id));
+    };
+
+    const [saved, setSaved] = React.useState(false);
+
+    React.useEffect(() => {
+        if (userSavedTrainings.some(x => x.trainingId === props.training.id))
+            setSaved(true);
+    }, [userSavedTrainings]);
+
     return (<Row className={classes.row}>
             <Col className={classes.trainingCol}>
                 <Accordion>
@@ -114,8 +130,14 @@ const TrainingBox: React.FC<Props> = (props) => {
                     </AccordionDetails>
                 </Accordion>
             </Col>
-            {(props.saveEnabled && <Col className={classes.buttonCol}>
+            {(props.saveEnabled && !saved && <Col className={classes.buttonCol}>
                 <Button onClick={handleSave}>Save</Button>
+            </Col>)}
+            {(props.saveEnabled && saved && <Col className={classes.buttonCol}>
+                <Button disabled>Saved</Button>
+            </Col>)}
+            {(props.deleteEnabled && saved && <Col className={classes.buttonCol}>
+                <Button onClick={handleDelete}>Delete</Button>
             </Col>)}
     </Row>);
 };

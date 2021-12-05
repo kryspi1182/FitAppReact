@@ -32,6 +32,15 @@ export const addUserSavedDiet = createAsyncThunk('userSavedDiets/add', async (pa
     }
 });
 
+export const deleteUserSavedDiet = createAsyncThunk('userSavedDiets/delete', async (id: EntityId) => {
+    try {
+        return await userApi.deleteUserSavedDiet(id);
+    }
+    catch (e) {
+        return e.json();
+    }
+});
+
 export const {
     selectAll: selectAllUserSavedDiets,
     selectById: selectUserSavedDietById,
@@ -48,6 +57,10 @@ const userSavedDietsSlice = createSlice({
         }).addCase(addUserSavedDiet.fulfilled, (state, action: PayloadAction<UserSavedDiet>) => {
             if (action.payload) {
                 userSavedDietAdapter.upsertOne(state, action);
+            }
+        }).addCase(deleteUserSavedDiet.fulfilled, (state, action: PayloadAction<UserSavedDiet>) => {
+            if (action.payload) {
+                userSavedDietAdapter.removeOne(state, action.payload.id);
             }
         })
     }

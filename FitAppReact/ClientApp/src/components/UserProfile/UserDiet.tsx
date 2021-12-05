@@ -69,6 +69,10 @@ const UserDiet: React.FC = () => {
                 break;
             case "none":
                 setStep(1);
+                setStartDietProcess(false);
+                setStartCustomDietProcess(false);
+                setGenerateDiet(false);
+                setGenerateCustomDiet(false);
                 break;
         }
     }, [chosenOption]);
@@ -124,7 +128,8 @@ const UserDiet: React.FC = () => {
         && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.SecondBreakfast)
         && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Lunch)
         && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Snack)
-        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner))
+        && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner)
+        && startDietProcess)
         {
             setGenerateDiet(true);
             setGenerateCustomDiet(false); 
@@ -139,7 +144,6 @@ const UserDiet: React.FC = () => {
         && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner)
         && startCustomDietProcess)
         {
-            
             setGenerateCustomDiet(true);
             setGenerateDiet(false);
         }
