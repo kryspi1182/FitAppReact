@@ -15,10 +15,13 @@ import { Exercise } from '../../models/Exercise';
 import { addUserSavedTraining } from '../../store/userSavedTrainingsSlice';
 import { UserSavedTrainingParams } from '../../models/UserSavedTrainingParams';
 import { selectUser } from '../../store/userSlice';
+import { TrainingCondition } from '../../models/TrainingCondition';
+import { TrainingConditionSeverityEnum } from '../../models/enums/TrainingConditionSeverityEnum';
 
 type Props = {
     training: Training,
-    saveEnabled: boolean
+    saveEnabled: boolean,
+    trainingConditions: TrainingCondition[]
 };
 
 type ExerciseWithReps = {
@@ -91,8 +94,12 @@ const TrainingBox: React.FC<Props> = (props) => {
                             <Row>
                                 <Col>
                                 {trainingExercises.length > 0 && exercisesWithReps.map(exercise => {
+                                    var severity = props.trainingConditions
+                                        .find(trainingCondition => exercise.exercise.exerciseBodyTargets
+                                            .some(x => x.bodyTargetId === trainingCondition.bodyTargetId))?.trainingConditionSeverityId;
+
                                     return (<Row className={classes.item} key={exercise.exercise.id + "" + props.training.id}>
-                                        <ExerciseBox exercise={exercise.exercise} series={exercise.series} repsPerSeries={exercise.repsPerSeries}  />
+                                        <ExerciseBox exercise={exercise.exercise} series={exercise.series} repsPerSeries={exercise.repsPerSeries} severity={severity}  />
                                     </Row>)
                                 })}
                                 </Col>

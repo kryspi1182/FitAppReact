@@ -13,10 +13,12 @@ import { TrainingCategoryEnum } from '../../models/enums/TrainingCategoryEnum';
 import TrainingBox from '../common/TrainingBox';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
 import { Training } from '../../models/Training';
+import { TrainingCondition } from '../../models/TrainingCondition';
 
 type Props = {
     trainings: Training[],
-    saveEnabled: boolean
+    saveEnabled: boolean,
+    trainingConditions: TrainingCondition[],
 };
 
 const TrainingList: React.FC<Props> = (props) => {
@@ -38,7 +40,7 @@ const TrainingList: React.FC<Props> = (props) => {
                         <Container>
                         {props.trainings
                         .filter(training => training.trainingCategoryId === catId)
-                        .map(training => <TrainingBox training={training} saveEnabled={props.saveEnabled} />)}
+                        .map(training => <TrainingBox training={training} saveEnabled={props.saveEnabled} trainingConditions={props.trainingConditions} />)}
                         </Container>
                     </AccordionDetails>
                 </Accordion>

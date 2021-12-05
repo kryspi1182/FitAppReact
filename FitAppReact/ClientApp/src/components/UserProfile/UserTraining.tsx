@@ -141,7 +141,7 @@ const UserTraining: React.FC = () => {
         </Row>
         <Row>
             <Col className={classes.result}>
-            {(showTraining && notFirstRender && <TrainingResult />)}
+            {(showTraining && notFirstRender && <TrainingResult trainingConditions={trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))} />)}
             {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}
             </Col>
         </Row>
