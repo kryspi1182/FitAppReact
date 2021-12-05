@@ -96,10 +96,14 @@ const TrainingBox: React.FC<Props> = (props) => {
                                 {trainingExercises.length > 0 && exercisesWithReps.map(exercise => {
                                     var severity = props.trainingConditions
                                         .find(trainingCondition => exercise.exercise.exerciseBodyTargets
-                                            .some(x => x.bodyTargetId === trainingCondition.bodyTargetId))?.trainingConditionSeverityId;
+                                            .some(x => x.bodyTargetId === trainingCondition.bodyTargetId));
+
+                                    let severityId = 0 as EntityId;
+                                    if (severity)
+                                        severityId = severity.trainingConditionSeverityId;
 
                                     return (<Row className={classes.item} key={exercise.exercise.id + "" + props.training.id}>
-                                        <ExerciseBox exercise={exercise.exercise} series={exercise.series} repsPerSeries={exercise.repsPerSeries} severity={severity}  />
+                                        <ExerciseBox exercise={exercise.exercise} series={exercise.series} repsPerSeries={exercise.repsPerSeries} severity={severityId}  />
                                     </Row>)
                                 })}
                                 </Col>
