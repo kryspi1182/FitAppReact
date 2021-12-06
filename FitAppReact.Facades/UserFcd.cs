@@ -62,5 +62,13 @@ namespace FitAppReact.Facades
         {
             return weightTargetSrv.GetWeightTargets();
         }
+        public UserSavedTrainingDTO DeleteUserSavedTraining(int id)
+        {
+            return userSavedTrainingSrv.DeleteUserSavedTraining(id).Result;
+        }
+        public UserSavedDietDTO DeleteUserSavedDiet(int id)
+        {
+            return userSavedDietSrv.DeleteUserSavedDiet(id).Result;
+        }
     }
 }

@@ -9,15 +9,25 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Container, Row } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 
-import { selectAllUserSavedDiets } from '../../store/userSavedDietsSlice';
+import { deleteUserSavedDiet, selectAllUserSavedDiets } from '../../store/userSavedDietsSlice';
 import WeekDietBox from '../common/WeekDietBox';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
 
+const useStyles = makeStyles({
+    buttonCol: {
+        maxWidth: '10%'
+    }
+});
+
 const UserSavedDiets: React.FC = () => {
     const dispatch = useDispatch();
+    const classes = useStyles();
     const userDiets = useSelector(selectAllUserSavedDiets);
+    const handleDelete = (id: EntityId) => {
+        dispatch(deleteUserSavedDiet(id));
+    };
     return(<Container>
         {userDiets.map(userDiet => {
             let breakfasts = [] as EntityId[];
@@ -45,6 +55,8 @@ const UserSavedDiets: React.FC = () => {
                 }
             }
             return (
+                <Row>
+                    <Col>
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -63,8 +75,11 @@ const UserSavedDiets: React.FC = () => {
                         />
                     </AccordionDetails>
             </Accordion>
-            
-            
+            </Col>
+            <Col className={classes.buttonCol}>
+                <Button onClick={() => handleDelete(userDiet.id)}>Delete</Button>
+            </Col>
+            </Row>
             )
         })}
     </Container>);

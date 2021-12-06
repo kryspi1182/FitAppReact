@@ -26,6 +26,10 @@ namespace FitAppReact.UserService
 
         public async Task<UserSavedDietDTO> AddUserSavedDiet(UserSavedDietParams userDietObjectParams)
         {
+            if (appDbContext.UserSavedDiets.Where(x => x.UserId == userDietObjectParams.userId).Count() >= 5)
+            {
+                return null;
+            }
             var meals = appDbContext.Meals
                 .AsNoTracking()
                 .Where(x => userDietObjectParams.mealIds.Contains(x.Id))
@@ -57,6 +61,19 @@ namespace FitAppReact.UserService
             return result;
         }
 
+        public async Task<UserSavedDietDTO> DeleteUserSavedDiet(int id)
+        {
+            var diet = appDbContext.UserSavedDiets
+                .AsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            var result = mapper.Map<UserSavedDietDTO>(diet);
+            appDbContext.UserSavedDiets.Remove(diet);
+            await appDbContext.SaveChangesAsync();
+
+            return result;
+        }
         public IEnumerable<UserSavedDietDTO> GetUserSavedDiets(string id)
         {
             var result = appDbContext.UserSavedDiets

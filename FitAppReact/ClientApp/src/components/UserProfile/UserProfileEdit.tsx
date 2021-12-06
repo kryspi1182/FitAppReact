@@ -16,6 +16,13 @@ import UserDiet from './UserDiet';
 import { fetchUser, selectUser } from '../../store/userSlice';
 import UserSavedDiets from './UserSavedDiets';
 import UserSavedTrainings from './UserSavedTrainings';
+import ModalWithContent from '../common/ModalWithContent';
+import HelpModal from '../common/HelpModal';
+import DataHelp from '../Sections/Help/DataHelp';
+import DietHelp from '../Sections/Help/DietHelp';
+import SavedDietsHelp from '../Sections/Help/SavedDietsHelp';
+import TrainingHelp from '../Sections/Help/TrainingHelp';
+import SavedTrainingsHelp from '../Sections/Help/SavedTrainingsHelp';
 
 const useStyles = makeStyles({
     container: {
@@ -23,6 +30,13 @@ const useStyles = makeStyles({
     },
     column: {
         margin: '10px',
+    },
+    helpDiv: {
+        margin: '10px',
+        padding: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
@@ -32,22 +46,41 @@ const UserProfileEdit: React.FC = () => {
     const [chosenMenu, setChosenMenu] = React.useState("data");
     const user = useSelector(selectUser);
     const [title, setTitle] = React.useState("Edit your data");
+    const [helpTitle, setHelpTitle] = React.useState("Your data");
+    const [helpDescription, setHelpDescription] = React.useState("Data description");
+    const [helpContent, setHelpContent] = React.useState(<DataHelp />);
+    
     React.useEffect(() => {
         switch(chosenMenu) {
             case "data":
                 setTitle("Your data");
+                setHelpTitle("Your data");
+                setHelpDescription("Data description");
+                setHelpContent(<DataHelp />);
                 break;
             case "diet":
                 setTitle("Your diet");
+                setHelpTitle("Your diet");
+                setHelpDescription("Diet generating description");
+                setHelpContent(<DietHelp />);
                 break;
             case "savedDiets":
                 setTitle("Your saved diets");
+                setHelpTitle("Your saved diets");
+                setHelpDescription("Saved diets description");
+                setHelpContent(<SavedDietsHelp />);
                 break;
             case "training":
                 setTitle("Your training");
+                setHelpTitle("Your training");
+                setHelpDescription("Training generating description");
+                setHelpContent(<TrainingHelp />);
                 break;
-            case "savedTraining":
+            case "savedTrainings":
                 setTitle("Your saved trainings");
+                setHelpTitle("Your saved trainings");
+                setHelpDescription("Saved trainings description");
+                setHelpContent(<SavedTrainingsHelp />);
                 break;
         }
     }, [chosenMenu]);
@@ -89,9 +122,20 @@ const UserProfileEdit: React.FC = () => {
             </Row>
             <Row>
                 <Col xs="3">
-                    <SideMenu options={options}/>
+                    <Row>
+                        <Col>
+                            <SideMenu options={options}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <div className={classes.helpDiv}>
+                                <ModalWithContent title="Help" content={<HelpModal content={helpContent}/>}  />
+                            </div>
+                        </Col>
+                    </Row>
                 </Col>
-                <Col xs="auto">
+                <Col xs="9">
                     {(chosenMenu === "data") && <UserData />}
                     {(chosenMenu === "diet") && <UserDiet />}
                     {(chosenMenu === "savedDiets") && <UserSavedDiets />}

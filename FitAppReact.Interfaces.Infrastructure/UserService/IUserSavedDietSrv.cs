@@ -12,5 +12,6 @@ namespace FitAppReact.Interfaces.Infrastructure.UserService
     {
         public Task<UserSavedDietDTO> AddUserSavedDiet(UserSavedDietParams userDietObjectParams);
         public IEnumerable<UserSavedDietDTO> GetUserSavedDiets(string id);
+        public Task<UserSavedDietDTO> DeleteUserSavedDiet(int id);
     }
 }

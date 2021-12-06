@@ -18,6 +18,5 @@ export default () => (
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/user-hub' component={UserProfile} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-        <AuthorizeRoute exact path='/meal/details/:Id' component={MealDetails} />
     </Layout>
 );

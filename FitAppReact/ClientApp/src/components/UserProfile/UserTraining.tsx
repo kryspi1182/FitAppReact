@@ -16,11 +16,16 @@ import TrainingResult from './TrainingResult';
 import CustomTraining from './CustomTraining';
 import { selectUser } from '../../store/userSlice';
 import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
+import ErrorBox from '../common/ErrorBox';
 
 const useStyles = makeStyles({
     button: {
         margin: '10px'
     },
+    result: {
+        marginTop: "10px",
+        marginBottom: "10px"
+    }
 });
 
 const UserTraining: React.FC = () => {
@@ -31,6 +36,8 @@ const UserTraining: React.FC = () => {
     const [title, setTitle] = React.useState("Find trainings based on:");
     const [startTrainingProcess, setStartTrainingProcess] = React.useState(false);
     const [showTraining, setShowTraining] = React.useState(false);
+    const [showError, setShowError] = React.useState(false);
+    const [notFirstRender, setNotFirstRender] = React.useState(false);
 
     const userTrainings = useSelector(selectAllUserTrainings);
     const trainingConditions = useSelector(selectAllTrainingConditions);
@@ -59,22 +66,34 @@ const UserTraining: React.FC = () => {
                 break;
             case "none":
                 setStep(1);
+                setStartTrainingProcess(false);
+                setShowTraining(false);
+                setShowError(false);
+                setNotFirstRender(false);
                 break;
         }
     }, [chosenOption]);
     React.useEffect(() => {
         if(startTrainingProcess) {
+            setNotFirstRender(true);
+            console.log(showError);
             let params = {
                 difficulty: user.difficultyId,
                 trainingConditions: trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id)),
             } as UserTrainingParams;
             dispatch(fetchMatchingTrainingsUserData(params));
+            
         }
     }, [startTrainingProcess]);
 
     React.useEffect(() => {
         if(userTrainings.length > 0) {
             setShowTraining(true);
+            setShowError(false);
+        }
+        else {
+            setShowTraining(false);
+            setShowError(true);
         }
     }, [userTrainings]);
     
@@ -84,6 +103,7 @@ const UserTraining: React.FC = () => {
             <Col><h4>{title}</h4></Col>
         </Row>
         <Row>
+            <Col>
         {(chosenOption === "none" && <>
             <Button 
                 onClick={() => {setChosenOption("data")}}
@@ -119,11 +139,15 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Back</Button>
-            <CustomTraining />
+            <CustomTraining notify={setNotFirstRender}/>
         </>)}
+        </Col>
         </Row>
         <Row>
-            {(showTraining && <TrainingResult />)}
+            <Col className={classes.result}>
+            {(showTraining && notFirstRender && <TrainingResult trainingConditions={trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))} />)}
+            {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}
+            </Col>
         </Row>
     </Container>
     </>)

@@ -81,5 +81,23 @@ export const userApi = {
         catch (e) {
             console.log("error w userApi " + e);
         }
+    },
+    async deleteUserSavedTraining(id: EntityId) {
+        try {
+            return await connection.api.post<UserSavedTraining>(`user/userSavedTraining/delete/${id}`)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w userApi " + e);
+        }
+    },
+    async deleteUserSavedDiet(id: EntityId) {
+        try {
+            return await connection.api.post<UserSavedDiet>(`user/userSavedDiet/delete/${id}`)
+                .then(response => response.data);
+        }
+        catch (e) {
+            console.log("error w userApi " + e);
+        }
     }
 };

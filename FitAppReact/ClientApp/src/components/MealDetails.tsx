@@ -33,11 +33,14 @@ const useStyles = makeStyles({
     }
 });
 
-const MealDetails: React.FC = () => {
+type Props = {
+    mealId : EntityId
+}
+
+const MealDetails: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const mealId = useParams<{Id: string}>().Id as EntityId;
     const products = useSelector(selectAllProducts);
-    let meal = useSelector((state: RootState) => selectMealById(state, mealId)); 
+    let meal = useSelector((state: RootState) => selectMealById(state, props.mealId)); 
     let mealProducts = meal !== undefined ? products.filter(product => meal.mealProducts.some(mealProduct => mealProduct.productId === product.id)) : [];
     let mealWithProducts = {
         meal: meal,
