@@ -41,7 +41,8 @@ const useStyles = makeStyles({
     row: {
         display: 'flex',
         flexWrap: 'wrap',
-        margin: "10px"
+        marginBottom: '10px',
+        paddingBottom: '10px'
     },
     trainingCol: {
         width: '85%',
@@ -131,13 +132,13 @@ const TrainingBox: React.FC<Props> = (props) => {
                 </Accordion>
             </Col>
             {(props.saveEnabled && !saved && <Col className={classes.buttonCol}>
-                <Button onClick={handleSave}>Save</Button>
+                <Button type="button" variant="outlined" color="secondary" onClick={handleSave}>Save</Button>
             </Col>)}
             {(props.saveEnabled && saved && <Col className={classes.buttonCol}>
-                <Button disabled>Saved</Button>
+                <Button type="button" variant="outlined" color="secondary" disabled>Saved</Button>
             </Col>)}
             {(props.deleteEnabled && saved && <Col className={classes.buttonCol}>
-                <Button onClick={handleDelete}>Delete</Button>
+                <Button type="button" variant="outlined" color="secondary" onClick={handleDelete}>Delete</Button>
             </Col>)}
     </Row>);
 };

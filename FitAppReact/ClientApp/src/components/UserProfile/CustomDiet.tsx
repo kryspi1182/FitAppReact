@@ -26,10 +26,23 @@ const useStyles = makeStyles({
         display: 'block'
     },
     container: {
-        padding: '10px'
+        paddingLeft: '0px'
     },
     column: {
-        margin: '10px',
+        //margin: '10px',
+    },
+    formInput: {
+        width: '100%'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
+    },
+    title: {
+        textAlign: 'center'
+    },
+    submitButton: {
+        float: 'right'
     }
 });
 
@@ -141,7 +154,7 @@ const CustomDiet: React.FC<Props> = (props) => {
     });
     return(<Container className={classes.container}>
         <form onSubmit={formik.handleSubmit} id="custom-diet">
-            <Row>
+            <Row className={classes.row}>
                 <Col className={classes.column}>
                     <FormControl className={classes.formControl}>
                         <TextField
@@ -155,6 +168,7 @@ const CustomDiet: React.FC<Props> = (props) => {
                             }}
                             value={formik.values.calories}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -171,11 +185,12 @@ const CustomDiet: React.FC<Props> = (props) => {
                             }}
                             value={formik.values.carbohydrates}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                 <Col className={classes.column}>
                     <FormControl className={classes.formControl}>
                         <TextField
@@ -189,6 +204,7 @@ const CustomDiet: React.FC<Props> = (props) => {
                             }}
                             value={formik.values.protein}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -205,11 +221,12 @@ const CustomDiet: React.FC<Props> = (props) => {
                                 }}
                                 value={formik.values.fat}
                                 variant="outlined"
+                                className={classes.formInput}
                             />
                         </FormControl>
                     </Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -223,6 +240,7 @@ const CustomDiet: React.FC<Props> = (props) => {
                                 }}
                                 value={formik.values.sugar}
                                 variant="outlined"
+                                className={classes.formInput}
                             />
                         </FormControl>
                     </Col>
@@ -239,11 +257,12 @@ const CustomDiet: React.FC<Props> = (props) => {
                                 }}
                                 value={formik.values.salt}
                                 variant="outlined"
+                                className={classes.formInput}
                             />
                         </FormControl>
                     </Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                     <Col className={classes.column}>
                         <FormControl className={classes.formControl}>
                             <TextField
@@ -257,12 +276,13 @@ const CustomDiet: React.FC<Props> = (props) => {
                                 }}
                                 value={formik.values.fibre}
                                 variant="outlined"
+                                className={classes.formInput}
                             />
                         </FormControl>
                     </Col>
                 </Row>
-            <Row>
-                <Col className={classes.column}>
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedMedicalConditions} 
@@ -274,8 +294,8 @@ const CustomDiet: React.FC<Props> = (props) => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column}>
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedProducts} 
@@ -287,12 +307,13 @@ const CustomDiet: React.FC<Props> = (props) => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                 <Col className={classes.column}>
                     <Button
                     type="submit"
                     variant="contained"
                     color="primary"
+                    className={classes.submitButton}
                     >
                         Submit
                     </Button>

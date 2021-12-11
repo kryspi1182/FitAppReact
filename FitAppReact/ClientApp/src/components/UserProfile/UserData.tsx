@@ -30,10 +30,23 @@ const useStyles = makeStyles({
         display: 'block'
     },
     container: {
-        padding: '10px'
+        //padding: '10px'
     },
     column: {
-        margin: '10px',
+        //margin: '10px'
+    },
+    formInput: {
+        width: '100%'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
+    },
+    title: {
+        textAlign: 'center'
+    },
+    submitButton: {
+        float: 'right'
     }
 });
 
@@ -153,9 +166,14 @@ const UserData: React.FC = () => {
         }
     });
     return(<Container className={classes.container}>
+        {/* <Row className={classes.row}>
+            <Col>
+                <h4 className={classes.title}>Your data</h4>
+            </Col>
+        </Row> */}
         <form onSubmit={formik.handleSubmit} id="user-data-form">
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-age"
@@ -168,6 +186,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.age}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -181,6 +200,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('gender', event.target.value as number);
                             }}
                             value={formik.values.gender}
+                            className={classes.formInput}
                         >
                             <MenuItem value={1}>Male</MenuItem>
                             <MenuItem value={2}>Female</MenuItem>
@@ -189,8 +209,8 @@ const UserData: React.FC = () => {
                 </Col>
                 
             </Row>
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-weight"
@@ -203,6 +223,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.weight}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -216,6 +237,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('activity', event.target.value as number);
                             }}
                             value={formik.values.activity}
+                            className={classes.formInput}
                         >
                             <MenuItem value={1.2}>None</MenuItem>
                             <MenuItem value={1.35}>Light</MenuItem>
@@ -225,8 +247,8 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-height"
@@ -239,6 +261,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.height}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl> 
                 </Col>
@@ -252,6 +275,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('weightTargetId', event.target.value as number);
                             }}
                             value={formik.values.weightTargetId}
+                            className={classes.formInput}
                         >
                             <MenuItem value={WeightTargetEnum.LoseWeight}>Lose weight</MenuItem>
                             <MenuItem value={WeightTargetEnum.MaintainWeight}>Maintain weight</MenuItem>
@@ -260,8 +284,8 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedMedicalConditions} 
@@ -269,12 +293,13 @@ const UserData: React.FC = () => {
                             title="Medical conditions"
                             setSelected={mapItemsToMedicalConditions}
                             selectedValues={selectedMappedMedicalConditions}
+                            
                         />
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedProducts} 
@@ -286,9 +311,9 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
-                    <FormControl>
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
+                    <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedTrainingConditions}
                             id="user-training-conditions"
@@ -299,9 +324,10 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
+                        <InputLabel>Difficulty</InputLabel>
                         <Select
                             id="user-difficulty"
                             label="Difficulty"
@@ -309,6 +335,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('difficulty', event.target.value as number);
                             }}
                             value={formik.values.difficulty}
+                            className={classes.formInput}
                         >
                             <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
                             <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
@@ -319,12 +346,13 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             
-            <Row>
+            <Row className={classes.row}>
                 <Col className={classes.column}>
                     <Button
                     type="submit"
                     variant="contained"
                     color="primary"
+                    className={classes.submitButton}
                     >
                         Submit
                     </Button>

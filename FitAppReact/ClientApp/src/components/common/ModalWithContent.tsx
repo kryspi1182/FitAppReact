@@ -25,6 +25,7 @@ const useStyles = makeStyles({
         border: '2px solid #000',
         backgroundColor: '#fff',
         padding: '10px',
+        borderRadius: '5px'
         
       },
       column: {
@@ -38,6 +39,9 @@ const useStyles = makeStyles({
         overflowY: "auto",
         maxHeight: "80vh",
         maxWidth: "inherit"
+      },
+      exitButton: {
+        float: 'right'
       }
 });
 
@@ -74,7 +78,7 @@ const ModalWithContent: React.FC<Props> = (props) => {
               <Container className={classes.paper}>
                 <Row>
                   <Col className={classes.closeColumn}>
-                    <Button onClick={handleClose}>
+                    <Button onClick={handleClose} className={classes.exitButton}>
                       <CloseIcon />
                     </Button>
                   </Col>

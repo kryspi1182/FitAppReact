@@ -33,13 +33,13 @@ const MacrosBox: React.FC<Props> = (props) => {
             <Paper>
                 <List>
                     <ListItem><h4>Macros per 100g</h4></ListItem>
-                    <ListItem>Calories: {props.macros.calories}</ListItem>
-                    <ListItem>Carbohydrates: {props.macros.carbohydrates}</ListItem>
-                    <ListItem>Protein: {props.macros.protein}</ListItem>
-                    <ListItem>Fat: {props.macros.fat}</ListItem>
-                    <ListItem>Sugar: {props.macros.sugar}</ListItem>
-                    <ListItem>Fibre: {props.macros.fibre}</ListItem>
-                    <ListItem>Salt: {props.macros.salt}</ListItem>
+                    <ListItem>Calories: {props.macros.calories} kcal</ListItem>
+                    <ListItem>Carbohydrates: {props.macros.carbohydrates} g</ListItem>
+                    <ListItem>Protein: {props.macros.protein} g</ListItem>
+                    <ListItem>Fat: {props.macros.fat} g</ListItem>
+                    <ListItem>Sugar: {props.macros.sugar} g</ListItem>
+                    <ListItem>Fibre: {props.macros.fibre} g</ListItem>
+                    <ListItem>Salt: {props.macros.salt} g</ListItem>
                 </List>
             </Paper>
         </Container>

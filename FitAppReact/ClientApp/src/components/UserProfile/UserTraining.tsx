@@ -20,11 +20,18 @@ import ErrorBox from '../common/ErrorBox';
 
 const useStyles = makeStyles({
     button: {
-        margin: '10px'
+        marginRight: '10px',
+        marginTop: '10px',
+        marginBottom: '10px'
     },
     result: {
         marginTop: "10px",
-        marginBottom: "10px"
+        marginBottom: "10px",
+        paddingLeft: '0px'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
     }
 });
 
@@ -99,12 +106,11 @@ const UserTraining: React.FC = () => {
     
     return(<>
         <Container>
-        <Row>
+        <Row className={classes.row}>
             <Col><h4>{title}</h4></Col>
         </Row>
-        <Row>
-            <Col>
-        {(chosenOption === "none" && <>
+        <Row className={classes.row}>
+        {(chosenOption === "none" && <Col>
             <Button 
                 onClick={() => {setChosenOption("data")}}
                 variant="contained"
@@ -117,8 +123,8 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Parameters of your choice</Button>
-        </>)}
-        {(chosenOption === "data" && <>
+        </Col>)}
+        {(chosenOption === "data" && <Col>
             <Button 
                 onClick={() => {setChosenOption("none")}}
                 variant="contained"
@@ -131,8 +137,8 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Find trainings</Button>
-        </>)}
-        {(chosenOption === "form" && <>
+        </Col>)}
+        {(chosenOption === "form" && <Col>
             <Button 
                 onClick={() => {setChosenOption("none")}}
                 variant="contained"
@@ -140,10 +146,9 @@ const UserTraining: React.FC = () => {
                 className={classes.button}
             >Back</Button>
             <CustomTraining notify={setNotFirstRender}/>
-        </>)}
-        </Col>
+        </Col>)}
         </Row>
-        <Row>
+        <Row className={classes.row}>
             <Col className={classes.result}>
             {(showTraining && notFirstRender && <TrainingResult trainingConditions={trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))} />)}
             {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}

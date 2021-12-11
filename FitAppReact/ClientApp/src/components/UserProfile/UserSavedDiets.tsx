@@ -18,6 +18,10 @@ import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
 const useStyles = makeStyles({
     buttonCol: {
         maxWidth: '10%'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
     }
 });
 
@@ -55,7 +59,7 @@ const UserSavedDiets: React.FC = () => {
                 }
             }
             return (
-                <Row>
+                <Row className={classes.row}>
                     <Col>
             <Accordion>
                 <AccordionSummary
@@ -77,7 +81,7 @@ const UserSavedDiets: React.FC = () => {
             </Accordion>
             </Col>
             <Col className={classes.buttonCol}>
-                <Button onClick={() => handleDelete(userDiet.id)}>Delete</Button>
+                <Button type="button" variant="outlined" color="secondary" onClick={() => handleDelete(userDiet.id)}>Delete</Button>
             </Col>
             </Row>
             )

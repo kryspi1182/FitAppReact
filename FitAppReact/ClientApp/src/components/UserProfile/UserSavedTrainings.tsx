@@ -16,7 +16,7 @@ const UserSavedTrainings: React.FC = () => {
     const allTrainingConditions = useSelector(selectAllTrainingConditions);
     const savedTrainings = useSelector(selectAllUserSavedTrainings);
     const userTrainings = allTrainings.filter(training => savedTrainings.some(savedTraining => savedTraining.trainingId === training.id));
-    const userTrainingConditions = allTrainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))
+    const userTrainingConditions = allTrainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id));
 
     return(<TrainingList 
         trainings={userTrainings} 

@@ -95,7 +95,7 @@ const AutocompleteInput: React.FC<Props> = (props) => {
         options={props.items}
         getOptionLabel={(option) => option.name}
 
-        style={{ width: 500 }}
+        //style={{ width: 500 }}
         classes={{ paper: classes.paper }}
         renderInput={(params) => (
             <TextField {...params} label={props.title} variant="outlined" />

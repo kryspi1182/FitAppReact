@@ -16,6 +16,9 @@ import { Link, NavLink } from 'react-router-dom';
 const useStyles = makeStyles({
     root: {
         width: '100%',
+    },
+    title: {
+        textAlign: 'center'
     }
 });
 
@@ -29,26 +32,24 @@ const DayDietBox: React.FC<Props> = (props) => {
     return(<Container>
         <Row>
             <Col>
-                <h2>{props.day}</h2>
+                <h2 className={classes.title}>{props.day}</h2>
             </Col>
         </Row>
-        
+        <Row>
+            <Col>
         {(props.meals.length === 5 && <List className={classes.root}>
             <MealWithProductItem label="Breakfast" meal={props.meals[0]}/>
-            <Divider variant="inset" component="li" />
 
             <MealWithProductItem label="Second breakfast" meal={props.meals[1]}/>
-            <Divider variant="inset" component="li" />
 
             <MealWithProductItem label="Lunch" meal={props.meals[2]}/>
-            <Divider variant="inset" component="li" />
 
             <MealWithProductItem label="Snack" meal={props.meals[3]}/>
-            <Divider variant="inset" component="li" />
 
             <MealWithProductItem label="Dinner" meal={props.meals[4]}/>
-            <Divider variant="inset" component="li" />
         </List>)}
+        </Col>
+        </Row>
         {(props.meals.length !== 5 && <h3>Error: wrong data format</h3>)}
     </Container>)
 };

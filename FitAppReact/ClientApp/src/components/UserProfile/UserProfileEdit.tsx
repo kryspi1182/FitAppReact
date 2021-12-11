@@ -37,6 +37,13 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    title: {
+        textAlign: 'center'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
     }
 });
 
@@ -116,11 +123,11 @@ const UserProfileEdit: React.FC = () => {
     } as menuOption);
     return(<>
         <Container className={classes.container}>
-            <Row>
-                <Col><h4>Hello {user.userName}</h4></Col>
-                <Col><h4>{title}</h4></Col>
+            <Row className={classes.row}>
+                <Col xs="3"><h4 className={classes.title}>Hello {user.userName}</h4></Col>
+                <Col xs="9"><h4 className={classes.title}>{title}</h4></Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                 <Col xs="3">
                     <Row>
                         <Col>

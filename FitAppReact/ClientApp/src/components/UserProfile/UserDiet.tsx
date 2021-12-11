@@ -26,8 +26,14 @@ const getRandomInt = (max: number) => {
 
 const useStyles = makeStyles({
     button: {
-        margin: '10px'
+        marginRight: '10px',
+        marginTop: '10px',
+        marginBottom: '10px'
     },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
+    }
 });
 
 const UserDiet: React.FC = () => {
@@ -151,11 +157,13 @@ const UserDiet: React.FC = () => {
     }, [customMeals]);
     return(<>
     <Container>
-        <Row>
-            <Col><h4>{title}</h4></Col>
+        <Row className={classes.row}>
+            <Col xs="12">
+                <h4>{title}</h4>
+            </Col>
         </Row>
-        <Row>
-        {(chosenOption === "none" && <>
+        <Row className={classes.row}>
+        {(chosenOption === "none" && <Col xs="12">
             <Button 
                 onClick={() => {setChosenOption("data")}}
                 variant="contained"
@@ -168,8 +176,8 @@ const UserDiet: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Macros of your choice</Button>
-        </>)}
-        {(chosenOption === "data" && <>
+        </Col>)}
+        {(chosenOption === "data" && <Col xs="12">
             <Button 
                 onClick={() => {setChosenOption("none")}}
                 variant="contained"
@@ -182,8 +190,8 @@ const UserDiet: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Generate diet</Button>
-        </>)}
-        {(chosenOption === "form" && <>
+        </Col>)}
+        {(chosenOption === "form" && <Col xs="12">
             <Button 
                 onClick={() => {setChosenOption("none")}}
                 variant="contained"
@@ -191,9 +199,9 @@ const UserDiet: React.FC = () => {
                 className={classes.button}
             >Back</Button>
             <CustomDiet setStartProcess={setStartCustomDietProcess}/>
-        </>)}
+        </Col>)}
         </Row>
-        <Row>
+        <Row className={classes.row}>
             {(generateDiet && <DietResult generateDiet={generateDiet} setGenerateDiet={setGenerateDiet} dietType={DietTypeEnum.Data}/>)}
             {(generateCustomDiet && <DietResult generateDiet={generateCustomDiet} setGenerateDiet={setGenerateCustomDiet} dietType={DietTypeEnum.Custom}/>)}
         </Row>

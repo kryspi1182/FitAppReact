@@ -25,14 +25,20 @@ const useStyles = makeStyles({
         display: 'block'
     },
     container: {
-        padding: '10px'
+        paddingLeft: '0px'
     },
     column: {
-        margin: '10px',
+        //margin: '10px',
     },
     row: {
-        marginTop: "10px",
-        marginBottom: "10px"
+        marginBottom: '10px',
+        paddingBottom: '10px'
+    },
+    submitButton: {
+        float: 'right'
+    },
+    formInput: {
+        width: '100%'
     }
 });
 
@@ -83,11 +89,11 @@ const CustomTraining: React.FC<Props> = (props) => {
             props.notify(true);
         }
     });
-    return(<Container>
+    return(<Container className={classes.container}>
         <form onSubmit={formik.handleSubmit} id="custom-training">
             <Row className={classes.row}>
-                <Col>
-                    <FormControl>
+                <Col xs="6">
+                    <FormControl className={classes.formControl}>
                         <InputLabel>Category</InputLabel>
                         <Select
                             id="custom-training-category"
@@ -96,6 +102,7 @@ const CustomTraining: React.FC<Props> = (props) => {
                                 formik.setFieldValue('trainingCategory', event.target.value as number);
                             }}
                             value={formik.values.trainingCategory}
+                            className={classes.formInput}
                         >
                             <MenuItem value={TrainingCategoryEnum.Circuit}>Circuit</MenuItem>
                             <MenuItem value={TrainingCategoryEnum.Fartlek}>Fartlek</MenuItem>
@@ -107,26 +114,9 @@ const CustomTraining: React.FC<Props> = (props) => {
                         </Select>
                     </FormControl>
                 </Col>
-                <Col>
-                    <FormControl>
-                        <InputLabel>Difficulty</InputLabel>
-                        <Select
-                            id="custom-training-difficulty"
-                            label="Difficulty"
-                            onChange={(event) => {
-                                formik.setFieldValue('difficulty', event.target.value as number);
-                            }}
-                            value={formik.values.difficulty}
-                        >
-                            <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
-                            <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
-                            <MenuItem value={DifficultyEnum.Advanced}>Advanced</MenuItem>
-                            <MenuItem value={DifficultyEnum.Professional}>Professional</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Col>
-                <Col>
-                    <FormControl>
+                
+                <Col xs="6">
+                    <FormControl className={classes.formControl}>
                         <InputLabel>Body target</InputLabel>
                         <Select
                             id="custom-training-target"
@@ -135,6 +125,7 @@ const CustomTraining: React.FC<Props> = (props) => {
                                 formik.setFieldValue('bodyTarget', event.target.value as number);
                             }}
                             value={formik.values.bodyTarget}
+                            className={classes.formInput}
                         >
                             <MenuItem value={BodyTargetEnum.Arms}>Arms</MenuItem>
                             <MenuItem value={BodyTargetEnum.Back}>Back</MenuItem>
@@ -147,8 +138,8 @@ const CustomTraining: React.FC<Props> = (props) => {
                 </Col>
             </Row>
             <Row className={classes.row}>
-                <Col>
-                    <FormControl>
+                <Col xs="12">
+                    <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedTrainingConditions}
                             id="custom-training-conditions"
@@ -160,11 +151,33 @@ const CustomTraining: React.FC<Props> = (props) => {
                 </Col>
             </Row>
             <Row>
+                <Col xs="6">
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Difficulty</InputLabel>
+                        <Select
+                            id="custom-training-difficulty"
+                            label="Difficulty"
+                            onChange={(event) => {
+                                formik.setFieldValue('difficulty', event.target.value as number);
+                            }}
+                            value={formik.values.difficulty}
+                            className={classes.formInput}
+                        >
+                            <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
+                            <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
+                            <MenuItem value={DifficultyEnum.Advanced}>Advanced</MenuItem>
+                            <MenuItem value={DifficultyEnum.Professional}>Professional</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Col>
+            </Row>
+            <Row className={classes.row}>
                 <Col>
                     <Button
                         type="submit"
                         variant="contained"
                         color="primary"
+                        className={classes.submitButton}
                     >
                         Submit
                     </Button>

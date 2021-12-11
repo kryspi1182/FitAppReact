@@ -29,7 +29,9 @@ const useStyles = makeStyles({
         margin: '10px'
     },
     chip: {
-        margin: '10px'
+        margin: '10px',
+        color: '#fff',
+        backgroundColor: '#000'
     }
 });
 
@@ -66,16 +68,21 @@ const MealDetails: React.FC<Props> = (props) => {
         macros.salt += product.salt;
     });
     return(<>{(mealWithProducts.meal && mealWithProducts.products && <Container className={classes.container}>
-        <Row><h3>Details</h3></Row>
+        <Row>
+            <Col>
+                <h3>Details</h3>
+            </Col>
+        </Row>
         <Row>
             <Col xs="3">
                 <MacrosBox macros={macros} />
             </Col>
             <Col xs="9">
-                <ListItem>
                     <Container>
                         <Row className={classes.row}>
-                            <Typography className={classes.sectionTitle}>{mealWithProducts.meal.name}</Typography>
+                            <Col>
+                            <h3 className={classes.sectionTitle}>{mealWithProducts.meal.name}</h3>
+                            </Col>
                         </Row>
                         <Row className={classes.row}>
                             <Col xs="3">
@@ -104,13 +111,13 @@ const MealDetails: React.FC<Props> = (props) => {
                                     return <Chip label={product.name + " " + quantity.quantity * 100 + "g"} 
                                         key={product.id + "" + quantity.mealId} 
                                         className={classes.chip}
+                                        color="primary"
                                         />
                                 }
                             })}
                             </Col>
                         </Row>
                     </Container>
-                </ListItem>
             </Col>
         </Row>
     </Container>)}</>);
