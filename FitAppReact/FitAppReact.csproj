@@ -48,6 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\IdentityStyles.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
     <ProjectReference Include="..\FitAppReact.DI\FitAppReact.DI.csproj" />
     <ProjectReference Include="..\FitAppReact.EntityFramework\FitAppReact.EntityFramework.csproj" />

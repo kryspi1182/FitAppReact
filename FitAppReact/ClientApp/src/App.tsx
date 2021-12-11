@@ -18,16 +18,41 @@ import './custom.css';
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#000'
+            main: '#000',
         },
       secondary: {
         main: '#000'
       }
     }
   });
-
+const customTheme = createTheme({
+    overrides: {
+        MuiButton: {
+            outlinedSecondary: {
+                color: theme.palette.primary.main,
+                backgroundColor: theme.palette.primary.contrastText,
+                borderColor: theme.palette.primary.main,
+                "&:hover": {
+                    color: theme.palette.primary.contrastText,
+                    backgroundColor: theme.palette.primary.main,
+                    borderColor: theme.palette.primary.main,
+                }
+            },
+            containedPrimary: {
+                color: theme.palette.primary.contrastText,
+                backgroundColor: theme.palette.primary.main,
+                borderColor: theme.palette.primary.main,
+                "&:hover": {
+                    color: theme.palette.primary.main,
+                    backgroundColor: theme.palette.primary.contrastText,
+                    borderColor: theme.palette.primary.main,
+                }
+            }
+        }
+    }
+});
 export default () => (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={customTheme}>
         <Layout>
             <Route exact path='/' component={Home} />
             <Route path='/counter' component={Counter} />
