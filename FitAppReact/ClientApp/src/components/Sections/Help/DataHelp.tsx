@@ -4,10 +4,9 @@ import { Container, Col, Row } from 'reactstrap';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { TextField, Select, MenuItem, FormControl, FormHelperText, InputLabel, Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 
-import { selectAllDifficulties } from '../../../store/difficultiesSlice';
-import { selectAllTrainingConditionSeverities } from '../../../store/trainingConditionSeveritiesSlice';
+import { selectAllDifficulties } from '../../../store/Training/DifficultiesSlice';
+import { selectAllTrainingConditionSeverities } from '../../../store/Training/TrainingConditionSeveritiesSlice';
 
 const useStyles = makeStyles({
 

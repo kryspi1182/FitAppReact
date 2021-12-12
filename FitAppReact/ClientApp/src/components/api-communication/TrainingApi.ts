@@ -1,12 +1,12 @@
 import * as connection from './ApiConnection';
-import { UserTrainingParams } from "../../models/UserTrainingParams";
-import { Training } from '../../models/Training';
-import { Exercise } from '../../models/Exercise';
-import { BodyTarget } from '../../models/BodyTarget';
-import { TrainingCategory } from '../../models/TrainingCategory';
-import { Difficulty } from '../../models/Difficulty';
-import { TrainingCondition } from '../../models/TrainingCondition';
-import { TrainingConditionSeverity } from '../../models/TrainingConditionSeverity';
+import { UserTrainingParams } from "../../models/User/UserTrainingParams";
+import { Training } from '../../models/Training/Training';
+import { Exercise } from '../../models/Training/Exercise';
+import { BodyTarget } from '../../models/Training/BodyTarget';
+import { TrainingCategory } from '../../models/Training/TrainingCategory';
+import { Difficulty } from '../../models/Training/Difficulty';
+import { TrainingCondition } from '../../models/Training/TrainingCondition';
+import { TrainingConditionSeverity } from '../../models/Training/TrainingConditionSeverity';
 
 export const trainingApi = {
     async getMatchingTrainings(params: UserTrainingParams) {

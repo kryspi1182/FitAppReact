@@ -5,29 +5,26 @@ import { Container, Col, Row } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Select, MenuItem, FormControl, FormHelperText, InputLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import {selectUser, updateUser} from '../../store/userSlice';
-import {selectUserMacros, fetchUserMacros} from '../../store/userMacrosSlice';
-import { selectAllMedicalConditions, fetchMedicalConditions } from '../../store/medicalConditionsSlice';
-import { UserParams } from '../../models/UserParams';
+import {selectUser, updateUser} from '../../store/User/UserSlice';
+import {selectUserMacros, fetchUserMacros} from '../../store/User/UserMacrosSlice';
+import { selectAllMedicalConditions, fetchMedicalConditions } from '../../store/Diet/MedicalConditionsSlice';
+import { UserParams } from '../../models/User/UserParams';
 import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
 import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
-import { selectAllProducts } from '../../store/productsSlice';
-import { UserMedicalCondition } from '../../models/UserMedicalCondition';
-import { UserUnwantedProduct } from '../../models/UserUnwantedProduct';
-import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
-import { selectAllTrainingConditionSeverities } from '../../store/trainingConditionSeveritiesSlice';
-import { selectAllBodyTargets } from '../../store/bodyTargetsSlice';
-import { UserTrainingCondition } from '../../models/UserTrainingCondition';
+import { selectAllProducts } from '../../store/Diet/ProductsSlice';
+import { UserMedicalCondition } from '../../models/User/UserMedicalCondition';
+import { UserUnwantedProduct } from '../../models/User/UserUnwantedProduct';
+import { selectAllTrainingConditions } from '../../store/Training/TrainingConditionsSlice';
+import { selectAllTrainingConditionSeverities } from '../../store/Training/TrainingConditionSeveritiesSlice';
+import { selectAllBodyTargets } from '../../store/Training/BodyTargetsSlice';
+import { UserTrainingCondition } from '../../models/User/UserTrainingCondition';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
-import { selectAllWeightTargets } from '../../store/weightTargetSlice';
+import { selectAllWeightTargets } from '../../store/User/WeightTargetSlice';
 import { WeightTargetEnum } from '../../models/enums/WeightTargetEnum';
-import LoadingModal from '../common/LoadingModal';
+import LoadingModal from '../common/Modal/LoadingModal';
 
 const useStyles = makeStyles({
     formControl: {
@@ -220,6 +217,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.age}
                             variant="outlined"
+                            color="primary"
                             className={classes.formInput}
                         />
                     </FormControl>

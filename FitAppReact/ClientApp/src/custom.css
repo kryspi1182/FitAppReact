@@ -4,11 +4,25 @@ a {
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.MuiOutlinedInput-root {
+  border-color: #000 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused input {
+  border-color: #000 !important;
+}
+.Mui-focused fieldset {
+  border-color: #000 !important;
+}
+label.Mui-focused {
+  color: #000 !important;
 }

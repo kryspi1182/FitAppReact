@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
-import { selectUser } from '../store/userSlice';
-import { useSelector } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { FlashOnRounded } from '@material-ui/icons';
-import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
+
 import { makeStyles } from '@material-ui/styles';
+
+import './NavMenu.css';
+import { selectUser } from '../store/User/UserSlice';
+import { useSelector } from 'react-redux';
+import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
+
 
 const useStyles = makeStyles({
     customLink: {

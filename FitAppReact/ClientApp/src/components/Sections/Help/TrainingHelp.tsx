@@ -4,15 +4,11 @@ import { Container, Col, Row } from 'reactstrap';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { TextField, Select, MenuItem, FormControl, FormHelperText, InputLabel, Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
-import { selectAllWeightTargets } from '../../../store/weightTargetSlice';
-import { selectAllDifficulties } from '../../../store/difficultiesSlice';
-import { selectAllTrainingConditionSeverities } from '../../../store/trainingConditionSeveritiesSlice';
-import { selectAllTrainingCategories } from '../../../store/trainingCategoriesSlice';
+import { selectAllTrainingCategories } from '../../../store/Training/TrainingCategoriesSlice';
 
 const useStyles = makeStyles({
 
