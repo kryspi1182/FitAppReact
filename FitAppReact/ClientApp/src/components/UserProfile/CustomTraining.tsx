@@ -18,7 +18,7 @@ import { selectAllTrainingConditionSeverities } from '../../store/trainingCondit
 import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
 import { selectAllBodyTargets } from '../../store/bodyTargetsSlice';
 import { UserTrainingParams } from '../../models/UserTrainingParams';
-import { fetchMatchingTrainings } from '../../store/userTrainingsSlice';
+import { fetchMatchingTrainings, resetTrainings } from '../../store/userTrainingsSlice';
 
 const useStyles = makeStyles({
     formControl: {
@@ -43,7 +43,8 @@ const useStyles = makeStyles({
 });
 
 type Props = {
-    notify: Function
+    notify: Function,
+    startLoading: Function
 };
 
 const CustomTraining: React.FC<Props> = (props) => {
@@ -79,6 +80,10 @@ const CustomTraining: React.FC<Props> = (props) => {
             bodyTarget: 1,
         },
         onSubmit: (values) => {
+            props.startLoading();
+            dispatch(resetTrainings());
+            
+            
             var params = {
                 trainingCategory: values.trainingCategory,
                 difficulty: values.difficulty,
@@ -86,7 +91,7 @@ const CustomTraining: React.FC<Props> = (props) => {
                 trainingConditions: values.trainingConditions
             } as UserTrainingParams;
             dispatch(fetchMatchingTrainings(params));
-            props.notify(true);
+            props.notify();
         }
     });
     return(<Container className={classes.container}>

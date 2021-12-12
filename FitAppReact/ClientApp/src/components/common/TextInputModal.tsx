@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         justifyContent: 'center',
       },
       paper: {
-        border: '2px solid #000',
+        //border: '2px solid #000',
         backgroundColor: '#fff',
         padding: '10px'
       },

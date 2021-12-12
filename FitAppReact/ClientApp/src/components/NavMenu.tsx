@@ -7,44 +7,33 @@ import { useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { FlashOnRounded } from '@material-ui/icons';
 import { ApplicationPaths } from './api-authorization/ApiAuthorizationConstants';
+import { makeStyles } from '@material-ui/styles';
 
-// export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
-//     public state = {
-//         isOpen: false
-//     };
-    
-//     public render() {
-        
-//         return (
-//             <header>
-//                 <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
-//                     <Container>
-//                         <NavbarBrand tag={Link} to="/">FitAppReact</NavbarBrand>
-//                         <NavbarToggler onClick={this.toggle} className="mr-2"/>
-//                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
-//                             <ul className="navbar-nav flex-grow">
-//                                 <NavItem>
-//                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-//                                 </NavItem>
-//                                 <NavItem>
-//                                     <NavLink tag={Link} className="text-dark" to="/user-profile">My Profile</NavLink>
-//                                 </NavItem>
-//                             </ul>
-//                         </Collapse>
-//                     </Container>
-//                 </Navbar>
-//             </header>
-//         );
-//     }
-
-//     private toggle = () => {
-//         this.setState({
-//             isOpen: !this.state.isOpen
-//         });
-//     }
-// }
+const useStyles = makeStyles({
+    customLink: {
+        color: '#fff !important',
+        backgroundColor: '#000',
+        border: '1px solid',
+        borderColor: '#000',
+        borderRadius: '5px',
+        margin: '5px',
+        "&:hover": {
+            color: '#000 !important',
+            backgroundColor: '#fff',
+            border: '1px solid',
+            borderColor: '#000',
+        },
+        "&:active": {
+            color: '#fff !important',
+            backgroundColor: '#000',
+            border: '1px solid',
+            borderColor: '#000',
+        }
+    }
+});
 
 const NavMenuFc : React.FC = () => {
+    const classes = useStyles();
     const [isOpen, setIsOpen] = React.useState(false);
 
     const toggle = () => {
@@ -63,13 +52,13 @@ const NavMenuFc : React.FC = () => {
                     <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={isOpen} navbar>
                         <ul className="navbar-nav flex-grow">
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                                <NavLink tag={Link} className={classes.customLink} to="/">Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/user-hub">User hub</NavLink>
+                                <NavLink tag={Link} className={classes.customLink} to="/user-hub">User hub</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to={ApplicationPaths.Profile}>My profile</NavLink>
+                                <NavLink tag={Link} className={classes.customLink} to={ApplicationPaths.Profile}>My profile</NavLink>
                             </NavItem>
                         </ul>
                     </Collapse>

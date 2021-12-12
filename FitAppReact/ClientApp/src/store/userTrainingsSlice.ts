@@ -26,6 +26,10 @@ export const fetchMatchingTrainingsUserData = createAsyncThunk('training/match/u
     }
 });
 
+export const resetTrainings = createAsyncThunk('training/reset', async () => {
+
+});
+
 export const {
     selectAll: selectAllUserTrainings,
     selectById: selectUserTrainingById,
@@ -47,6 +51,9 @@ const userTrainingsSlice = createSlice({
             if (action.payload) {
                 userTrainingsAdapter.upsertMany(state, action);
             }
+        })
+        .addCase(resetTrainings.fulfilled, (state, action) => {
+            userTrainingsAdapter.removeAll(state);
         })
     }
 });

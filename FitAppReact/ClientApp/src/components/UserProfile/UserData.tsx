@@ -5,6 +5,9 @@ import { Container, Col, Row } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Select, MenuItem, FormControl, FormHelperText, InputLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -24,6 +27,7 @@ import { UserTrainingCondition } from '../../models/UserTrainingCondition';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
 import { selectAllWeightTargets } from '../../store/weightTargetSlice';
 import { WeightTargetEnum } from '../../models/enums/WeightTargetEnum';
+import LoadingModal from '../common/LoadingModal';
 
 const useStyles = makeStyles({
     formControl: {
@@ -47,7 +51,27 @@ const useStyles = makeStyles({
     },
     submitButton: {
         float: 'right'
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paper: {
+        border: '2px solid #000',
+        backgroundColor: '#fff',
+        padding: '10px',
+        borderRadius: '5px'
+        
+      },
+      content: {
+        overflowY: "auto",
+        maxHeight: "80vh",
+        maxWidth: "inherit"
+      },
+      exitButton: {
+        float: 'right'
+      }
 });
 
 const UserData: React.FC = () => {
@@ -60,6 +84,14 @@ const UserData: React.FC = () => {
     const trainingConditionSeverities = useSelector(selectAllTrainingConditionSeverities);
     const bodyTargets = useSelector(selectAllBodyTargets);
     const weightTargets = useSelector(selectAllWeightTargets);
+
+    const [firstRender, setFirstRender] = React.useState(true);
+    const [loaded, setLoaded] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const mappedMedicalConditions = medicalConditions.map(x => {
         return {id: x.id, name: x.name} as AutocompleteItem;
@@ -112,7 +144,10 @@ const UserData: React.FC = () => {
     React.useEffect(() => {
         if(user.weight !== 1) {
             dispatch(fetchUserMacros(null));
-            
+            if (firstRender)
+                setFirstRender(false);
+            else
+                setLoaded(true);
         } //TODO: first login logic to ensure data has been filled
             
     }, [user]);
@@ -162,15 +197,14 @@ const UserData: React.FC = () => {
         }),
         validateOnChange: false,
         onSubmit: (values) => {
+            setLoaded(false);
+            handleOpen();
             dispatch(updateUser(values));
         }
     });
     return(<Container className={classes.container}>
-        {/* <Row className={classes.row}>
-            <Col>
-                <h4 className={classes.title}>Your data</h4>
-            </Col>
-        </Row> */}
+        {/*Did not use ModalWithContent here due to modal showing on a submit button, not a dedicated modal button*/}
+        <LoadingModal open={open} setOpen={setOpen} loaded={loaded} />
         <form onSubmit={formik.handleSubmit} id="user-data-form">
             <Row className={classes.row}>
                 <Col className={classes.column} xs="6">

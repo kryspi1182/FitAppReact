@@ -35,7 +35,9 @@ const useStyles = makeStyles({
         paddingBottom: '10px'
     },
     chip: {
-        margin: '5px'
+        margin: '5px',
+        color: '#fff',
+        backgroundColor: '#000'
     }
 });
 
@@ -52,7 +54,7 @@ const MealWithProductItem: React.FC<Props> = (props) => {
                         </Col>
                         <Col>
                             {props.meal.products.map(product => {
-                                return <Chip label={product.name} key={product.id + "-" + props.meal.meal.id} color="primary" className={classes.chip}/>
+                                return <Chip label={product.name} key={product.id + "-" + props.meal.meal.id} className={classes.chip}/>
                             })}
                         </Col>
                     </Row>

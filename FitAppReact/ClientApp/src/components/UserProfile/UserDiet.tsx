@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Container, Col, Row } from 'reactstrap';
 
-import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals, fetchMatchingMeals } from '../../store/userMealsSlice';
+import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals, fetchMatchingMeals, resetMeals } from '../../store/userMealsSlice';
 import { selectUserMacros } from '../../store/userMacrosSlice';
 import { selectAllCustomMeals } from '../../store/customMealsSlice';
 import { fetchProducts } from '../../store/productsSlice';
@@ -19,6 +19,7 @@ import { DietTypeEnum } from '../../models/enums/DietTypeEnum';
 import { UserDietParams } from '../../models/UserDietParams';
 import CustomDiet from './CustomDiet';
 import ErrorBox from '../common/ErrorBox';
+import LoadingModal from '../common/LoadingModal';
 
 const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max);
@@ -46,6 +47,13 @@ const UserDiet: React.FC = () => {
     const [generateCustomDiet, setGenerateCustomDiet] = React.useState(false);
     const [step, setStep] = React.useState(1);
     const [title, setTitle] = React.useState("Generate diet based on your:");
+    const [firstRender, setFirstRender] = React.useState(true);
+    const [loaded, setLoaded] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const macros = useSelector(selectUserMacros);
     const meals = useSelector(selectAllUserMeals);
@@ -85,6 +93,9 @@ const UserDiet: React.FC = () => {
 
     React.useEffect(() => {
         if (macros.calories > 0 && startDietProcess) {
+            setLoaded(false);
+            handleOpen();
+            dispatch(resetMeals());
             const breakfastParams = {
                 macros: macros,
                 unwantedProductIds: user.unwantedProducts.map(x => x.productId),
@@ -129,6 +140,14 @@ const UserDiet: React.FC = () => {
         }
         
     }, [startDietProcess]);
+
+    React.useEffect(() => {
+        if (startCustomDietProcess) {
+            setLoaded(false);
+            handleOpen();
+        }
+    }, [startCustomDietProcess]);
+
     React.useEffect(() => {
         if(meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Breakfast) 
         && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.SecondBreakfast)
@@ -137,6 +156,7 @@ const UserDiet: React.FC = () => {
         && meals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner)
         && startDietProcess)
         {
+            setLoaded(true);
             setGenerateDiet(true);
             setGenerateCustomDiet(false); 
         }
@@ -150,6 +170,7 @@ const UserDiet: React.FC = () => {
         && customMeals.some((meal) => meal.mealCategoryId === MealCategoryEnum.Dinner)
         && startCustomDietProcess)
         {
+            setLoaded(true);
             setGenerateCustomDiet(true);
             setGenerateDiet(false);
         }
@@ -157,6 +178,8 @@ const UserDiet: React.FC = () => {
     }, [customMeals]);
     return(<>
     <Container>
+        {/*Did not use ModalWithContent here due to modal showing on a submit button, not a dedicated modal button*/}
+        <LoadingModal open={open} setOpen={setOpen} loaded={loaded} />
         <Row className={classes.row}>
             <Col xs="12">
                 <h4>{title}</h4>

@@ -19,7 +19,7 @@ import { Macros } from '../../models/Macros';
 import { dietApi } from '../api-communication/DietApi';
 import { UserDietParams } from '../../models/UserDietParams';
 import { MealCategoryEnum } from '../../models/enums/MealCategoryEnum';
-import { fetchMatchingMeals } from '../../store/userMealsSlice';
+import { fetchMatchingMeals, resetMeals } from '../../store/userMealsSlice';
 
 const useStyles = makeStyles({
     formControl: {
@@ -125,6 +125,7 @@ const CustomDiet: React.FC<Props> = (props) => {
         }),
         onSubmit: (values) => {
             //console.log(values);
+            dispatch(resetMeals());
             const macros = {
                 calories: formik.values.calories,
                 fat: formik.values.fat,

@@ -56,6 +56,10 @@ export const fetchMatchingMeals = createAsyncThunk('meal/match', async (params: 
     }
 });
 
+export const resetMeals = createAsyncThunk('meal/reset', async () => {
+
+});
+
 export const {
     selectAll: selectAllUserMeals,
     selectById: selectUserMealById,
@@ -85,6 +89,9 @@ const userMealsSlice = createSlice({
         .addCase(fetchMatchingMeals.fulfilled, (state, action: PayloadAction<Array<Meal>>) => {
             if (action.payload)
                 userMealsAdapter.upsertMany(state, action);
+        })
+        .addCase(resetMeals.fulfilled, (state, action) => {
+            userMealsAdapter.removeAll(state);
         })
     }
 });

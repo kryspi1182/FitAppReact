@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Container, Col, Row } from 'reactstrap';
 
-import { fetchMatchingTrainings, fetchMatchingTrainingsUserData, selectAllUserTrainings } from '../../store/userTrainingsSlice';
+import { fetchMatchingTrainings, fetchMatchingTrainingsUserData, resetTrainings, selectAllUserTrainings } from '../../store/userTrainingsSlice';
 import { UserTrainingParams } from '../../models/UserTrainingParams';
 import { TrainingCategoryEnum } from '../../models/enums/TrainingCategoryEnum';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
@@ -17,6 +17,7 @@ import CustomTraining from './CustomTraining';
 import { selectUser } from '../../store/userSlice';
 import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
 import ErrorBox from '../common/ErrorBox';
+import LoadingModal from '../common/LoadingModal';
 
 const useStyles = makeStyles({
     button: {
@@ -45,6 +46,27 @@ const UserTraining: React.FC = () => {
     const [showTraining, setShowTraining] = React.useState(false);
     const [showError, setShowError] = React.useState(false);
     const [notFirstRender, setNotFirstRender] = React.useState(false);
+    const [loaded, setLoaded] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const startLoading = () => {
+        setLoaded(false);
+        handleOpen();
+    };
+
+    const notify = () => {
+        setNotFirstRender(true);
+        setTimeout(() => {
+            if (!loaded) {
+                setShowError(true);
+                setLoaded(true);
+            }
+        }, 10000);
+    };
 
     const userTrainings = useSelector(selectAllUserTrainings);
     const trainingConditions = useSelector(selectAllTrainingConditions);
@@ -77,19 +99,22 @@ const UserTraining: React.FC = () => {
                 setShowTraining(false);
                 setShowError(false);
                 setNotFirstRender(false);
+                
                 break;
         }
+        setLoaded(false);
     }, [chosenOption]);
     React.useEffect(() => {
         if(startTrainingProcess) {
-            setNotFirstRender(true);
-            console.log(showError);
+            //setNotFirstRender(true);
+            startLoading();
+            dispatch(resetTrainings());
             let params = {
                 difficulty: user.difficultyId,
                 trainingConditions: trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id)),
             } as UserTrainingParams;
             dispatch(fetchMatchingTrainingsUserData(params));
-            
+            notify();
         }
     }, [startTrainingProcess]);
 
@@ -97,6 +122,7 @@ const UserTraining: React.FC = () => {
         if(userTrainings.length > 0) {
             setShowTraining(true);
             setShowError(false);
+            setLoaded(true);
         }
         else {
             setShowTraining(false);
@@ -106,6 +132,8 @@ const UserTraining: React.FC = () => {
     
     return(<>
         <Container>
+            {/*Did not use ModalWithContent here due to modal showing on a submit button, not a dedicated modal button*/}
+            <LoadingModal open={open} setOpen={setOpen} loaded={loaded} />
         <Row className={classes.row}>
             <Col><h4>{title}</h4></Col>
         </Row>
@@ -145,13 +173,13 @@ const UserTraining: React.FC = () => {
                 color="primary"
                 className={classes.button}
             >Back</Button>
-            <CustomTraining notify={setNotFirstRender}/>
+            <CustomTraining notify={notify} startLoading={startLoading}/>
         </Col>)}
         </Row>
         <Row className={classes.row}>
             <Col className={classes.result}>
             {(showTraining && notFirstRender && <TrainingResult trainingConditions={trainingConditions.filter(x => user.trainingConditions.some(y => y.trainingConditionId === x.id))} />)}
-            {(showError && notFirstRender && <ErrorBox message="No matching trainings were found." />)}
+            {(showError && notFirstRender && !showTraining && <ErrorBox message="No matching trainings were found." />)}
             </Col>
         </Row>
     </Container>

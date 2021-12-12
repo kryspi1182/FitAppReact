@@ -111,7 +111,6 @@ const MealDetails: React.FC<Props> = (props) => {
                                     return <Chip label={product.name + " " + quantity.quantity * 100 + "g"} 
                                         key={product.id + "" + quantity.mealId} 
                                         className={classes.chip}
-                                        color="primary"
                                         />
                                 }
                             })}
