@@ -7,7 +7,7 @@ using FitAppReact.Interfaces.Infrastructure.DietService;
 
 namespace FitAppReact.DietService
 {
-    public class MacroCounter: IMacroCounter
+    public class MacroSrv: IMacroSrv
     {
         public Macros GetDailyMacros(UserParams userParams)
         {

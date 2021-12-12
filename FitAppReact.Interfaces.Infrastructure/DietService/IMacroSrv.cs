@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Interfaces.Infrastructure.DietService
 {
-    public interface IMacroCounter
+    public interface IMacroSrv
     {
         public Macros GetDailyMacros(UserParams userParams);
     }

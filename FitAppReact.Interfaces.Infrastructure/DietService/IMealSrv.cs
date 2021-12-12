@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitAppReact.Interfaces.Infrastructure
 {
-    public interface IMealPicker
+    public interface IMealSrv
     {
         public IEnumerable<MealDTO> GetDietMealsForCategory(Macros requirements, MealCategoryEnum mealCategory);
         public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams);

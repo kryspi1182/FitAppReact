@@ -17,9 +17,9 @@ namespace FitAppReact.Facades
             emailSrv = _emailSrv;
         }
 
-        public void SendVerificationEmail(string email, string subject, string content)
+        public void SendEmail(string email, string subject, string content)
         {
-            emailSrv.SendVerificationEmail(email, subject, content);
+            emailSrv.SendEmail(email, subject, content);
         }
     }
 }

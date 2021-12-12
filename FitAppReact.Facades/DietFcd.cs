@@ -14,11 +14,11 @@ namespace FitAppReact.Facades
 {
     public class DietFcd: IDietFcd
     {
-        private readonly IMacroCounter macroCounter;
-        private readonly IMealPicker mealPicker;
+        private readonly IMacroSrv macroCounter;
+        private readonly IMealSrv mealPicker;
         private readonly IProductSrv productSrv;
 
-        public DietFcd(IMacroCounter _macroCounter, IMealPicker _mealPicker, IProductSrv _productSrv)
+        public DietFcd(IMacroSrv _macroCounter, IMealSrv _mealPicker, IProductSrv _productSrv)
         {
             macroCounter = _macroCounter;
             mealPicker = _mealPicker;

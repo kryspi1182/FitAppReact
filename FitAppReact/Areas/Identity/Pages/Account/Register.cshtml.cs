@@ -98,7 +98,7 @@ namespace FitAppReact.Areas.Identity.Pages.Account
 
                     var subject = "Potwierdzenie stworzenia konta";
                     var content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-                    _emailFcd.SendVerificationEmail(user.Email, subject, content);
+                    _emailFcd.SendEmail(user.Email, subject, content);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

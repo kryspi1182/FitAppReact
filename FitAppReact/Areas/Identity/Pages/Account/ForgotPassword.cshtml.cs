@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using FitAppReact.Interfaces.Facades;
 
 namespace FitAppReact.Areas.Identity.Pages.Account
 {
@@ -19,11 +20,13 @@ namespace FitAppReact.Areas.Identity.Pages.Account
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IEmailFcd _emailFcd;
 
-        public ForgotPasswordModel(UserManager<AppUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<AppUser> userManager, IEmailSender emailSender, IEmailFcd emailFcd)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _emailFcd = emailFcd;
         }
 
         [BindProperty]
@@ -57,10 +60,12 @@ namespace FitAppReact.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                _emailFcd.SendEmail(Input.Email, "Reset Password", $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

@@ -14,11 +14,11 @@ using FitAppReact.Interfaces.Infrastructure;
 
 namespace FitAppReact.DietService
 {
-    public class MealPicker: IMealPicker
+    public class MealSrv: IMealSrv
     {
         private readonly AppDbContext appDbContext;
         private readonly IMapper mapper;
-        public MealPicker (AppDbContext _appDbContext, IMapper _mapper)
+        public MealSrv (AppDbContext _appDbContext, IMapper _mapper)
         {
             appDbContext = _appDbContext;
             mapper = _mapper;
