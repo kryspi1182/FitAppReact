@@ -64,8 +64,8 @@ namespace FitAppReact.DI
             #endregion
 
             #region Services
-            serviceCollection.AddScoped<IMealPicker, MealPicker>();
-            serviceCollection.AddScoped<IMacroCounter, MacroCounter>();
+            serviceCollection.AddScoped<IMealSrv, MealSrv>();
+            serviceCollection.AddScoped<IMacroSrv, MacroSrv>();
             serviceCollection.AddScoped<IAppUserSrv, AppUserSrv>();
             serviceCollection.AddScoped<IProductSrv, ProductSrv>();
             serviceCollection.AddScoped<IMedicalConditionSrv, MedicalConditionSrv>();

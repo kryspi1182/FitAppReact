@@ -1,13 +1,13 @@
 ﻿import * as connection from './ApiConnection';
-import { User } from '../../models/User';
+import { User } from '../../models/User/User';
 import { EntityId } from '@reduxjs/toolkit';
-import { UserParams } from '../../models/UserParams';
-import { MedicalCondition } from '../../models/MedicalCondition';
-import { UserSavedDietParams } from '../../models/UserSavedDietParams';
-import { UserSavedDiet } from '../../models/UserSavedDiet';
-import { UserSavedTrainingParams } from '../../models/UserSavedTrainingParams';
-import { UserSavedTraining } from '../../models/UserSavedTraining';
-import { WeightTarget } from '../../models/WeightTarget';
+import { UserParams } from '../../models/User/UserParams';
+import { MedicalCondition } from '../../models/Diet/MedicalCondition';
+import { UserSavedDietParams } from '../../models/User/UserSavedDietParams';
+import { UserSavedDiet } from '../../models/User/UserSavedDiet';
+import { UserSavedTrainingParams } from '../../models/User/UserSavedTrainingParams';
+import { UserSavedTraining } from '../../models/User/UserSavedTraining';
+import { WeightTarget } from '../../models/User/WeightTarget';
 
 export const userApi = {
     async getUser(id: EntityId) {

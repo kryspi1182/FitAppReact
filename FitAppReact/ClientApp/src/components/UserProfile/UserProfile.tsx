@@ -1,22 +1,22 @@
 ﻿import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, selectUser } from '../../store/userSlice';
-import { UserStorage } from '../../models/UserStorage';
-import { ProfileStorage } from '../../models/ProfileStorage';
+
+import { fetchUser, selectUser } from '../../store/User/UserSlice';
+import { UserStorage } from '../../models/User/UserStorage';
 import UserProfileEdit from './UserProfileEdit';
-import { fetchProducts } from '../../store/productsSlice';
-import { fetchMedicalConditions } from '../../store/medicalConditionsSlice';
-import { fetchUserSavedDiets } from '../../store/userSavedDietsSlice';
-import { fetchMeals } from '../../store/mealsSlice';
-import { fetchExercises } from '../../store/exercisesSlice';
-import { fetchBodyTargets } from '../../store/bodyTargetsSlice';
-import { fetchUserSavedTrainings } from '../../store/userSavedTrainingsSlice';
-import { fetchTrainings } from '../../store/trainingsSlice';
-import { fetchTrainingCategories } from '../../store/trainingCategoriesSlice';
-import { fetchDifficulties } from '../../store/difficultiesSlice';
-import { fetchTrainingConditions } from '../../store/trainingConditionsSlice';
-import { fetchTrainingConditionSeverities } from '../../store/trainingConditionSeveritiesSlice';
-import { fetchWeightTargets } from '../../store/weightTargetSlice';
+import { fetchProducts } from '../../store/Diet/ProductsSlice';
+import { fetchMedicalConditions } from '../../store/Diet/MedicalConditionsSlice';
+import { fetchUserSavedDiets } from '../../store/User/UserSavedDietsSlice';
+import { fetchMeals } from '../../store/Diet/MealsSlice';
+import { fetchExercises } from '../../store/Training/ExercisesSlice';
+import { fetchBodyTargets } from '../../store/Training/BodyTargetsSlice';
+import { fetchUserSavedTrainings } from '../../store/User/UserSavedTrainingsSlice';
+import { fetchTrainings } from '../../store/Training/TrainingsSlice';
+import { fetchTrainingCategories } from '../../store/Training/TrainingCategoriesSlice';
+import { fetchDifficulties } from '../../store/Training/DifficultiesSlice';
+import { fetchTrainingConditions } from '../../store/Training/TrainingConditionsSlice';
+import { fetchTrainingConditionSeverities } from '../../store/Training/TrainingConditionSeveritiesSlice';
+import { fetchWeightTargets } from '../../store/User/WeightTargetSlice';
 
 const UserProfile: React.FC = () => {
     const dispatch = useDispatch();

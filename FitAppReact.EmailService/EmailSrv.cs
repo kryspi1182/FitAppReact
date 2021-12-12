@@ -14,7 +14,7 @@ namespace FitAppReact.EmailService
         {
             emailConfiguration = _emailConfiguration;
         }
-        public void SendVerificationEmail(string email, string subject, string content)
+        public void SendEmail(string email, string subject, string content)
         {
             var message = new MimeMessage();
             var name = email.Split('@')[0];

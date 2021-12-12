@@ -8,33 +8,67 @@ import Button from '@material-ui/core/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import {selectUser, updateUser} from '../../store/userSlice';
-import {selectUserMacros, fetchUserMacros} from '../../store/userMacrosSlice';
-import { selectAllMedicalConditions, fetchMedicalConditions } from '../../store/medicalConditionsSlice';
-import { UserParams } from '../../models/UserParams';
+import {selectUser, updateUser} from '../../store/User/UserSlice';
+import {selectUserMacros, fetchUserMacros} from '../../store/User/UserMacrosSlice';
+import { selectAllMedicalConditions, fetchMedicalConditions } from '../../store/Diet/MedicalConditionsSlice';
+import { UserParams } from '../../models/User/UserParams';
 import { AutocompleteItem } from '../common/Autocomplete/AutocompleteItem';
 import AutocompleteInput from '../common/Autocomplete/AutocompleteInput';
-import { selectAllProducts } from '../../store/productsSlice';
-import { UserMedicalCondition } from '../../models/UserMedicalCondition';
-import { UserUnwantedProduct } from '../../models/UserUnwantedProduct';
-import { selectAllTrainingConditions } from '../../store/trainingConditionsSlice';
-import { selectAllTrainingConditionSeverities } from '../../store/trainingConditionSeveritiesSlice';
-import { selectAllBodyTargets } from '../../store/bodyTargetsSlice';
-import { UserTrainingCondition } from '../../models/UserTrainingCondition';
+import { selectAllProducts } from '../../store/Diet/ProductsSlice';
+import { UserMedicalCondition } from '../../models/User/UserMedicalCondition';
+import { UserUnwantedProduct } from '../../models/User/UserUnwantedProduct';
+import { selectAllTrainingConditions } from '../../store/Training/TrainingConditionsSlice';
+import { selectAllTrainingConditionSeverities } from '../../store/Training/TrainingConditionSeveritiesSlice';
+import { selectAllBodyTargets } from '../../store/Training/BodyTargetsSlice';
+import { UserTrainingCondition } from '../../models/User/UserTrainingCondition';
 import { DifficultyEnum } from '../../models/enums/DifficultyEnum';
-import { selectAllWeightTargets } from '../../store/weightTargetSlice';
+import { selectAllWeightTargets } from '../../store/User/WeightTargetSlice';
 import { WeightTargetEnum } from '../../models/enums/WeightTargetEnum';
+import LoadingModal from '../common/Modal/LoadingModal';
 
 const useStyles = makeStyles({
     formControl: {
         display: 'block'
     },
     container: {
-        padding: '10px'
+        //padding: '10px'
     },
     column: {
-        margin: '10px',
-    }
+        //margin: '10px'
+    },
+    formInput: {
+        width: '100%'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
+    },
+    title: {
+        textAlign: 'center'
+    },
+    submitButton: {
+        float: 'right'
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      paper: {
+        border: '2px solid #000',
+        backgroundColor: '#fff',
+        padding: '10px',
+        borderRadius: '5px'
+        
+      },
+      content: {
+        overflowY: "auto",
+        maxHeight: "80vh",
+        maxWidth: "inherit"
+      },
+      exitButton: {
+        float: 'right'
+      }
 });
 
 const UserData: React.FC = () => {
@@ -47,6 +81,14 @@ const UserData: React.FC = () => {
     const trainingConditionSeverities = useSelector(selectAllTrainingConditionSeverities);
     const bodyTargets = useSelector(selectAllBodyTargets);
     const weightTargets = useSelector(selectAllWeightTargets);
+
+    const [firstRender, setFirstRender] = React.useState(true);
+    const [loaded, setLoaded] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const mappedMedicalConditions = medicalConditions.map(x => {
         return {id: x.id, name: x.name} as AutocompleteItem;
@@ -99,7 +141,10 @@ const UserData: React.FC = () => {
     React.useEffect(() => {
         if(user.weight !== 1) {
             dispatch(fetchUserMacros(null));
-            
+            if (firstRender)
+                setFirstRender(false);
+            else
+                setLoaded(true);
         } //TODO: first login logic to ensure data has been filled
             
     }, [user]);
@@ -149,13 +194,17 @@ const UserData: React.FC = () => {
         }),
         validateOnChange: false,
         onSubmit: (values) => {
+            setLoaded(false);
+            handleOpen();
             dispatch(updateUser(values));
         }
     });
     return(<Container className={classes.container}>
+        {/*Did not use ModalWithContent here due to modal showing on a submit button, not a dedicated modal button*/}
+        <LoadingModal open={open} setOpen={setOpen} loaded={loaded} />
         <form onSubmit={formik.handleSubmit} id="user-data-form">
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-age"
@@ -168,6 +217,8 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.age}
                             variant="outlined"
+                            color="primary"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -181,6 +232,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('gender', event.target.value as number);
                             }}
                             value={formik.values.gender}
+                            className={classes.formInput}
                         >
                             <MenuItem value={1}>Male</MenuItem>
                             <MenuItem value={2}>Female</MenuItem>
@@ -189,8 +241,8 @@ const UserData: React.FC = () => {
                 </Col>
                 
             </Row>
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-weight"
@@ -203,6 +255,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.weight}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl>
                 </Col>
@@ -216,6 +269,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('activity', event.target.value as number);
                             }}
                             value={formik.values.activity}
+                            className={classes.formInput}
                         >
                             <MenuItem value={1.2}>None</MenuItem>
                             <MenuItem value={1.35}>Light</MenuItem>
@@ -225,8 +279,8 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="3">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
                         <TextField
                             id="user-data-height"
@@ -239,6 +293,7 @@ const UserData: React.FC = () => {
                             }}
                             value={formik.values.height}
                             variant="outlined"
+                            className={classes.formInput}
                         />
                     </FormControl> 
                 </Col>
@@ -252,6 +307,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('weightTargetId', event.target.value as number);
                             }}
                             value={formik.values.weightTargetId}
+                            className={classes.formInput}
                         >
                             <MenuItem value={WeightTargetEnum.LoseWeight}>Lose weight</MenuItem>
                             <MenuItem value={WeightTargetEnum.MaintainWeight}>Maintain weight</MenuItem>
@@ -260,8 +316,8 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedMedicalConditions} 
@@ -269,12 +325,13 @@ const UserData: React.FC = () => {
                             title="Medical conditions"
                             setSelected={mapItemsToMedicalConditions}
                             selectedValues={selectedMappedMedicalConditions}
+                            
                         />
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
                     <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedProducts} 
@@ -286,9 +343,9 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
-                    <FormControl>
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="12">
+                    <FormControl className={classes.formControl}>
                         <AutocompleteInput 
                             items={mappedTrainingConditions}
                             id="user-training-conditions"
@@ -299,9 +356,10 @@ const UserData: React.FC = () => {
                     </FormControl>
                 </Col>
             </Row>
-            <Row>
-                <Col className={classes.column} xs="9">
+            <Row className={classes.row}>
+                <Col className={classes.column} xs="6">
                     <FormControl className={classes.formControl}>
+                        <InputLabel>Difficulty</InputLabel>
                         <Select
                             id="user-difficulty"
                             label="Difficulty"
@@ -309,6 +367,7 @@ const UserData: React.FC = () => {
                                 formik.setFieldValue('difficulty', event.target.value as number);
                             }}
                             value={formik.values.difficulty}
+                            className={classes.formInput}
                         >
                             <MenuItem value={DifficultyEnum.Beginner}>Beginner</MenuItem>
                             <MenuItem value={DifficultyEnum.Intermediate}>Intermediate</MenuItem>
@@ -319,12 +378,13 @@ const UserData: React.FC = () => {
                 </Col>
             </Row>
             
-            <Row>
+            <Row className={classes.row}>
                 <Col className={classes.column}>
                     <Button
                     type="submit"
                     variant="contained"
                     color="primary"
+                    className={classes.submitButton}
                     >
                         Submit
                     </Button>

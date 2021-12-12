@@ -11,13 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import SideMenu, {menuOption} from '../common/SideMenu';
 import UserData from './UserData';
-import UserTraining from './UserTraining';
-import UserDiet from './UserDiet';
-import { fetchUser, selectUser } from '../../store/userSlice';
-import UserSavedDiets from './UserSavedDiets';
-import UserSavedTrainings from './UserSavedTrainings';
-import ModalWithContent from '../common/ModalWithContent';
-import HelpModal from '../common/HelpModal';
+import UserTraining from './Training/UserTraining';
+import UserDiet from './Diet/UserDiet';
+import { fetchUser, selectUser } from '../../store/User/UserSlice';
+import UserSavedDiets from './Diet/UserSavedDiets';
+import UserSavedTrainings from './Training/UserSavedTrainings';
+import ModalWithContent from '../common/Modal/ModalWithContent';
+import HelpModal from '../common/Modal/HelpModal';
 import DataHelp from '../Sections/Help/DataHelp';
 import DietHelp from '../Sections/Help/DietHelp';
 import SavedDietsHelp from '../Sections/Help/SavedDietsHelp';
@@ -37,6 +37,13 @@ const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    title: {
+        textAlign: 'center'
+    },
+    row: {
+        marginBottom: '10px',
+        paddingBottom: '10px'
     }
 });
 
@@ -116,11 +123,11 @@ const UserProfileEdit: React.FC = () => {
     } as menuOption);
     return(<>
         <Container className={classes.container}>
-            <Row>
-                <Col><h4>Hello {user.userName}</h4></Col>
-                <Col><h4>{title}</h4></Col>
+            <Row className={classes.row}>
+                <Col xs="3"><h4 className={classes.title}>Hello {user.userName}</h4></Col>
+                <Col xs="9"><h4 className={classes.title}>{title}</h4></Col>
             </Row>
-            <Row>
+            <Row className={classes.row}>
                 <Col xs="3">
                     <Row>
                         <Col>

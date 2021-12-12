@@ -9,10 +9,6 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined';
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 
-import { selectAllWeightTargets } from '../../../store/weightTargetSlice';
-import { selectAllDifficulties } from '../../../store/difficultiesSlice';
-import { selectAllTrainingConditionSeverities } from '../../../store/trainingConditionSeveritiesSlice';
-
 const useStyles = makeStyles({
 
 });

@@ -8,6 +8,6 @@ namespace FitAppReact.Interfaces.Facades
 {
     public interface IEmailFcd
     {
-        public void SendVerificationEmail(string email, string subject, string content);
+        public void SendEmail(string email, string subject, string content);
     }
 }
