@@ -311,7 +311,7 @@ const UserData: React.FC = () => {
                         >
                             <MenuItem value={WeightTargetEnum.LoseWeight}>Lose weight</MenuItem>
                             <MenuItem value={WeightTargetEnum.MaintainWeight}>Maintain weight</MenuItem>
-                            <MenuItem value={WeightTargetEnum.GainWeight}>Gain target</MenuItem>
+                            <MenuItem value={WeightTargetEnum.GainWeight}>Gain weight</MenuItem>
                         </Select>
                     </FormControl>
                 </Col>

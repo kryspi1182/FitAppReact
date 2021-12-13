@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Container, Col, Row } from 'reactstrap';
 
-import { fetchBreakfast, fetchLunch, fetchDinner, fetchSnack, selectAllUserMeals, fetchMatchingMeals, resetMeals } from '../../../store/User/UserMealsSlice';
+import { selectAllUserMeals, fetchMatchingMeals, resetMeals } from '../../../store/User/UserMealsSlice';
 import { selectUserMacros } from '../../../store/User/UserMacrosSlice';
 import { selectAllCustomMeals } from '../../../store/Diet/CustomMealsSlice';
 import DietResult from './DietResult';
