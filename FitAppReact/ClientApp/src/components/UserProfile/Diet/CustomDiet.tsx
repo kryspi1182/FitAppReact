@@ -12,14 +12,13 @@ import { userInfo } from 'os';
 
 import { selectAllMedicalConditions } from '../../../store/Diet/MedicalConditionsSlice';
 import { selectAllProducts } from '../../../store/Diet/ProductsSlice';
-import { fetchMatchingCustomMeals } from '../../../store/Diet/CustomMealsSlice';
+import { fetchMatchingCustomMeals, resetCustomMeals } from '../../../store/Diet/CustomMealsSlice';
 import { AutocompleteItem } from '../../common/Autocomplete/AutocompleteItem';
 import AutocompleteInput from '../../common/Autocomplete/AutocompleteInput';
 import { Macros } from '../../../models/Diet/Macros';
 import { dietApi } from '../../api-communication/DietApi';
 import { UserDietParams } from '../../../models/User/UserDietParams';
 import { MealCategoryEnum } from '../../../models/enums/MealCategoryEnum';
-import { fetchMatchingMeals, resetMeals } from '../../../store/User/UserMealsSlice';
 
 const useStyles = makeStyles({
     formControl: {
@@ -125,7 +124,7 @@ const CustomDiet: React.FC<Props> = (props) => {
         }),
         onSubmit: (values) => {
             //console.log(values);
-            dispatch(resetMeals());
+            dispatch(resetCustomMeals());
             const macros = {
                 calories: formik.values.calories,
                 fat: formik.values.fat,
