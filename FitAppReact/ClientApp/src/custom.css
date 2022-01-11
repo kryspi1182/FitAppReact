@@ -4,11 +4,50 @@ a {
 }
 
 code {
-  color: #E01A76;
+  color: #e01a76;
 }
 
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.MuiOutlinedInput-root {
+  border-color: #000 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused input {
+  border-color: #000 !important;
+}
+.Mui-focused fieldset {
+  border-color: #000 !important;
+}
+label.Mui-focused {
+  color: #000 !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff !important;
+  border-radius: 10px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000 !important;
+  border-radius: 10px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+}
+
+html {
+  scrollbar-color: #000 !important;
 }

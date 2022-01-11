@@ -5,8 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
+    <ProjectReference Include="..\FitAppReact.DietService\FitAppReact.DietService.csproj" />
+    <ProjectReference Include="..\FitAppReact.EmailService\FitAppReact.EmailService.csproj" />
+    <ProjectReference Include="..\FitAppReact.EntityFramework\FitAppReact.EntityFramework.csproj" />
+    <ProjectReference Include="..\FitAppReact.Facades\FitAppReact.Facades.csproj" />
+    <ProjectReference Include="..\FitAppReact.Interfaces.Facades\FitAppReact.Interfaces.Facades.csproj" />
+    <ProjectReference Include="..\FitAppReact.Interfaces.Infrastructure\FitAppReact.Interfaces.Infrastructure.csproj" />
+    <ProjectReference Include="..\FitAppReact.TrainingService\FitAppReact.TrainingService.csproj" />
+    <ProjectReference Include="..\FitAppReact.UserService\FitAppReact.UserService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FitAppReact.Common\FitAppReact.Common.csproj" />
+    <ProjectReference Include="..\FitAppReact.EntityFramework\FitAppReact.EntityFramework.csproj" />
+    <ProjectReference Include="..\FitAppReact.Interfaces.Infrastructure\FitAppReact.Interfaces.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
