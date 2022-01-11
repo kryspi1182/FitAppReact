@@ -1,3 +1,5 @@
+//Program powsta³ na Wydziale Informatyki Politechniki Bia³ostockiej
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

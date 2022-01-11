@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using AutoMapper;
 using FitAppReact.Common.ModelsDTO;
 using FitAppReact.EntityFramework;
 using FitAppReact.Interfaces.Infrastructure.DietService;

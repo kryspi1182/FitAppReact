@@ -1,4 +1,6 @@
-﻿using FitAppReact.Common.Classes;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using FitAppReact.Common.Classes;
 using FitAppReact.Common.Enums;
 using FitAppReact.Common.ModelsDTO;
 using FitAppReact.Interfaces.Facades;
@@ -14,44 +16,44 @@ namespace FitAppReact.Facades
 {
     public class DietFcd: IDietFcd
     {
-        private readonly IMacroSrv macroCounter;
-        private readonly IMealSrv mealPicker;
+        private readonly IMacroSrv macroSrv;
+        private readonly IMealSrv mealSrv;
         private readonly IProductSrv productSrv;
 
-        public DietFcd(IMacroSrv _macroCounter, IMealSrv _mealPicker, IProductSrv _productSrv)
+        public DietFcd(IMacroSrv _macroSrv, IMealSrv _mealSrv, IProductSrv _productSrv)
         {
-            macroCounter = _macroCounter;
-            mealPicker = _mealPicker;
+            macroSrv = _macroSrv;
+            mealSrv = _mealSrv;
             productSrv = _productSrv;
         }
 
         public Macros GetDailyMacros(UserParams userParams)
         {
-            return macroCounter.GetDailyMacros(userParams);
+            return macroSrv.GetDailyMacros(userParams);
         }
         public IEnumerable<MealDTO> GetMatchingMeals(UserDietParams userDietParams)
         {
             if ((userDietParams.conditionIds.Count() == 0) && (userDietParams.unwantedProductIds.Count() == 0))
-                return mealPicker.GetDietMealsForCategory(userDietParams.macros, userDietParams.mealCategory);
+                return mealSrv.GetDietMealsForCategory(userDietParams.macros, userDietParams.mealCategory);
             else 
-                return mealPicker.GetMatchingMeals(userDietParams);
+                return mealSrv.GetMatchingMeals(userDietParams);
         }
 
         public IEnumerable<MealDTO> GetDietMealsForBreakfast(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Breakfast);
+            return mealSrv.GetDietMealsForCategory(requirements, MealCategoryEnum.Breakfast);
         }
         public IEnumerable<MealDTO> GetDietMealsForLunch(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Lunch);
+            return mealSrv.GetDietMealsForCategory(requirements, MealCategoryEnum.Lunch);
         }
         public IEnumerable<MealDTO> GetDietMealsForDinner(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Dinner);
+            return mealSrv.GetDietMealsForCategory(requirements, MealCategoryEnum.Dinner);
         }
         public IEnumerable<MealDTO> GetDietMealsForSnack(Macros requirements)
         {
-            return mealPicker.GetDietMealsForCategory(requirements, MealCategoryEnum.Snack);
+            return mealSrv.GetDietMealsForCategory(requirements, MealCategoryEnum.Snack);
         }
         public IEnumerable<ProductDTO> GetProducts()
         {
@@ -59,7 +61,7 @@ namespace FitAppReact.Facades
         }
         public IEnumerable<MealDTO> GetMeals()
         {
-            return mealPicker.GetMeals();
+            return mealSrv.GetMeals();
         }
     }
 }

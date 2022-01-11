@@ -1,37 +1,53 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, EntityId, createDraftSafeSelector } from '@reduxjs/toolkit';
-import { PayloadAction } from '@reduxjs/toolkit/src';
+//Program powstał na Wydziale Informatyki Politechniki Białostockiej
 
-import { RootState } from '../ConfigureStore';
-import { trainingApi } from '../../components/api-communication/TrainingApi';
-import { TrainingConditionSeverity } from '../../models/Training/TrainingConditionSeverity';
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  EntityId,
+  createDraftSafeSelector,
+} from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit/src";
 
-const trainingConditionSeveritiesAdapter = createEntityAdapter<TrainingConditionSeverity>();
+import { RootState } from "../ConfigureStore";
+import { trainingApi } from "../../components/api-communication/TrainingApi";
+import { TrainingConditionSeverity } from "../../models/Training/TrainingConditionSeverity";
 
-export const fetchTrainingConditionSeverities = createAsyncThunk('trainingConditionSeverities', async () => {
+const trainingConditionSeveritiesAdapter =
+  createEntityAdapter<TrainingConditionSeverity>();
+
+export const fetchTrainingConditionSeverities = createAsyncThunk(
+  "trainingConditionSeverities",
+  async () => {
     try {
-        return await trainingApi.getTrainingConditionSeverities();
+      return await trainingApi.getTrainingConditionSeverities();
+    } catch (e) {
+      return e.json();
     }
-    catch (e) {
-        return e.json();
-    }
-});
+  }
+);
 
 export const {
-    selectAll: selectAllTrainingConditionSeverities,
-    selectById: selectTrainingConditionSeverityById,
-} = trainingConditionSeveritiesAdapter.getSelectors((state: RootState) => state.trainingConditionSeverities);
+  selectAll: selectAllTrainingConditionSeverities,
+  selectById: selectTrainingConditionSeverityById,
+} = trainingConditionSeveritiesAdapter.getSelectors(
+  (state: RootState) => state.trainingConditionSeverities
+);
 
 const trainingConditionSeveritiesSlice = createSlice({
-    name: 'trainingConditionSeverities',
-    initialState: trainingConditionSeveritiesAdapter.getInitialState(),
-    reducers: {},
-    extraReducers: builder => {
-        builder.addCase(fetchTrainingConditionSeverities.fulfilled, (state, action: PayloadAction<Array<TrainingConditionSeverity>>) => {
-            if (action.payload) {
-                trainingConditionSeveritiesAdapter.upsertMany(state, action);
-            }
-        })
-    }
+  name: "trainingConditionSeverities",
+  initialState: trainingConditionSeveritiesAdapter.getInitialState(),
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchTrainingConditionSeverities.fulfilled,
+      (state, action: PayloadAction<Array<TrainingConditionSeverity>>) => {
+        if (action.payload) {
+          trainingConditionSeveritiesAdapter.upsertMany(state, action);
+        }
+      }
+    );
+  },
 });
 
 export default trainingConditionSeveritiesSlice.reducer;

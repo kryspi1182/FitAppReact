@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using System;
 using FitAppReact.Common.Enums;
 using FitAppReact.Common.Classes;
 using FitAppReact.EntityFramework;

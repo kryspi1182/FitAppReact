@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

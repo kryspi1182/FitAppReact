@@ -3,11 +3,11 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://192.168.0.15/FitAppReact",
+      "applicationUrl": "http://192.168.0.12/FitAppReact",
       "sslPort": 0
     },
     "iisExpress": {
-      "applicationUrl": "http://192.168.0.15:25415",
+      "applicationUrl": "http://192.168.0.12:25415",
       "sslPort": 0
     }
   },
@@ -18,7 +18,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://192.168.0.15:25415"
+      "applicationUrl": "http://192.168.0.12:25415"
     },
     "FitAppReact": {
       "commandName": "Project",
@@ -26,14 +26,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://192.168.0.15:25415"
+      "applicationUrl": "http://192.168.0.12:25415"
     },
     "FitAppReactNative": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://192.168.0.15:5000"
+      "applicationUrl": "http://192.168.0.12:5000"
     }
   }
 }

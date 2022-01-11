@@ -1,4 +1,6 @@
-﻿using FitAppReact.Common.Enums;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using FitAppReact.Common.Enums;
 using FitAppReact.Common.ModelsDTO;
 using System;
 using System.Collections.Generic;

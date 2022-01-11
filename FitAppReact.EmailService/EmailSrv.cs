@@ -1,4 +1,6 @@
-﻿using FitAppReact.Common.Configurations;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using FitAppReact.Common.Configurations;
 using FitAppReact.Interfaces.Infrastructure.EmailService;
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -23,12 +25,10 @@ namespace FitAppReact.EmailService
 
             message.To.Add(new MailboxAddress($"{name}", email));
 
-            //var footer = string.Format(this.templateManager.EmailFooter, emailConfiguration.SmtpName, "", emailConfiguration.SmtpUserName);
-
             message.Subject = subject;
             message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = content //+ footer,
+                Text = content
             };
 
 
