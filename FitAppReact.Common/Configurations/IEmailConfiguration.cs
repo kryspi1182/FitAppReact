@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +15,6 @@ namespace FitAppReact.Common.Configurations
         public string UserName { get; set; }
         public string Password { get; set; }
         public string SmtpName { get; set; }
-        //public string TemplatePath { get; set; }
         public string Subject { get; set; }
-        //public string ChangeStatusSubject { get; set; }
-        //public string ChangeStatusTitle { get; set; }
     }
 }

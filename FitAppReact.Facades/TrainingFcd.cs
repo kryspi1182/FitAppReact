@@ -1,4 +1,6 @@
-﻿using FitAppReact.Common.Classes;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using FitAppReact.Common.Classes;
 using FitAppReact.Common.ModelsDTO;
 using FitAppReact.Interfaces.Facades;
 using FitAppReact.Interfaces.Infrastructure.TrainingService;

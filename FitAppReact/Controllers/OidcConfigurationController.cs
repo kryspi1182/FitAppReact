@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using System;
 using System.Collections.Generic;

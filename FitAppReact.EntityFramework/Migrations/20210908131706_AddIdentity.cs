@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FitAppReact.EntityFramework.Migrations

@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using AutoMapper;
 using FitAppReact.Common.Classes;
 using FitAppReact.Common.Enums;
 using FitAppReact.Common.ModelsDTO;

@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
+//Program powstał na Wydziale Informatyki Politechniki Białostockiej
 
-import Disclaimer from './Sections/HomePage/Disclaimer';
+import * as React from "react";
+import { connect } from "react-redux";
+
+import Disclaimer from "./Sections/HomePage/Disclaimer";
 
 const Home = () => (
   <div>

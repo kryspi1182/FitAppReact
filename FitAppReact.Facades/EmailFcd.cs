@@ -1,4 +1,6 @@
-﻿using FitAppReact.Interfaces.Facades;
+﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
+using FitAppReact.Interfaces.Facades;
 using FitAppReact.Interfaces.Infrastructure.EmailService;
 using System;
 using System.Collections.Generic;
