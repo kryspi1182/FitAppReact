@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 using FitAppReact.Common.Configurations;
 using FitAppReact.Interfaces.Infrastructure.EmailService;

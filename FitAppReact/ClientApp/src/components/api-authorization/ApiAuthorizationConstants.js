@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 export const ApplicationName = "FitAppReact";
 

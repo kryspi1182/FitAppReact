@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 import "bootstrap/dist/css/bootstrap.css";
 

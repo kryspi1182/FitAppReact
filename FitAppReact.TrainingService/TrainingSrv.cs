@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 using AutoMapper;
 using FitAppReact.Common.Classes;
@@ -28,7 +28,7 @@ namespace FitAppReact.TrainingService
         public IEnumerable<TrainingDTO> GetMatchingTrainings(UserTrainingParams userTrainingParams)
         {
             var trainings = appDbContext.Trainings
-                .Where(x => x.DifficultyId == ((int)userTrainingParams.difficulty) 
+                .Where(x => x.DifficultyId <= ((int)userTrainingParams.difficulty) 
                     && x.TrainingCategoryId == ((int)userTrainingParams.trainingCategory))
                 .Include(x => x.TrainingExercises)
                 .ToArray();
@@ -40,7 +40,7 @@ namespace FitAppReact.TrainingService
         public IEnumerable<TrainingDTO> GetMatchingTrainingsUserData(UserTrainingParams userTrainingParams)
         {
             var trainings = appDbContext.Trainings
-                .Where(x => x.DifficultyId == ((int)userTrainingParams.difficulty))
+                .Where(x => x.DifficultyId <= ((int)userTrainingParams.difficulty))
                 .Include(x => x.TrainingExercises)
                 .ToArray();
             var trainingConditions = mapper.Map<TrainingCondition[]>(userTrainingParams.trainingConditions);

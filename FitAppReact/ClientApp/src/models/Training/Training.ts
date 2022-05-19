@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 import { EntityId } from "@reduxjs/toolkit";
 import { TrainingExercise } from "./TrainingExercise";

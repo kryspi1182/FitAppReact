@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 export enum ExerciseCategoryEnum {
   Warmup = 1,

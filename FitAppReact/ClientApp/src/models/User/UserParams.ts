@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 import { UserMedicalCondition } from "./UserMedicalCondition";
 import { UserTrainingCondition } from "./UserTrainingCondition";

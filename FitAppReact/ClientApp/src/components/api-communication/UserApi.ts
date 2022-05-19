@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 import * as connection from "./ApiConnection";
 import { User } from "../../models/User/User";

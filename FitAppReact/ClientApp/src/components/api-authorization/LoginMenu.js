@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 import React, { Component, Fragment } from "react";
 import { NavItem, NavLink } from "reactstrap";

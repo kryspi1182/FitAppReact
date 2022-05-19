@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 import axios, { AxiosError } from "axios";
 import notificationService from "./ToastNotify";

@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;

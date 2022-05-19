@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 import { BodyTargetEnum } from "../enums/BodyTargetEnum";
 import { DifficultyEnum } from "../enums/DifficultyEnum";

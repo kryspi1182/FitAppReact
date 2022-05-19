@@ -1,4 +1,4 @@
-//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+
 
 import * as React from "react";
 import { Container, Col, Row } from "reactstrap";

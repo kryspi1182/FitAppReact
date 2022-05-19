@@ -1,4 +1,4 @@
-﻿//Program powstał na Wydziale Informatyki Politechniki Białostockiej
+﻿
 
 import { configureStore } from "@reduxjs/toolkit";
 import reduxThunk from "redux-thunk";
