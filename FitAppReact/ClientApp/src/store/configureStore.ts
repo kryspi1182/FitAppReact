@@ -1,6 +1,4 @@
-﻿
-
-import { configureStore } from "@reduxjs/toolkit";
+﻿import { configureStore } from "@reduxjs/toolkit";
 import reduxThunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";

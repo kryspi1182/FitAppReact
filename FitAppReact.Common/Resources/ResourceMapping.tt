@@ -1,0 +1,51 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Windows.Forms" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Resources" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.ComponentModel.Design" #>
+<#@ output extension=".cs" #>
+namespace ResourcesMapping
+{
+<#
+	var resxDir = this.Host.ResolvePath(".");
+	var resxFiles = Directory.GetFiles(resxDir, "*.resx");
+
+	foreach (var filePath in resxFiles)
+	{
+		var fileNameSegments = Path.GetFileName(filePath).Split('.');
+		var fileName = fileNameSegments[0];
+#>
+		public enum <#=fileName#>
+		{
+<#
+			using (var reader = new ResXResourceReader(filePath))
+			{
+				reader.UseResXDataNodes = true;
+
+				foreach (DictionaryEntry entry in reader)
+				{
+					var key = entry.Key;
+					var node = (ResXDataNode)entry.Value;
+					var value = node.GetValue((ITypeResolutionService) null);
+					var comment = node.Comment;
+					var summary = value;
+					if (!String.IsNullOrEmpty(comment)) summary += "-" + comment;
+#>
+					/// <summary>
+					/// <#= summary #>
+					/// </summary>
+					<#= key #>,
+<#
+				}
+			}
+#>
+		}
+<#
+	}
+#>	
+}

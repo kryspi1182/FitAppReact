@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,14 +16,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Resources\ResourceMapping.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceMapping.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Errors.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Labels.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\ResourceMapping.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceMapping.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Labels.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
@@ -32,12 +55,16 @@
   <ItemGroup>
     <None Update="Resources\ResourceMapping.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ResourceMapping.txt</LastGenOutput>
+      <LastGenOutput>ResourceMapping.cs</LastGenOutput>
     </None>
-    <None Update="Resources\ResourceMapping.txt">
+    <None Update="Resources\ResourceMappingToJs.js">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceMapping.tt</DependentUpon>
+      <DependentUpon>ResourceMappingToJs.tt</DependentUpon>
+    </None>
+    <None Update="Resources\ResourceMappingToJs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ResourceMappingToJs.js</LastGenOutput>
     </None>
   </ItemGroup>
 
