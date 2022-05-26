@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { UserSavedDiet } from "../../models/User/UserSavedDiet";
 import { userApi } from "../../components/api-communication/UserApi";
 import { UserSavedDietParams } from "../../models/User/UserSavedDietParams";
@@ -21,7 +19,7 @@ export const fetchUserSavedDiets = createAsyncThunk(
   async (id: EntityId) => {
     try {
       return await userApi.getUserSavedDiets(id);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }
@@ -32,7 +30,7 @@ export const addUserSavedDiet = createAsyncThunk(
   async (params: UserSavedDietParams) => {
     try {
       return await userApi.addUserSavedDiet(params);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }
@@ -43,7 +41,7 @@ export const deleteUserSavedDiet = createAsyncThunk(
   async (id: EntityId) => {
     try {
       return await userApi.deleteUserSavedDiet(id);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

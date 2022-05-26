@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { trainingApi } from "../../components/api-communication/TrainingApi";
 import { TrainingCondition } from "../../models/Training/TrainingCondition";
 
@@ -20,7 +18,7 @@ export const fetchTrainingConditions = createAsyncThunk(
   async () => {
     try {
       return await trainingApi.getTrainingConditions();
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

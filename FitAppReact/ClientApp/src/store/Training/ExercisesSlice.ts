@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { trainingApi } from "../../components/api-communication/TrainingApi";
 import { Exercise } from "../../models/Training/Exercise";
 
@@ -18,7 +16,7 @@ const exercisesAdapter = createEntityAdapter<Exercise>();
 export const fetchExercises = createAsyncThunk("exercises", async () => {
   try {
     return await trainingApi.getExercises();
-  } catch (e) {
+  } catch (e: any) {
     return e.json();
   }
 });

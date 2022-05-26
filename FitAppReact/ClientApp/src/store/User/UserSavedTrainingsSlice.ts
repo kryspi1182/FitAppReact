@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { UserSavedTraining } from "../../models/User/UserSavedTraining";
 import { userApi } from "../../components/api-communication/UserApi";
 import { UserSavedTrainingParams } from "../../models/User/UserSavedTrainingParams";
@@ -21,7 +19,7 @@ export const fetchUserSavedTrainings = createAsyncThunk(
   async (id: EntityId) => {
     try {
       return await userApi.getUserSavedTrainings(id);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }
@@ -32,7 +30,7 @@ export const addUserSavedTraining = createAsyncThunk(
   async (params: UserSavedTrainingParams) => {
     try {
       return await userApi.addUserSavedTraining(params);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }
@@ -43,7 +41,7 @@ export const deleteUserSavedTraining = createAsyncThunk(
   async (id: EntityId) => {
     try {
       return await userApi.deleteUserSavedTraining(id);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

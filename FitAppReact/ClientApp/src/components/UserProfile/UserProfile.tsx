@@ -1,6 +1,4 @@
-﻿
-
-import * as React from "react";
+﻿import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUser, selectUser } from "../../store/User/UserSlice";
@@ -24,9 +22,10 @@ const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
   const storage = window.sessionStorage;
   const localStorage = window.localStorage;
-  const userString = localStorage.getItem(
+  const userItem = localStorage.getItem(
     "FitAppReactuser:http://192.168.0.12:25415:FitAppReact"
   ); //TODO: figure out how to set a variable for that
+  const userString = userItem !== null ? userItem : "";
   const userObj = JSON.parse(userString) as UserStorage;
   React.useEffect(() => {
     dispatch(fetchProducts());

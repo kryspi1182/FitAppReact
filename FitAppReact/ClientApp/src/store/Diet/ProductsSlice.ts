@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { Product } from "../../models/Diet/Product";
 import { dietApi } from "../../components/api-communication/DietApi";
 
@@ -18,7 +16,7 @@ const productsAdapter = createEntityAdapter<Product>();
 export const fetchProducts = createAsyncThunk("products", async () => {
   try {
     return await dietApi.getProducts();
-  } catch (e) {
+  } catch (e: any) {
     return e.json();
   }
 });

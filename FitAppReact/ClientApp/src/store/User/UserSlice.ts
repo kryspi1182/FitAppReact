@@ -1,14 +1,12 @@
-﻿
-
-import {
+﻿import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
   EntityId,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { User } from "../../models/User/User";
 import { userApi } from "../../components/api-communication/UserApi";
 import { UserParams } from "../../models/User/UserParams";
@@ -37,7 +35,7 @@ export const fetchUser = createAsyncThunk(
   async (id: string) => {
     try {
       return await userApi.getUser(id);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }
@@ -49,7 +47,7 @@ export const updateUser = createAsyncThunk(
     try {
       const state = thunkAPI.getState() as RootState;
       return await userApi.updateUser(state.user.id, params);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

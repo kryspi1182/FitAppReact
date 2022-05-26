@@ -1,14 +1,12 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
   EntityId,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { Macros } from "../../models/Diet/Macros";
 import { dietApi } from "../../components/api-communication/DietApi";
 import { UserParams } from "../../models/User/UserParams";
@@ -37,7 +35,7 @@ export const fetchUserMacros = createAsyncThunk(
         weightTargetId: state.user.weightTargetId,
       } as UserParams;
       return await dietApi.getMacros(params);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

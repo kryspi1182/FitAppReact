@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,8 +5,8 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { RootState } from "../ConfigureStore";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { RootState } from "../configureStore";
+import { PayloadAction } from "@reduxjs/toolkit";
 import { userApi } from "../../components/api-communication/UserApi";
 import { WeightTarget } from "../../models/User/WeightTarget";
 
@@ -17,7 +15,7 @@ const weightTargetAdapter = createEntityAdapter<WeightTarget>();
 export const fetchWeightTargets = createAsyncThunk("WeightTarget", async () => {
   try {
     return await userApi.getWeightTargets();
-  } catch (e) {
+  } catch (e: any) {
     return e.json();
   }
 });

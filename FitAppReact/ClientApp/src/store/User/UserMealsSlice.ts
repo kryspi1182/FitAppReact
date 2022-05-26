@@ -1,5 +1,3 @@
-
-
 import {
   createAsyncThunk,
   createEntityAdapter,
@@ -7,9 +5,9 @@ import {
   EntityId,
   createDraftSafeSelector,
 } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/src";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "../ConfigureStore";
+import { RootState } from "../configureStore";
 import { Meal } from "../../models/Diet/Meal";
 import { dietApi } from "../../components/api-communication/DietApi";
 import { UserDietParams } from "../../models/User/UserDietParams";
@@ -21,7 +19,7 @@ export const fetchMatchingMeals = createAsyncThunk(
   async (params: UserDietParams) => {
     try {
       return await dietApi.getMatchingMeals(params);
-    } catch (e) {
+    } catch (e: any) {
       return e.json();
     }
   }

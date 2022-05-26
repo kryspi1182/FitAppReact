@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EntityId } from "@reduxjs/toolkit";
@@ -14,12 +12,13 @@ import {
   Chip,
 } from "@material-ui/core";
 
-import store, { RootState } from "../../../store/ConfigureStore";
+import store, { RootState } from "../../../store/configureStore";
 import { selectMealById } from "../../../store/Diet/MealsSlice";
 import { selectAllProducts } from "../../../store/Diet/ProductsSlice";
 import MealWithProducts from "../../../models/Diet/MealWithProducts";
 import MacrosBox from "./MacrosBox";
 import { Macros } from "../../../models/Diet/Macros";
+import { Meal } from "../../../models/Diet/Meal";
 
 const useStyles = makeStyles({
   container: {
@@ -49,11 +48,12 @@ type Props = {
 const MealDetails: React.FC<Props> = (props) => {
   const classes = useStyles();
   const products = useSelector(selectAllProducts);
-  let meal = useSelector((state: RootState) =>
+  const mealState = useSelector((state: RootState) =>
     selectMealById(state, props.mealId)
   );
+  let meal = mealState !== undefined ? mealState : ({} as Meal);
   let mealProducts =
-    meal !== undefined
+    meal !== ({} as Meal)
       ? products.filter((product) =>
           meal.mealProducts.some(
             (mealProduct) => mealProduct.productId === product.id
