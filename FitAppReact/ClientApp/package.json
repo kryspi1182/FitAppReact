@@ -55,7 +55,8 @@
     "typescript": "^4.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "updateResources": "node tools/updateResources.mjs",
+    "start": "react-scripts start && npm updateResources",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
